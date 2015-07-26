@@ -1,0 +1,182 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    tools:context="com.androditry.LoginIPM" >
+   
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_email" 
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:text="@string/email_start" />
+        
+        <EditText
+            android:id="@+id/etEmaleSignUpIPM"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+      	    android:typeface="serif"
+             />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="110dp"
+            android:text="@string/email_end"
+            android:textSize="20sp"
+      		android:textStyle="bold"
+     	    android:typeface="serif" />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_fullname" 
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <TextView
+            android:id="@+id/tvFullNameStartIPM"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+  	   		android:layout_marginTop="10dp"
+    	    android:layout_marginLeft="25dp"
+        	android:textSize="20sp"
+        	android:textStyle="bold"
+        	android:typeface="serif"
+        	android:text="" />
+        
+        <EditText
+            android:id="@+id/etFullNameEndSignUpIPM"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+      	    android:typeface="serif"
+             />
+        
+    </LinearLayout>
+    </LinearLayout>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_pass"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+    
+    <EditText
+        	android:id="@+id/etPassSignUpIPM"
+        	android:inputType="textPassword"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+       		android:textStyle="bold"
+       		android:typeface="serif"
+            android:layout_height="wrap_content" />
+        
+ 	<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reenter_pass"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
+    
+    <EditText
+        	android:id="@+id/etRePassSignUpIPM"
+        	android:inputType="textPassword"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+       		android:textStyle="bold"
+       		android:typeface="serif"
+            android:layout_height="wrap_content" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+    <CheckBox
+      android:id="@+id/cbTermsIPM"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical" />
+    
+    <TextView
+        android:id="@+id/tvTermsIPM"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/termsNConditions" />
+    
+     </LinearLayout>
+     
+    <Button
+        android:id="@+id/btnSignupIPM"
+        android:layout_marginTop="15dp"
+        android:layout_height="45dp"
+        android:layout_width="140dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/blue_button"
+        style="@style/ButtonText"
+        android:text="@string/signup" />
+        
+    </LinearLayout>
+
+</ScrollView>

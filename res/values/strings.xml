@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kriger Campus</string>
+    <string name="title_activity_school_select">SchoolSelect</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="school_select">You are a student of:</string>
+    <string name="school">School</string>
+    <string name="IPM">IPM</string>
+    <string name="title_activity_login_ipm">LoginIPM</string>
+    <string name="title_activity_login_school">LoginSchool</string>
+    <string name="enter_email">Enter Email:</string>
+    <string name="enter_fullname">Enter Full Name:</string>
+    <string name="enter_username">Enter Username:</string>
+    <string name="enter_pass">Enter Password:</string>
+    <string name="reenter_pass">Confirm Password:</string>
+    <string name="email_start">i</string>
+    <string name="email_end">\@iimidr.ac.in</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="noaccount">Don\'t have an account? \nSignUp for a new account!</string>
+    <string name="title_activity_sign_up_ipm">SignUpIPM</string>
+    <string name="title_activity_home_screen_ipm">HomeScreenIPM</string>
+    <string name="pass_no_match_error_msg">The passwords do NOT match!</string>
+    <string name="signup_error_message">Please make sure you enter a username, password, and email address!</string>
+    <string name="signup_error_title">Error!</string>
+    <string name="login_error_message">Please make sure you enter a username and password!</string>
+    <string name="login_error_title">Error!</string>
+    <string name="verify_email_title">Email NOT verified!</string>
+    <string name="verify_email_msg">Your email is NOT verified yet!\nPlease verify your email before login.</string>
+    <string name="title_activity_sign_up_school">SignUpSchool</string>
+    <string name="title_activity_home_screen_school">HomeScreenSchool</string>
+    <string name="view_all_categories">View all categories</string>
+    <string name="view_all_categories_symbol">+</string>
+    <string name="title_activity_view_all_categories">ViewAllCategories</string>
+    <string name="title_activity_category_nav">CategoryNav</string>
+    <string name="title_activity_view_one_category">ViewOneCategory</string>
+    <string name="followOneCategory">FOLLOW</string>
+    <string name="unfollowOneCategory">UNFOLLOW</string>
+    <string name="title_activity_question_view">QuestionView</string>
+    <string name="hint_write_answer">Write Your Answer Here. . .</string>
+    <string name="PostAnswer">Post</string>
+    <string name="newQuesSymbol">+</string>
+    <string name="title_activity_new_question">NewQuestion</string>
+    <string name="quesTitle">Enter Title of questions :</string>
+    <string name="quesTitleHint">Question Header. . .</string>
+    <string name="quesDetails">Details about the question :\n\t\t\t\t\t\t\t\t(optional)</string>
+    <string name="quesDetailsHint">Question Details. . .</string>
+    <string name="postQuestion">Post</string>
+    <string name="no_internet_msg">Internet connection could not be etablished. \nPlease verify that you are connected through an active connection.</string>
+    <string name="no_internet_title">Could NOT connect!</string>
+    <string name="title_bar_text">Title Bar</string>
+    <string name="notif_text">!</string>
+    <string name="termsNConditions">By signing up, you agree to our \n<u><a href="http://krigermotivation.com/kriger-campus-terms-and-conditions/">Terms and Conditions</a></u>.</string>
+
+    <!-- **ACTIONS** -->
+    <string name="menu_logout">LogOut</string>
+    <string name="action_settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="title_activity_title_bar">TitleBar</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    
+    <!--  **Custom Button** -->
+    <style name="ButtonText">
+	    <item name="android:layout_width">fill_parent</item>
+    	<item name="android:layout_height">wrap_content</item>
+	    <item name="android:textColor">#444444</item>
+    	<item name="android:gravity">center</item>
+	    <item name="android:layout_margin">3dp</item>
+    	<item name="android:textSize">20sp</item>
+	    <item name="android:textStyle">bold</item>
+    	<item name="android:shadowColor">#000000</item>
+	    <item name="android:shadowDx">1</item>
+    	<item name="android:shadowDy">1</item>
+	    <item name="android:shadowRadius">2</item>
+	</style>
+
+</resources>

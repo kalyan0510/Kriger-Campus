@@ -1,0 +1,40 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background1"
+    tools:context="com.androditry.MainActivity" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:text="@string/app_name"
+        android:layout_marginTop="4dp"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:typeface="serif" />
+
+    <ImageButton
+        android:id="@+id/enterImageBtn"
+        android:scaleType="centerInside"
+        android:layout_width="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_height="400dp"
+        android:contentDescription="@string/app_name"
+        android:clickable="true"
+        android:background="@null"
+        android:src="@drawable/img_main_crown" />
+
+    
+    </LinearLayout>
+
+</ScrollView>
