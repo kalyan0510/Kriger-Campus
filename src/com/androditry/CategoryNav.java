@@ -2,6 +2,8 @@ package com.androditry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -11,6 +13,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,8 +35,10 @@ public class CategoryNav extends ActionBarActivity {
 	
 	ArrayList<CustomListItem> list = new ArrayList<CustomListItem>();
     CustomListAdapter adapter;
-    
+
+    Timer myTimer;
     private boolean haveAllQuestions = false;
+    private boolean timerCalledUpdate = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,16 +85,72 @@ public class CategoryNav extends ActionBarActivity {
         	btnNewQues.setVisibility(View.GONE);
         }
 		doPopulateAllQuestions(true);
+		
+        myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {          
+            @Override
+            public void run() {
+                TimerMethod();
+            }
+
+        }, 30000, 30000);
 	}
+	
+
+    private void TimerMethod()
+    {
+        //This method is called directly by the timer
+        //and runs in the same thread as the timer.
+
+        //We call the method that will work with the UI
+        //through the runOnUiThread method.
+        this.runOnUiThread(Timer_Tick);
+    }
+
+
+    private Runnable Timer_Tick = new Runnable() {
+        public void run() {
+        	//This method runs in the same thread as the UI.
+        	timerCalledUpdate = true;
+        	doPopulateAllQuestions(true);
+        }
+    };
 
 	private void doPopulateAllQuestions(final boolean forceUpdate) {
+		if(!Utilities.isNetworkAvailable(CategoryNav.this)
+				&& (!haveAllQuestions || forceUpdate))
+		{
+			if(!timerCalledUpdate)
+			{
+				AlertDialog.Builder builder = new AlertDialog.Builder(CategoryNav.this);
+	            builder.setMessage(R.string.no_internet_msg)
+	                .setTitle(R.string.no_internet_title)
+	                .setPositiveButton(android.R.string.ok, null);
+	            AlertDialog dialog = builder.create();
+	            dialog.show();
+	            tvInfo.setText("The list of interests could not be updated!\nCheck your network!");
+			}
+    		return;
+		}
+		
+		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
 		
 		if(Utilities.hasCurTagQuesLoaded())
 			haveAllQuestions = true;
-		if(haveAllQuestions && !forceUpdate)
+		if(haveAllQuestions)
 		{
-			query.fromLocalDatastore();
+			if(!forceUpdate)
+				query.fromLocalDatastore();
+			else
+			{
+				try {
+					ParseObject.unpinAll();
+				} catch (ParseException e1) {
+					Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
+					e1.printStackTrace();
+				}
+			}
 		}
 
 		query.addAscendingOrder("createdAt");
@@ -128,6 +189,7 @@ public class CategoryNav extends ActionBarActivity {
 	            }
 	        }
 	    });
+	    timerCalledUpdate = false;
 	}
 	
 	protected void setListNameforusername(final int index, String user, final boolean triggerUpdate, boolean isForcedUpdate)/*, final boolean isAnon)*/ {

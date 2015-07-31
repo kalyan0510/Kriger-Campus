@@ -2,6 +2,8 @@ package com.androditry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -36,8 +38,10 @@ public class QuestionView extends ActionBarActivity {
 	
 	ArrayList<CustomListItem> list = new ArrayList<CustomListItem>();
 	CustomListAdapter adapter;
-	
+
+    Timer myTimer;
 	private boolean haveAllAnswers = false;
+    private boolean timerCalledUpdate = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +125,35 @@ public class QuestionView extends ActionBarActivity {
 		});
         
         doPopulateAllAnswers(true);
+        
+		myTimer = new Timer();
+        myTimer.schedule(new TimerTask() {          
+            @Override
+            public void run() {
+                TimerMethod();
+            }
+
+        }, 30000, 30000); 
 	}
+
+    private void TimerMethod()
+    {
+        //This method is called directly by the timer
+        //and runs in the same thread as the timer.
+
+        //We call the method that will work with the UI
+        //through the runOnUiThread method.
+        this.runOnUiThread(Timer_Tick);
+    }
+
+
+    private Runnable Timer_Tick = new Runnable() {
+        public void run() {
+        	//This method runs in the same thread as the UI.     
+        	timerCalledUpdate = true;
+        	doPopulateAllAnswers(true);
+        }
+    };
 	
 	private void updateCurQuestionNumAnswers() {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
@@ -156,13 +188,38 @@ public class QuestionView extends ActionBarActivity {
 	}
 
 	private void doPopulateAllAnswers(final boolean forceUpdate) {
+		if(!Utilities.isNetworkAvailable(QuestionView.this)
+				&& (!haveAllAnswers || forceUpdate))
+		{
+			if(!timerCalledUpdate)
+			{
+				AlertDialog.Builder builder = new AlertDialog.Builder(QuestionView.this);
+	            builder.setMessage(R.string.no_internet_msg)
+	                .setTitle(R.string.no_internet_title)
+	                .setPositiveButton(android.R.string.ok, null);
+	            AlertDialog dialog = builder.create();
+	            dialog.show();
+	        }
+    		return;
+		}
+		
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForQues(Utilities.getCurQuesObj().getObjectId()));
 		
 		if(Utilities.hasCurQuesAnsLoaded())
 			haveAllAnswers = true;
-		if(haveAllAnswers && !forceUpdate)
+		if(haveAllAnswers)
 		{
-			query.fromLocalDatastore();
+			if(!forceUpdate)
+				query.fromLocalDatastore();
+			else
+			{
+				try {
+					ParseObject.unpinAll();
+				} catch (ParseException e1) {
+					Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
+					e1.printStackTrace();
+				}
+			}
 		}
 
 		query.addAscendingOrder("createdAt");
@@ -224,6 +281,7 @@ public class QuestionView extends ActionBarActivity {
 	            }
 	        }
 	    });
+	    timerCalledUpdate = false;
 	}
 	
 	protected void setListNameforusername(final int index, String user, final boolean triggerUpdate, final boolean isAnon, boolean isForcedUpdate) {
