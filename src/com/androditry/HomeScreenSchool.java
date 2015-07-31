@@ -84,7 +84,7 @@ public class HomeScreenSchool extends ActionBarActivity {
                 TimerMethod();
             }
 
-        }, 10000, 10000); 
+        }, 30000, 30000); 
     }
 
     private void TimerMethod()

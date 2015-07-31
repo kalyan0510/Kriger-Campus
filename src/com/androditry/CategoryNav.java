@@ -79,20 +79,20 @@ public class CategoryNav extends ActionBarActivity {
         	btnNewQues.setEnabled(false);
         	btnNewQues.setVisibility(View.GONE);
         }
-		doPopulateAllQuestions();
+		doPopulateAllQuestions(true);
 	}
 
-	private void doPopulateAllQuestions() {
+	private void doPopulateAllQuestions(final boolean forceUpdate) {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
 		
 		if(Utilities.hasCurTagQuesLoaded())
 			haveAllQuestions = true;
-		if(haveAllQuestions)
+		if(haveAllQuestions && !forceUpdate)
 		{
 			query.fromLocalDatastore();
-			query.addAscendingOrder("createdAt");
 		}
-		
+
+		query.addAscendingOrder("createdAt");
 	    query.findInBackground(new FindCallback<ParseObject>() {
 	 
 	        @Override
@@ -110,9 +110,9 @@ public class CategoryNav extends ActionBarActivity {
 	            		temp = tag.getString(Utilities.alias_QBY);
 	            		list.add(new CustomListItem("...",tag.getString(Utilities.alias_QTITLE)));
 	            		if(index < totSize)
-	            			setListNameforusername(index, temp, false);//, isAnon);
+	            			setListNameforusername(index, temp, false, forceUpdate);//, isAnon);
 	            		else
-	            			setListNameforusername(index, temp, true);//, isAnon);
+	            			setListNameforusername(index, temp, true, forceUpdate);//, isAnon);
 	            		++index;
 	            	}
 	            	ParseObject.pinAllInBackground(postList, new SaveCallback(){
@@ -130,10 +130,10 @@ public class CategoryNav extends ActionBarActivity {
 	    });
 	}
 	
-	protected void setListNameforusername(final int index, String user, final boolean triggerUpdate)/*, final boolean isAnon)*/ {
+	protected void setListNameforusername(final int index, String user, final boolean triggerUpdate, boolean isForcedUpdate)/*, final boolean isAnon)*/ {
 		ParseQuery<ParseUser> query = ParseUser.getQuery();
 		query.whereEqualTo("username", user);
-		if(haveAllQuestions)
+		if(haveAllQuestions && !isForcedUpdate)
 			query.fromLocalDatastore();
 		query.findInBackground(new FindCallback<ParseUser>() {
 		     public void done(List<ParseUser> objects, ParseException e) {
@@ -181,7 +181,7 @@ public class CategoryNav extends ActionBarActivity {
 		else if(id == R.id.action_refresh)
 		{
 			Toast.makeText(CategoryNav.this, "Refreshing...", Toast.LENGTH_SHORT).show();
-			doPopulateAllQuestions();
+			doPopulateAllQuestions(true);
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -189,6 +189,6 @@ public class CategoryNav extends ActionBarActivity {
 	@Override
 	protected void onPostResume() {
 		super.onPostResume();
-		doPopulateAllQuestions();
+		doPopulateAllQuestions(false);
 	}
 }

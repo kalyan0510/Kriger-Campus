@@ -109,7 +109,7 @@ public class QuestionView extends ActionBarActivity {
                     		
                     		Toast.makeText(QuestionView.this, "Answer posted Successfully!", Toast.LENGTH_SHORT).show();
                     		updateCurQuestionNumAnswers();
-                    		doPopulateAllAnswers();
+                    		doPopulateAllAnswers(false);
                     	} else {
                             // The save failed.
                             //Toast.makeText(getApplicationContext(), "Failed to Save\nPlease Check network!", Toast.LENGTH_SHORT).show();
@@ -120,11 +120,7 @@ public class QuestionView extends ActionBarActivity {
 			}
 		});
         
-        doPopulateAllAnswers();
-        
-        //String str = Utilities.AllClassesNames.getClassNameForQues(Utilities.getCurQuesObj().getObjectId());
-        //Toast.makeText(getApplicationContext(), "question_class_name:" + str + "!", Toast.LENGTH_SHORT).show();
-        
+        doPopulateAllAnswers(true);
 	}
 	
 	private void updateCurQuestionNumAnswers() {
@@ -159,17 +155,17 @@ public class QuestionView extends ActionBarActivity {
         });
 	}
 
-	private void doPopulateAllAnswers() {
+	private void doPopulateAllAnswers(final boolean forceUpdate) {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForQues(Utilities.getCurQuesObj().getObjectId()));
 		
 		if(Utilities.hasCurQuesAnsLoaded())
 			haveAllAnswers = true;
-		if(haveAllAnswers)
+		if(haveAllAnswers && !forceUpdate)
 		{
 			query.fromLocalDatastore();
-			query.addAscendingOrder("createdAt");
 		}
-			
+
+		query.addAscendingOrder("createdAt");
 	    query.findInBackground(new FindCallback<ParseObject>() {
 	 
 	        @Override
@@ -185,9 +181,9 @@ public class QuestionView extends ActionBarActivity {
 	            		temp = tag.getString(Utilities.alias_ANSBY);
 	            		list.add(new CustomListItem("...",tag.getString(Utilities.alias_ANSTEXT)));
 	            		if(index < totSize)
-	            			setListNameforusername(index, temp, false, isAnon);
+	            			setListNameforusername(index, temp, false, isAnon, forceUpdate);
 	            		else
-	            			setListNameforusername(index, temp, true, isAnon);
+	            			setListNameforusername(index, temp, true, isAnon, forceUpdate);
 	            		++index;
 	            	}
 	            	if(list.isEmpty())
@@ -230,10 +226,10 @@ public class QuestionView extends ActionBarActivity {
 	    });
 	}
 	
-	protected void setListNameforusername(final int index, String user, final boolean triggerUpdate, final boolean isAnon) {
+	protected void setListNameforusername(final int index, String user, final boolean triggerUpdate, final boolean isAnon, boolean isForcedUpdate) {
 		ParseQuery<ParseUser> query = ParseUser.getQuery();
 		query.whereEqualTo("username", user);
-		if(haveAllAnswers)
+		if(haveAllAnswers && !isForcedUpdate)
 			query.fromLocalDatastore();
 		query.findInBackground(new FindCallback<ParseUser>() {
 		     public void done(List<ParseUser> objects, ParseException e) {
@@ -288,7 +284,7 @@ public class QuestionView extends ActionBarActivity {
 		else if(id == R.id.action_refresh)
 		{
 			Toast.makeText(QuestionView.this, "Refreshing...", Toast.LENGTH_SHORT).show();
-			doPopulateAllAnswers();
+			doPopulateAllAnswers(true);
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -296,6 +292,6 @@ public class QuestionView extends ActionBarActivity {
 	@Override
 	protected void onPostResume() {
 		super.onPostResume();
-		doPopulateAllAnswers();
+		doPopulateAllAnswers(false);
 	}
 }
