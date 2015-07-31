@@ -22,6 +22,8 @@ public class Utilities {
 	protected static final String IPM_EMAIL_PREFIX = "i";
 	protected static final String ATHARVA_GROUP_NAME = "Pi_Quiz_(Atharv)";
 	protected static final String ATHARVA_USER_NAME = "PiQuiz_Atharv";
+	protected static final String TL_CHANNEL_NAME = "ThoughtLeaders";
+	
 	public static final int MAX_NOTIFICATIONS = 9;
 	public static final int CUSTOM_CAT_LIST_ITEM_ID_OFFSET = 1000;
 	private static ParseUser curUser=null;
@@ -53,10 +55,15 @@ public class Utilities {
 		
 		private static final String TAG_CLASS_PREFIX = "TAG___";
 		private static final String TAG_CLASS_SUFFIX = "___";
-		static public String getClassNameForTag(String tagName)
+		public static String getClassNameForTag(String tagName)
 		{
 			tagName = tagName.replace(' ', '_').replace('(', '_').replace(')','_');
 			return (TAG_CLASS_PREFIX + tagName + TAG_CLASS_SUFFIX);
+		}
+		public static String getTagNameForClass(String className) {
+			int prelen = TAG_CLASS_PREFIX.length();
+			int postlen = TAG_CLASS_SUFFIX.length();
+			return className.substring(prelen, className.length()-postlen);
 		}
 		
 		public static final String[] AnyTagColumns = new String[]{"objectId","quesTitle","quesDetails","questionBy","numAnswers","numAnsSeen"};
@@ -72,11 +79,6 @@ public class Utilities {
 		public static String getClassNameForQues(String id)
 		{
 			return (QUES_CLASS_PREFIX + id + QUES_CLASS_SUFFIX);
-		}
-		public static String getTagNameForClass(String className) {
-			int prelen = QUES_CLASS_PREFIX.length();
-			int postlen = QUES_CLASS_SUFFIX.length();
-			return className.substring(prelen, className.length()-prelen-postlen);
 		}
 		
 		public static final String[] AnyQuesAnswers = new String[]{"answerBy","answerText"};
@@ -189,7 +191,6 @@ public class Utilities {
 			allTagsDetails.add(obj);
 		}
 	}
-	
 	public static ParseObject getObjectByTagName(String tagName)
 	{
 		ParseObject ret = null;
@@ -201,6 +202,10 @@ public class Utilities {
 			}
 		}
 		return ret;
+	}
+	public static ParseObject getCurTagObject()
+	{
+		return getObjectByTagName(getCategory().replace(' ', '_'));
 	}
 	
 	private static ParseObject userDetailsObj;
@@ -365,7 +370,7 @@ public class Utilities {
 			}
 			else if(getCurUserType() == UserType.USER_TYPE_IPM)
 			{
-				ParsePush.subscribeInBackground("ThoughtLeaders");
+				ParsePush.subscribeInBackground(TL_CHANNEL_NAME);
 			}
 			else if(getCurUserType() == UserType.USER_TYPE_SCHOOL)
 			{

@@ -6,6 +6,7 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
@@ -107,6 +108,12 @@ public class NewQuestion extends ActionBarActivity {
 					                    public void done(ParseException e) {
 					                    	if (e == null) {
 					                    		updateNumQuestionsInCategory();
+					                    		
+					                    		ParsePush push = new ParsePush();
+					                    		push.setChannel(Utilities.TL_CHANNEL_NAME);
+					                    		push.setMessage("A new Question was asked in " + Utilities.getCategory() + "!");
+					                    		push.sendInBackground();
+					                    		
 					                    		Toast.makeText(getApplicationContext(), "Question post succesful!", Toast.LENGTH_SHORT).show();
 					                    		NewQuestion.this.finish();
 					                    	} else {
@@ -120,7 +127,7 @@ public class NewQuestion extends ActionBarActivity {
 				        	}
 				        	else
 				        	{
-				        		Log.d("New question asked...","Caused exception" + e.getMessage());
+				        		Log.d("New question asked...","Caused exception\n" + e.getMessage());
 				        	}
 				        }
 				    });
@@ -166,10 +173,7 @@ public class NewQuestion extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		else if(id == R.id.action_logout)
+		if(id == R.id.action_logout)
 		{
 			Utilities.logOutCurUser();
 			Intent i = new Intent(NewQuestion.this,MainActivity.class);

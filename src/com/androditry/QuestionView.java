@@ -6,7 +6,9 @@ import java.util.List;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -90,6 +92,20 @@ public class QuestionView extends ActionBarActivity {
 			    testObject.saveInBackground(new SaveCallback() {
                     public void done(ParseException e) {
                     	if (e == null) {
+                    		String usrQBy = Utilities.getCurQuesObj().getString(Utilities.alias_QBY);
+                    		if(!usrQBy.equalsIgnoreCase(Utilities.getCurUsername()))
+                    		{
+                    			// Create our Installation query
+                        		ParseQuery<ParseInstallation> pushQuery = ParseInstallation.getQuery();
+                        		pushQuery.whereEqualTo("username", usrQBy);
+
+                        		// Send push notification to query
+                        		ParsePush push = new ParsePush();
+                        		push.setQuery(pushQuery); // Set our Installation query
+                        		push.setMessage(Utilities.getCurName() + " has posted an answered to your question on " + Utilities.getCategory() + "!");
+                        		push.sendInBackground();
+                    		}
+                    		
                     		Toast.makeText(QuestionView.this, "Answer posted Successfully!", Toast.LENGTH_SHORT).show();
                     		updateCurQuestionNumAnswers();
                     		doPopulateAllAnswers();
@@ -278,10 +294,7 @@ public class QuestionView extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		else if(id == R.id.action_logout)
+		if(id == R.id.action_logout)
 		{
 			Utilities.logOutCurUser();
 			Intent i = new Intent(QuestionView.this,MainActivity.class);

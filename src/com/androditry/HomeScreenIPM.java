@@ -301,10 +301,7 @@ public class HomeScreenIPM extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		else if(id == R.id.action_logout)
+		if(id == R.id.action_logout)
 		{
 			Utilities.logOutCurUser();
 			Intent i = new Intent(HomeScreenIPM.this,MainActivity.class);

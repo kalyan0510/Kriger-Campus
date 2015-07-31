@@ -60,20 +60,23 @@
     <string name="title_activity_title_bar">TitleBar</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    
-    <!--  **Custom Button** -->
+    <string name="txt_image_slider">Image Slideshow</string>
+
+    <!-- **Custom Button** -->
     <style name="ButtonText">
-	    <item name="android:layout_width">fill_parent</item>
-    	<item name="android:layout_height">wrap_content</item>
-	    <item name="android:textColor">#444444</item>
-    	<item name="android:gravity">center</item>
-	    <item name="android:layout_margin">3dp</item>
-    	<item name="android:textSize">20sp</item>
-	    <item name="android:textStyle">bold</item>
-    	<item name="android:shadowColor">#000000</item>
-	    <item name="android:shadowDx">1</item>
-    	<item name="android:shadowDy">1</item>
-	    <item name="android:shadowRadius">2</item>
-	</style>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#444444</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+
+    <string name="title_activity_proceed_school">ProceedSchool</string>
 
 </resources>

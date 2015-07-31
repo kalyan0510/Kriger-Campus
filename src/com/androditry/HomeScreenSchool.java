@@ -247,7 +247,7 @@ public class HomeScreenSchool extends ActionBarActivity {
 		
 		for(CustomCatListItem interest : list)
 		{
-			Toast.makeText(this, "notifications checking...", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "notifications checking...", Toast.LENGTH_SHORT).show();
 			interest.setNumNotifications(0);
 			String interestName = interest.getName();
 			ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(interestName));
@@ -258,23 +258,30 @@ public class HomeScreenSchool extends ActionBarActivity {
 		        public void done(List<ParseObject> postList, ParseException e) {
 		            if (e == null) {
 		            	int n = postList.size();
-		            	Toast.makeText(HomeScreenSchool.this, "No notifications for "+ postList.get(0).getClassName()+"!!", Toast.LENGTH_SHORT).show();
 		            	if(n > 0)
 		            	{
 		            		String str = Utilities.AllClassesNames.getTagNameForClass(postList.get(0).getClassName());
 		            		str = str.replace('_', ' ');
-		            		Toast.makeText(HomeScreenSchool.this, "Notifications : " + n + " for " + str, Toast.LENGTH_SHORT).show();
+		            		//Toast.makeText(HomeScreenSchool.this, "Notifications : " + n + " for " + str, Toast.LENGTH_SHORT).show();
+		            		int numNotif = 0;
+		            		for(ParseObject pQues : postList)
+		            		{
+		            			if(pQues.getInt(Utilities.alias_QNUMANSWERS) > pQues.getInt(Utilities.alias_QNUMANSSEEN))
+		            				++numNotif;
+		            		}
+		            		
 		            		int t = 0;
 		            		for(CustomCatListItem obj : list)
 		            		{
 		            			if(obj.getName().equals(str))
 		            			{
-		            				list.get(t).setNumNotifications(n);
+		            				list.get(t).setNumNotifications(numNotif);
 		            				break;
 		            			}
 		            			++t;
 		            		}
 		            	}
+		            	
 		            	adapter.notifyDataSetChanged();
 		            } else {
 		                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
@@ -303,10 +310,7 @@ public class HomeScreenSchool extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		else if(id == R.id.action_logout)
+		if(id == R.id.action_logout)
 		{
 			//myTimer.cancel();
 			Utilities.logOutCurUser();

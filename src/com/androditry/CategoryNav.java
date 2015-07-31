@@ -26,7 +26,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class CategoryNav extends ActionBarActivity {
 	
-	TextView tvInfo;
+	TextView tvInfo, tvAbout;
 	ListView lvCatQues;
 	Button   btnNewQues;
 	
@@ -41,6 +41,8 @@ public class CategoryNav extends ActionBarActivity {
 		setContentView(R.layout.activity_category_nav);
 		setTitle(Utilities.getCategory().replace('_', ' '));
 		
+		tvAbout = (TextView) findViewById(R.id.tvAboutCat);
+		tvAbout.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
 		tvInfo = (TextView) findViewById(R.id.tvInfoCatNav);
 		tvInfo.setText("Loading Questions");
 		
@@ -168,10 +170,7 @@ public class CategoryNav extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings){
-			return true;
-		}
-		else if(id == R.id.action_logout)
+		if(id == R.id.action_logout)
 		{
 			Utilities.logOutCurUser();
 			Intent i = new Intent(CategoryNav.this,MainActivity.class);
