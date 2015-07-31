@@ -47,8 +47,11 @@ public class CustomCatListAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
-		holder.nameView.setText(listData.get(position).getName());
+		
+		String strName = listData.get(position).getName();
+		if(listData.get(position).getIsAnon())
+			strName += " (Anonymous)";
+		holder.nameView.setText(strName);
 		int numNotif = listData.get(position).getNumNotifications();
 		if(numNotif <= Utilities.MAX_NOTIFICATIONS)
 			holder.notifView.setText("" + numNotif);

@@ -29,10 +29,6 @@ public class HomeScreenIPM extends ActionBarActivity {
 	
 	TextView tvInfo;
 	ListView lvUserCat;
-	//Button   /*btnAllCat,*/ btnNotif;
-	//int numnotif;
-	//ParseObject qToOpen;
-	
     ArrayList<CustomCatListItem> list = new ArrayList<CustomCatListItem>();
     CustomCatListAdapter adapter;
     
@@ -47,27 +43,6 @@ public class HomeScreenIPM extends ActionBarActivity {
 		
 		tvInfo    = (TextView) findViewById(R.id.tvUserHomeInfoIPM);
 		lvUserCat = (ListView) findViewById(R.id.lvUserCategoriesIPM);
-		//btnAllCat = (Button)   findViewById(R.id.btnViewAllCategoriesIPM);
-		//btnNotif  = (Button)   findViewById(R.id.btnNotificationAllCatIPM);
-		/** NO MORE NEEDED 14-07-2015
-		btnAllCat.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(HomeScreenIPM.this,ViewAllCategories.class);
-				startActivity(i);
-			}
-		}); **/
-		/** NO MORE NEEDED 19-07-2015
-		btnNotif.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Utilities.setCurQuesObj(qToOpen);
-				Intent i = new Intent(HomeScreenIPM.this,QuestionView.class);
-				startActivity(i);
-			}
-		});
-		btnNotif.setVisibility(View.GONE);**/
 		
 		adapter = new CustomCatListAdapter(this, list);
 	    lvUserCat.setAdapter(adapter);
@@ -94,8 +69,6 @@ public class HomeScreenIPM extends ActionBarActivity {
 			String title = Utilities.getCurName();
 			this.setTitle(title);
 			tvInfo.setText("Hello " + title + "!  Please wait...\nLoading all Interests...");
-			//btnAllCat.setEnabled(false);
-			//doPopulateUserCategories();
 			doPopulateListView(true);
 		}
         
@@ -167,7 +140,7 @@ public class HomeScreenIPM extends ActionBarActivity {
 	            	for(ParseObject tag: postList)
 	            	{
 	            		String tagName = tag.getString(Utilities.alias_TAGNAME).replace('_', ' ');
-	            		CustomCatListItem item = new CustomCatListItem(tagName, 0);
+	            		CustomCatListItem item = new CustomCatListItem(tagName, 0, tag.getBoolean(Utilities.alias_TAGISANON));
 	            		list.add(item);
 	            	}
 	            	ParseObject.pinAllInBackground(postList, new SaveCallback(){
@@ -189,63 +162,8 @@ public class HomeScreenIPM extends ActionBarActivity {
 	    timerCalledUpdate = false;
 	}
 	
-	/** NO MORE NEEDED 14-07-2015
-	private void doPopulateUserCategories()
-	{
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.UserDetails);
-		query.whereEqualTo(Utilities.alias_UNAME, Utilities.getCurUsername());
-		 
-	    query.findInBackground(new FindCallback<ParseObject>() {
-	 
-	        @Override
-	        public void done(List<ParseObject> postList, ParseException e) {
-	            if (e == null) {
-	            	list.clear();
-	                if(postList.isEmpty())
-	                {
-	                	ParseObject newObj = new ParseObject(Utilities.AllClassesNames.UserDetails);
-	                	newObj.put(Utilities.alias_UNAME,Utilities.getCurUsername());
-	                	newObj.put(Utilities.alias_TAGSFOLLOWED, "");
-	                	newObj.put(Utilities.alias_HASPPIC, false);
-	                	Utilities.setUserDetailsObj(newObj);
-	                	tvInfo.setText("You currently don't follow any topic.\n" +
-                				"View all Categories and add your choices...");
-	                }
-	                else
-	                {
-	                		Utilities.setUserDetailsObj(postList.get(0));
-	                		tvInfo.setText("Your tags Loaded!");
-	                		String allLiked = postList.get(0).getString(Utilities.alias_TAGSFOLLOWED);
-	                		if(allLiked.isEmpty())
-	                		{
-	                			tvInfo.setText("You currently don't follow any topic.\n" +
-	                    				"View all Categories and add your choices...");
-	                		}
-	                		else
-	                		{
-	                			for(String likedTag : allLiked.split("-"))
-		                		{
-		                			list.add(likedTag);
-		                		}
-	                		}
-	                		
-	                }
-	                adapter.notifyDataSetChanged();
-	                doCheckForNotifications();
-	            } else {
-	                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
-	            }
-	            //btnAllCat.setEnabled(true);
-	        }
-	    });
-	}
-	**/
-	
 	private void doCheckForNotifications()
 	{
-		//numnotif=0;
-		//btnNotif.setVisibility(View.GONE);
-		
 		for(CustomCatListItem interest : list)
 		{
 			interest.setNumNotifications(0);
@@ -277,12 +195,6 @@ public class HomeScreenIPM extends ActionBarActivity {
 		            } else {
 		                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
 		            }
-		            /** NO MORE NEEDED 19-07-2015
-		            if(numnotif>0)
-		            {
-		            	btnNotif.setVisibility(View.VISIBLE);
-		            	btnNotif.setText(numnotif + "!");
-		            }**/
 		        }
 		    });
 		}
@@ -311,7 +223,6 @@ public class HomeScreenIPM extends ActionBarActivity {
 		}
 		else if(id == R.id.action_refresh)
 		{
-			//doPopulateUserCategories();
 			Toast.makeText(HomeScreenIPM.this, "Refreshing...", Toast.LENGTH_SHORT).show();
 			doPopulateListView(true);
 		}
@@ -321,7 +232,6 @@ public class HomeScreenIPM extends ActionBarActivity {
 	@Override
 	protected void onPostResume() {
 		super.onPostResume();
-		//doPopulateUserCategories();
 		doPopulateListView(false);
 	}
 }

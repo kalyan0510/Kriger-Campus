@@ -20,8 +20,6 @@ import com.parse.ParseUser;
 public class Utilities {
 	protected static final String IPM_EMAIL_SUFFIX = "@iimidr.ac.in";
 	protected static final String IPM_EMAIL_PREFIX = "i";
-	protected static final String ATHARVA_GROUP_NAME = "Pi_Quiz_(Atharv)";
-	protected static final String ATHARVA_USER_NAME = "PiQuiz_Atharv";
 	protected static final String TL_CHANNEL_NAME = "ThoughtLeaders";
 	
 	public static final int MAX_NOTIFICATIONS = 9;
@@ -250,21 +248,6 @@ public class Utilities {
 		}
 	}
 	
-	/** NOT SAFE TO USE -- 16-07-2015
-	public static ParseObject getQuesObjByQTITLE(String qtitle)
-	{
-		ParseObject ret = null;
-		for(ParseObject obj : curTagQuestions)
-		{
-			if(obj.getString(alias_QTITLE).equals(qtitle))
-			{
-				return obj;
-			}
-				
-		}
-		return ret;
-	} */
-	
 	public static ParseObject getQuesObjectByQIndex(int index)
 	{
 		return curTagQuestions.get(index);
@@ -364,11 +347,7 @@ public class Utilities {
 		List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
 		if(subscribedChannels == null || subscribedChannels.size() == 0)
 		{
-			if(getCurUsername().equals("atharv"))
-			{
-				ParsePush.subscribeInBackground("Atharv");
-			}
-			else if(getCurUserType() == UserType.USER_TYPE_IPM)
+			if(getCurUserType() == UserType.USER_TYPE_IPM)
 			{
 				ParsePush.subscribeInBackground(TL_CHANNEL_NAME);
 			}
@@ -379,13 +358,5 @@ public class Utilities {
 				installation.saveInBackground();
 			}
 		}
-	}
-	
-	public static boolean isAtharvaCategory()
-	{
-		return getCategory().equalsIgnoreCase(ATHARVA_GROUP_NAME);
-	}
-	public static boolean isAtharvaUser() {
-		return getCurUsername().equalsIgnoreCase(ATHARVA_USER_NAME);
 	}
 }

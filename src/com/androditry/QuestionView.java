@@ -102,7 +102,8 @@ public class QuestionView extends ActionBarActivity {
                         		// Send push notification to query
                         		ParsePush push = new ParsePush();
                         		push.setQuery(pushQuery); // Set our Installation query
-                        		push.setMessage(Utilities.getCurName() + " has posted an answered to your question on " + Utilities.getCategory() + "!");
+                        		String strAnsweredBy = (Utilities.getCurTagObject().getBoolean(Utilities.alias_TAGISANON) && Utilities.getCurUserType() == Utilities.UserType.USER_TYPE_IPM) ? Utilities.getCurName() : "Someone";
+                        		push.setMessage(strAnsweredBy + " has posted an answered to your question on " + Utilities.getCategory() + "!");
                         		push.sendInBackground();
                     		}
                     		
@@ -193,25 +194,7 @@ public class QuestionView extends ActionBarActivity {
 	            	{
 	            		list.add(new CustomListItem("","No answer yet for this question!"));
 	            		lvAllAnswers.setEnabled(false);
-	            		if(Utilities.isAtharvaCategory())
-	            		{
-	    					if(Utilities.isAtharvaUser())
-	    					{
-	    						lvAllAnswers.setEnabled(true);
-			            		btnPost.setEnabled(true);
-		            			btnPost.setVisibility(View.VISIBLE);
-	    					}
-	    					else
-	    					{
-	    						//Any user can join a discussion on Atharva group only when the Atharva thought leader has answered the question
-		            			btnPost.setEnabled(false);
-		            			btnPost.setVisibility(View.GONE);
-		            			etAnswer.setText("");
-		            			etAnswer.setHint("You can't post any answer yet!");
-		            			etAnswer.setEnabled(false);
-	    					}
-	            		}
-	            		else if(Utilities.getCurUserType()==Utilities.UserType.USER_TYPE_SCHOOL)
+	            		if(Utilities.getCurUserType()==Utilities.UserType.USER_TYPE_SCHOOL)
 	            		{
 	            			//School users can join a discussion only when a thought leader has answered the question
 	            			btnPost.setEnabled(false);

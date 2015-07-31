@@ -3,6 +3,8 @@ package com.androditry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -27,9 +29,6 @@ public class HomeScreenSchool extends ActionBarActivity {
 	
 	TextView tvInfo;
 	ListView lvUserCat;
-	//Button   /*btnAllCat,*/ btnNotif;
-	//int numnotif;
-	//ParseObject qToOpen;
 	
 	ArrayList<CustomCatListItem> list = new ArrayList<CustomCatListItem>();
     CustomCatListAdapter adapter;
@@ -45,28 +44,6 @@ public class HomeScreenSchool extends ActionBarActivity {
 		
 		tvInfo    = (TextView) findViewById(R.id.tvUserHomeInfoSchool);
 		lvUserCat = (ListView) findViewById(R.id.lvUserCategoriesSchool);
-		//btnAllCat = (Button)   findViewById(R.id.btnViewAllCategoriesSchool);
-		//btnNotif  = (Button)   findViewById(R.id.btnNotificationAllCatSchool);
-		/** NO MORE NEEDED 14-07-2015
-		  btnAllCat.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(HomeScreenSchool.this,ViewAllCategories.class);
-				startActivity(i);
-			}
-		});**/
-		/** NO MORE NEEDED 19-07-2015
-		btnNotif.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Utilities.setCurQuesObj(qToOpen);
-				Intent i = new Intent(HomeScreenSchool.this,QuestionView.class);
-				startActivity(i);
-			}
-		});
-		btnNotif.setVisibility(View.GONE);**/
 		
 		 adapter = new CustomCatListAdapter(this, list);
 	     lvUserCat.setAdapter(adapter);
@@ -99,7 +76,7 @@ public class HomeScreenSchool extends ActionBarActivity {
 		
 		Utilities.CheckUpdateSubscriptionInBackground();
 		
-		/*
+		
 		myTimer = new Timer();
         myTimer.schedule(new TimerTask() {          
             @Override
@@ -107,9 +84,9 @@ public class HomeScreenSchool extends ActionBarActivity {
                 TimerMethod();
             }
 
-        }, 10000, 10000); */
+        }, 10000, 10000); 
     }
-/*
+
     private void TimerMethod()
     {
         //This method is called directly by the timer
@@ -127,7 +104,7 @@ public class HomeScreenSchool extends ActionBarActivity {
         	timerCalledUpdate = true;
         	doPopulateListView(true);
         }
-    };*/
+    };
 	
 	private void doPopulateListView(boolean forceUpdate)
 	{
@@ -161,13 +138,12 @@ public class HomeScreenSchool extends ActionBarActivity {
 	        	
 	            if (e == null) {
 	            	tvInfo.setText("All interests loaded!");
-	            	//Toast.makeText(HomeScreenSchool.this, "No of loaded tags : " + postList.size(), Toast.LENGTH_SHORT).show();
 	            	list.clear();
 	            	Utilities.storeAllTags(postList);
 	            	for(ParseObject tag: postList)
 	            	{
 	            		String tagName = tag.getString(Utilities.alias_TAGNAME).replace('_', ' ');
-	            		CustomCatListItem item = new CustomCatListItem(tagName, 0);
+	            		CustomCatListItem item = new CustomCatListItem(tagName, 0, tag.getBoolean(Utilities.alias_TAGISANON));
 	            		list.add(item);
 	            	}
 	            	ParseObject.pinAllInBackground(postList, new SaveCallback()
@@ -190,61 +166,8 @@ public class HomeScreenSchool extends ActionBarActivity {
 	    timerCalledUpdate = false;
 	}
 	
-	/** NO MORE USER SPECIFIC CATEGORIES 14-07-2015
-	private void doPopulateUserCategories()
-	{
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.UserDetails);
-		query.whereEqualTo(Utilities.alias_UNAME, Utilities.getCurUsername());
-		query.findInBackground(new FindCallback<ParseObject>() {
-			 
-	        @Override
-	        public void done(List<ParseObject> postList, ParseException e) {
-	            if (e == null) {
-	            	list.clear();
-	                if(postList.isEmpty())
-	                {
-	                	ParseObject newObj = new ParseObject(Utilities.AllClassesNames.UserDetails);
-	                	newObj.put(Utilities.alias_UNAME,Utilities.getCurUsername());
-	                	newObj.put(Utilities.alias_TAGSFOLLOWED, "");
-	                	newObj.put(Utilities.alias_HASPPIC, false);
-	                	Utilities.setUserDetailsObj(newObj);
-	                	tvInfo.setText("You currently don't follow any topic.\n" +
-                				"View all Categories and add your choices...");
-	                }
-	                else
-	                {
-	                		Utilities.setUserDetailsObj(postList.get(0));
-	                		tvInfo.setText("Your tags Loaded!");
-	                		String allLiked = postList.get(0).getString(Utilities.alias_TAGSFOLLOWED);
-	                		if(allLiked.isEmpty())
-	                		{
-	                			tvInfo.setText("You currently don't follow any topic.\n" +
-	                    				"View all Categories and add your choices...");
-	                		}
-	                		else
-	                		{
-	                			for(String likedTag : allLiked.split("-"))
-		                		{
-		                			list.add(likedTag);
-		                		}
-	                		}
-	                		
-	                }
-	                adapter.notifyDataSetChanged();
-	                doCheckForNotifications();
-	            } else {
-	                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
-	            }
-	            btnAllCat.setEnabled(true);
-	        }
-	    });
-	}**/
-	
 	private void doCheckForNotifications()
 	{
-		//numnotif=0;
-		//btnNotif.setVisibility(View.GONE);
-		
 		for(CustomCatListItem interest : list)
 		{
 			//Toast.makeText(this, "notifications checking...", Toast.LENGTH_SHORT).show();
@@ -262,7 +185,6 @@ public class HomeScreenSchool extends ActionBarActivity {
 		            	{
 		            		String str = Utilities.AllClassesNames.getTagNameForClass(postList.get(0).getClassName());
 		            		str = str.replace('_', ' ');
-		            		//Toast.makeText(HomeScreenSchool.this, "Notifications : " + n + " for " + str, Toast.LENGTH_SHORT).show();
 		            		int numNotif = 0;
 		            		for(ParseObject pQues : postList)
 		            		{
@@ -286,12 +208,6 @@ public class HomeScreenSchool extends ActionBarActivity {
 		            } else {
 		                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
 		            }
-		            /** NO MORE NEEDED 19-07-2015
-		            if(numnotif>0)
-		            {
-		            	btnNotif.setVisibility(View.VISIBLE);
-		            	btnNotif.setText(numnotif + "!");
-		            }**/
 		        }
 		    });
 		}
@@ -312,7 +228,6 @@ public class HomeScreenSchool extends ActionBarActivity {
 		int id = item.getItemId();
 		if(id == R.id.action_logout)
 		{
-			//myTimer.cancel();
 			Utilities.logOutCurUser();
 			Intent i = new Intent(HomeScreenSchool.this,MainActivity.class);
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

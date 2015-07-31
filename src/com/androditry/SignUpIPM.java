@@ -122,10 +122,6 @@ public class SignUpIPM extends ActionBarActivity {
                     
                     username = "i" + username;
                     email = "i" + email + "@iimidr.ac.in";
-                    
-                    /** NO MORE USED LIKE THIS
-                    String name = "";
-                    name = username.substring(3); **/
     
                     ParseUser newUser = new ParseUser();
                     newUser.setUsername(username);
