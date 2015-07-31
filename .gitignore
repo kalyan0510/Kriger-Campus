@@ -1,14 +1,4 @@
-.settings/
 bin/
 *.apk
-*.png
-*.jpg
-*.jpeg
-*.gif
-assets/
-libs/
 gen/
 *.txt
-*.properties
-.project
-.classpath
