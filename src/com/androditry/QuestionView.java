@@ -106,8 +106,8 @@ public class QuestionView extends ActionBarActivity {
                         		// Send push notification to query
                         		ParsePush push = new ParsePush();
                         		push.setQuery(pushQuery); // Set our Installation query
-                        		String strAnsweredBy = (Utilities.getCurTagObject().getBoolean(Utilities.alias_TAGISANON) && Utilities.getCurUserType() == Utilities.UserType.USER_TYPE_IPM) ? Utilities.getCurName() : "Someone";
-                        		push.setMessage(strAnsweredBy + " has posted an answered to your question on " + Utilities.getCategory() + "!");
+                        		//String strAnsweredBy = (Utilities.getCurTagObject().getBoolean(Utilities.alias_TAGISANON) && Utilities.getCurUserType() == Utilities.UserType.USER_TYPE_IPM) ? Utilities.getCurName() : "Someone";
+                        		push.setMessage("Someone has posted an answered to your question on " + Utilities.getCategory() + "!");
                         		push.sendInBackground();
                     		}
                     		
@@ -260,6 +260,8 @@ public class QuestionView extends ActionBarActivity {
 	            	else
 	            	{
 	            		lvAllAnswers.setEnabled(true);
+	            		etAnswer.setHint("Write your response here!");
+            			etAnswer.setEnabled(true);
 	            		btnPost.setEnabled(true);
             			btnPost.setVisibility(View.VISIBLE);
 	            	}
