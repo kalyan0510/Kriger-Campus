@@ -95,7 +95,7 @@ public class HomeScreenIPM extends ActionBarActivity {
 				try {
 					ParseObject.unpinAll();
 				} catch (ParseException e1) {
-					Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
 					e1.printStackTrace();
 				}
 			}
@@ -128,7 +128,7 @@ public class HomeScreenIPM extends ActionBarActivity {
 	            	doCheckForNotifications();
 	            } else {
 	            	tvInfo.setText("An error occured. Please try refresh. If interests still don't load then please logout and login again!");
-	            	Toast.makeText(HomeScreenIPM.this, "No tags could be loaded due to error: \n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+	            	//Toast.makeText(HomeScreenIPM.this, "No tags could be loaded due to error: \n" + e.getMessage(), Toast.LENGTH_SHORT).show();
 	                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
 	            }
 	        }

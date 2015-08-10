@@ -23,7 +23,9 @@ public class Utilities {
 	protected static final String TL_CHANNEL_NAME = "ThoughtLeaders";
 	
 	public static final int MAX_NOTIFICATIONS = 9;
+	public static final int CUSTOM_ANS_LIST_ITEM_ID_OFFSET = 0;
 	public static final int CUSTOM_CAT_LIST_ITEM_ID_OFFSET = 1000;
+	public static final int CUSTOM_QUES_LIST_ITEM_ID_OFFSET = 2000;
 	private static ParseUser curUser=null;
 	
 	public static enum UserType

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <LinearLayout
+        android:id="@+id/llAboveQues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    <TextView
+        android:id="@+id/tvNameLIQues"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="#3178be"
+        android:text="@string/hello_world"
+        android:typeface="sans" />
+    
+    <TextView
+        android:id="@+id/tvNotifLIQues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/notif_icon" />
+    
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTextLIQues"
+        android:text="@string/hello_world"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llAboveQues"
+        android:layout_marginTop="5dip"
+        android:textColor="#343434"
+        android:textSize="15sp" />
+</RelativeLayout>

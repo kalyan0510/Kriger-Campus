@@ -3,8 +3,6 @@ package com.androditry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
-
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -125,7 +123,7 @@ public class QuestionView extends ActionBarActivity {
 		});
         
         doPopulateAllAnswers(true);
-        
+        /**
 		myTimer = new Timer();
         myTimer.schedule(new TimerTask() {          
             @Override
@@ -133,9 +131,9 @@ public class QuestionView extends ActionBarActivity {
                 TimerMethod();
             }
 
-        }, 30000, 30000); 
+        }, 30000, 30000); **/
 	}
-
+/**
     private void TimerMethod()
     {
         //This method is called directly by the timer
@@ -154,7 +152,7 @@ public class QuestionView extends ActionBarActivity {
         	doPopulateAllAnswers(true);
         }
     };
-	
+	**/
 	private void updateCurQuestionNumAnswers() {
 		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
 		
@@ -253,7 +251,7 @@ public class QuestionView extends ActionBarActivity {
 	            			btnPost.setEnabled(false);
 	            			btnPost.setVisibility(View.GONE);
 	            			etAnswer.setText("");
-	            			etAnswer.setHint("You can't post any answer yet!");
+	            			etAnswer.setHint("You can't comment here yet!");
 	            			etAnswer.setEnabled(false);
 	            		}
 	            	}

@@ -4,12 +4,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
 	
-	ImageButton enterImageBtn;
+	TextView tvAppMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +17,8 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         setTitle("Welcome | Kriger Campus");
         
-        enterImageBtn = (ImageButton) findViewById(R.id.enterImageBtn);
-        enterImageBtn.setOnClickListener(new View.OnClickListener(){
+        tvAppMain = (TextView) findViewById(R.id.tvAppMain);
+        tvAppMain.setOnClickListener(new View.OnClickListener(){
 
 			@Override
 			public void onClick(View v) {
@@ -27,8 +27,6 @@ public class MainActivity extends ActionBarActivity {
 			}
         	
         });
-        
-        
         if(Utilities.checkLoggedInUser()==true)
         {
         	Intent i;

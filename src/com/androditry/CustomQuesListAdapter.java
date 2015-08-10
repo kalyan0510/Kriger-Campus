@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class CustomListAdapter extends BaseAdapter {
-	private ArrayList<CustomListItem> listData;
+public class CustomQuesListAdapter extends BaseAdapter {
+	private ArrayList<CustomQuesListItem> listData;
 	private LayoutInflater layoutInflater;
 
-	public CustomListAdapter(Context aContext, ArrayList<CustomListItem> listData) {
+	public CustomQuesListAdapter(Context aContext, ArrayList<CustomQuesListItem> listData) {
 		this.listData = listData;
 		layoutInflater = LayoutInflater.from(aContext);
 	}
@@ -31,25 +31,31 @@ public class CustomListAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		return position + Utilities.CUSTOM_ANS_LIST_ITEM_ID_OFFSET;
+		return position + Utilities.CUSTOM_QUES_LIST_ITEM_ID_OFFSET;
 	}
 
 	@SuppressLint("InflateParams")
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
 		if (convertView == null) {
-			convertView = layoutInflater.inflate(R.layout.list_item_layout, null);
+			convertView = layoutInflater.inflate(R.layout.list_item_ques, null);
 			holder = new ViewHolder();
-			holder.nameView = (TextView) convertView.findViewById(R.id.tvNameLI);
-			holder.textView = (TextView) convertView.findViewById(R.id.tvTextLI);
+			holder.nameView = (TextView) convertView.findViewById(R.id.tvNameLIQues);
+			holder.textView = (TextView) convertView.findViewById(R.id.tvTextLIQues);
+			holder.notifView = (TextView) convertView.findViewById(R.id.tvNotifLIQues);
 			
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
-		holder.nameView.setText(listData.get(position).getName());
-		holder.textView.setText(listData.get(position).getText());
+		
+		CustomQuesListItem obj = listData.get(position);
+		holder.nameView.setText(obj.getName());
+		holder.textView.setText(obj.getText());
+		if(obj.showNotif())
+			holder.notifView.setVisibility(View.VISIBLE);
+		else
+			holder.notifView.setVisibility(View.GONE);
 		
 		return convertView;
 	}
@@ -57,5 +63,6 @@ public class CustomListAdapter extends BaseAdapter {
 	static class ViewHolder {
 		TextView nameView;
 		TextView textView;
+		TextView notifView;
 	}
 }

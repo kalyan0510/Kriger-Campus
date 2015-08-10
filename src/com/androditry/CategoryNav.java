@@ -3,8 +3,6 @@ package com.androditry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
-
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -33,8 +31,8 @@ public class CategoryNav extends ActionBarActivity {
 	ListView lvCatQues;
 	Button   btnNewQues;
 	
-	ArrayList<CustomListItem> list = new ArrayList<CustomListItem>();
-    CustomListAdapter adapter;
+	ArrayList<CustomQuesListItem> list = new ArrayList<CustomQuesListItem>();
+    CustomQuesListAdapter adapter;
 
     Timer myTimer;
     private boolean haveAllQuestions = false;
@@ -54,7 +52,7 @@ public class CategoryNav extends ActionBarActivity {
 		lvCatQues = (ListView) findViewById(R.id.lvCategoryQuestions);
 		btnNewQues = (Button)  findViewById(R.id.btnAddQuestion);
 		
-		adapter = new CustomListAdapter(this, list);
+		adapter = new CustomQuesListAdapter(this, list);
         lvCatQues.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         
@@ -85,7 +83,7 @@ public class CategoryNav extends ActionBarActivity {
         	btnNewQues.setVisibility(View.GONE);
         }
 		doPopulateAllQuestions(true);
-		
+		/**
         myTimer = new Timer();
         myTimer.schedule(new TimerTask() {          
             @Override
@@ -93,10 +91,10 @@ public class CategoryNav extends ActionBarActivity {
                 TimerMethod();
             }
 
-        }, 30000, 30000);
+        }, 30000, 30000);**/
 	}
 	
-
+/**
     private void TimerMethod()
     {
         //This method is called directly by the timer
@@ -115,7 +113,7 @@ public class CategoryNav extends ActionBarActivity {
         	doPopulateAllQuestions(true);
         }
     };
-
+**/
 	private void doPopulateAllQuestions(final boolean forceUpdate) {
 		if(!Utilities.isNetworkAvailable(CategoryNav.this)
 				&& (!haveAllQuestions || forceUpdate))
@@ -153,7 +151,7 @@ public class CategoryNav extends ActionBarActivity {
 			}
 		}
 
-		query.addAscendingOrder("createdAt");
+		query.addAscendingOrder(Utilities.alias_QNUMANSWERS);
 	    query.findInBackground(new FindCallback<ParseObject>() {
 	 
 	        @Override
@@ -169,7 +167,7 @@ public class CategoryNav extends ActionBarActivity {
 	            	for(ParseObject tag: postList)
 	            	{
 	            		temp = tag.getString(Utilities.alias_QBY);
-	            		list.add(new CustomListItem("...",tag.getString(Utilities.alias_QTITLE)));
+	            		list.add(new CustomQuesListItem("...",tag.getString(Utilities.alias_QTITLE), tag.getInt(Utilities.alias_QNUMANSWERS)));
 	            		if(index < totSize)
 	            			setListNameforusername(index, temp, false, forceUpdate);//, isAnon);
 	            		else
