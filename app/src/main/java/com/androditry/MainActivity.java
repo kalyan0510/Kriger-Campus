@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
 			}
         	
         });
-        if(Utilities.checkLoggedInUser()==true)
+        if(Utilities.checkLoggedInUser())
         {
         	Intent i;
         	Utilities.UserType utype = Utilities.getCurUserType();

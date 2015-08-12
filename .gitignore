@@ -1,4 +1,5 @@
 bin/
-*.apk
+build/
+app/build/
 gen/
 *.txt
