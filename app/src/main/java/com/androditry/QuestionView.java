@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -38,7 +35,7 @@ public class QuestionView extends ActionBarActivity {
 	Button btnPost;
 	ListView lvAllAnswers;
 	
-	ArrayList<CustomListItem> list = new ArrayList<CustomListItem>();
+	ArrayList<CustomListItem> list = new ArrayList<>();
 	CustomListAdapter adapter;
 
     private Timer timer;
@@ -85,7 +82,10 @@ public class QuestionView extends ActionBarActivity {
             }
         });
 
-        new UpdateAnswersTask().execute(true);
+        if(Utilities.hasCurQuesAnsLoaded())
+            new UpdateAnswersTask().execute(false);
+        else
+            new UpdateAnswersTask().execute(true);
 
         timer = new Timer();
         TimerTask task = new TimerTask() {

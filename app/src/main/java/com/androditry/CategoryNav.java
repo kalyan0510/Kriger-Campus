@@ -87,7 +87,11 @@ public class CategoryNav extends ActionBarActivity {
         	btnNewQues.setEnabled(false);
         	btnNewQues.setVisibility(View.GONE);
         }
-		new UpdateQuestionsTask().execute(true);
+
+        if(Utilities.hasCurTagQuesLoaded())
+		    new UpdateQuestionsTask().execute(false);
+        else
+            new UpdateQuestionsTask().execute(true);
 
         timer = new Timer();
         TimerTask task = new TimerTask() {

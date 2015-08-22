@@ -3,6 +3,7 @@ package com.androditry;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -118,6 +119,8 @@ public class HomeScreenSchool extends ActionBarActivity {
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.AllTagsList);
             query.addAscendingOrder(Utilities.alias_TAGDISPORDER);
+            if(storedAllInterests && !forceUpdate)
+                query.fromLocalDatastore();
             try {
                 List<ParseObject> postList = query.find();
                 publishProgress("All interests loaded!");

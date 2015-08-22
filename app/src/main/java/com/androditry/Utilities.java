@@ -147,7 +147,7 @@ public class Utilities {
 			return UserType.USER_TYPE_NONE;
 		
 		return ((curUser.getEmail().endsWith(IPM_EMAIL_SUFFIX) 
-				&& curUser.getEmail().startsWith(IPM_EMAIL_PREFIX))==true) ? 
+				&& curUser.getEmail().startsWith(IPM_EMAIL_PREFIX))) ?
 						UserType.USER_TYPE_IPM : UserType.USER_TYPE_SCHOOL;
 	}
 	
@@ -175,7 +175,7 @@ public class Utilities {
 	private static ArrayList<ParseObject> allTagsDetails;
 
 	public static void storeAllTags(List<ParseObject> postList) {
-		allTagsDetails = new ArrayList<ParseObject>();
+		allTagsDetails = new ArrayList<>();
 		for(ParseObject obj : postList)
 		{
 			allTagsDetails.add(obj);
@@ -234,11 +234,12 @@ public class Utilities {
 	
 	private static ArrayList<ParseObject> curTagQuestions;
 	public static void saveCurTagQuestions(List<ParseObject> postList) {
-		curTagQuestions = new ArrayList<ParseObject>();
+		curTagQuestions = new ArrayList<>();
 		for(ParseObject obj : postList)
 		{
 			curTagQuestions.add(obj);
 		}
+		setTagQuesLoaded(getCategory());
 	}
 	
 	public static ParseObject getQuesObjectByQIndex(int index)
@@ -258,11 +259,12 @@ public class Utilities {
 	
 	private static ArrayList<ParseObject> curQuesAnswers;
 	public static void storeAllAnswers(List<ParseObject> postList) {
-		curQuesAnswers = new ArrayList<ParseObject>();
+		curQuesAnswers = new ArrayList<>();
 		for(ParseObject obj : postList)
 		{
 			curQuesAnswers.add(obj);
 		}
+        setCurQuesAnsLoaded();
 	}
 	public static ParseObject getAnswerObjByIndex(int index)
 	{
@@ -291,7 +293,7 @@ public class Utilities {
 	
 	public static boolean haveAllTags = false;
 	
-	private static Map<String, Boolean> tagQuestionsLoaded = new HashMap<String, Boolean>();
+	private static Map<String, Boolean> tagQuestionsLoaded = new HashMap<>();
 	public static void setTagQuesLoaded(String tagName, boolean newVal)
 	{
 		tagQuestionsLoaded.put(tagName, newVal);
@@ -315,7 +317,7 @@ public class Utilities {
 		return hasTagQuesLoaded(getCategory());
 	}
 	
-	private static Map<String, Boolean> quesAnsLoaded = new HashMap<String, Boolean>();
+	private static Map<String, Boolean> quesAnsLoaded = new HashMap<>();
 	public static void setQuesAnsLoaded(String quesId, boolean newVal)
 	{
 		quesAnsLoaded.put(quesId, newVal);
