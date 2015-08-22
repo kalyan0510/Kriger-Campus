@@ -1,9 +1,9 @@
 package com.androditry;
 
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 import com.parse.ParseException;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
 import android.app.AlertDialog;
@@ -22,6 +22,9 @@ public class SignUpSchool extends ActionBarActivity {
 	EditText etEmail,etPass,etName,etUsername,etRePass;
 	Button btnSignUp;
 	CheckBox cbTerms;
+
+    String username, password, repass, email, name;
+    boolean isCbChecked;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,94 +48,149 @@ public class SignUpSchool extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				if(!Utilities.isNetworkAvailable(SignUpSchool.this))
-				{
-					AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
-                    builder.setMessage(R.string.no_internet_msg)
-                        .setTitle(R.string.no_internet_title)
-                        .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-            		return;
-				}
-				
-				String username = etUsername.getText().toString();
-                String password = etPass.getText().toString();
-                String repass = etRePass.getText().toString();
-                String email = etEmail.getText().toString();
-                String name = etName.getText().toString();
- 
-                username = username.trim();
-                password = password.trim();
-                repass = repass.trim();
-                email = email.trim();
-                name.trim();
- 
-                if (name.isEmpty() || username.isEmpty() || password.isEmpty() || email.isEmpty()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
-                    builder.setMessage(R.string.signup_error_message)
-                        .setTitle(R.string.signup_error_title)
-                        .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                else if(email.endsWith(Utilities.IPM_EMAIL_SUFFIX)
-                		&& email.startsWith(Utilities.IPM_EMAIL_PREFIX))
-                {
-                	AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
-                    builder.setMessage("IPM email is only allowed for Thought Leaders.\nPlease use any other email for signing up for a Student account.")
-                        .setTitle("Email NOT allowed!")
-                        .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                else if (!password.equals(repass)) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
-                    builder.setMessage(R.string.pass_no_match_error_msg)
-                        .setTitle(R.string.signup_error_title)
-                        .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                else if (!cbTerms.isChecked()) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
-                    builder.setMessage("Please read and agree to our terms and conditions before signing up.")
-                        .setTitle("Agree to terms...")
-                        .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                else {
- 
+				username = etUsername.getText().toString();
+                password = etPass.getText().toString();
+                repass = etRePass.getText().toString();
+                email = etEmail.getText().toString();
+                name = etName.getText().toString();
+                isCbChecked = cbTerms.isChecked();
+
+                new SignUpTask().execute();
+            }
+        });
+	}
+
+
+    private enum SignUpTaskState
+    {
+        SUCCESS,
+        NO_INTERNET,
+        EMPTY_SIGNUP,
+        EMAIL_UNALLOWED,
+        PASS_NOMATCH,
+        TERMS_UNAGREED,
+        EXCEPTION_THROWN
+    }
+
+    String errMsg;
+    class SignUpTask extends AsyncTask<Void,Boolean, SignUpTaskState> {
+
+        @Override
+        protected SignUpTaskState doInBackground(Void... params) {
+            publishProgress(false);
+
+            if (!Utilities.isNetworkAvailable(SignUpSchool.this)) {
+                return SignUpTaskState.NO_INTERNET;
+            }
+
+            username = username.trim();
+            password = password.trim();
+            repass = repass.trim();
+            email = email.trim();
+            name = name.trim();
+
+            if (name.isEmpty() || username.isEmpty() || password.isEmpty() || email.isEmpty())
+            {
+                return SignUpTaskState.EMPTY_SIGNUP;
+            }
+            else if(email.endsWith(Utilities.IPM_EMAIL_SUFFIX)
+                    && email.startsWith(Utilities.IPM_EMAIL_PREFIX))
+            {
+                return SignUpTaskState.EMAIL_UNALLOWED;
+            }
+            else if (!password.equals(repass))
+            {
+                return SignUpTaskState.PASS_NOMATCH;
+            }
+            else if (!isCbChecked)
+            {
+                return SignUpTaskState.TERMS_UNAGREED;
+            }
+            else {
+                try {
                     ParseUser newUser = new ParseUser();
                     newUser.setUsername(username);
                     newUser.setPassword(password);
                     newUser.setEmail(email);
                     newUser.put("Name", name);
-                    newUser.signUpInBackground(new SignUpCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                        	
-                            if (e == null) {
-                            	Toast.makeText(SignUpSchool.this, "Sign Up Successful!\nCheck your e-mail for verification link!", Toast.LENGTH_SHORT).show();
-                            	Utilities.InitialiseUserDetails(etUsername.getText().toString().trim());
-                                // Success!
-                                Intent intent = new Intent(SignUpSchool.this, LoginSchool.class);
-                                startActivity(intent);
-                            }
-                            else {
-                            	String errorMsg = e.getMessage().replace("parameters", "Email ID or password");
-                                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
-                                builder.setMessage(errorMsg)
-                                    .setTitle(R.string.signup_error_title)
-                                    .setPositiveButton(android.R.string.ok, null);
-                                AlertDialog dialog = builder.create();
-                                dialog.show();
-                            }
-                        }
-                    });
+                    newUser.signUp();
+
+                    Toast.makeText(SignUpSchool.this, "Sign Up Successful!\nCheck your e-mail for verification link!", Toast.LENGTH_SHORT).show();
+                    Utilities.InitialiseUserDetails(username);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    errMsg = e.getMessage();
+                    return SignUpTaskState.EXCEPTION_THROWN;
                 }
             }
-		});
-	}
+            return SignUpTaskState.SUCCESS;
+        }
+
+        @Override
+        protected void onProgressUpdate(Boolean... isEnabled) {
+            btnSignUp.setEnabled(isEnabled[0]);
+            // Things to be done while execution of long running operation is in
+            // progress. For example updating ProgessDialog
+        }
+
+
+        @Override
+        protected void onPostExecute(SignUpTaskState state) {
+            // refresh UI
+            if (state == SignUpTaskState.SUCCESS) {
+                // Success!
+                Intent intent = new Intent(SignUpSchool.this, LoginSchool.class);
+                startActivity(intent);
+            }
+            else if (state == SignUpTaskState.NO_INTERNET) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
+                builder.setMessage(R.string.no_internet_msg)
+                        .setTitle(R.string.no_internet_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else if (state == SignUpTaskState.EMPTY_SIGNUP) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
+                builder.setMessage(R.string.signup_error_message)
+                        .setTitle(R.string.signup_error_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else if (state == SignUpTaskState.EMAIL_UNALLOWED) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
+                builder.setMessage("IPM email is only allowed for Thought Leaders.\nPlease use any other email for signing up for a Student account.")
+                        .setTitle("Email NOT allowed!")
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else if(state == SignUpTaskState.PASS_NOMATCH)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
+                builder.setMessage(R.string.pass_no_match_error_msg)
+                        .setTitle(R.string.signup_error_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else if (state == SignUpTaskState.TERMS_UNAGREED) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
+                builder.setMessage("Please read and agree to our terms and conditions before signing up.")
+                        .setTitle("Agree to terms...")
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else if (state == SignUpTaskState.EXCEPTION_THROWN) {
+                // Fail
+                String errorMsg = errMsg.replace("parameters", "Email ID or password");
+                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpSchool.this);
+                builder.setMessage(errorMsg)
+                        .setTitle(R.string.signup_error_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            btnSignUp.setEnabled(true);
+        }
+    }
 }

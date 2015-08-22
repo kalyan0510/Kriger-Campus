@@ -61,7 +61,7 @@ public class NewQuestion extends ActionBarActivity {
 				
 				if(qtitle.isEmpty() || qtitle.length()<MIN_QUES_TITLE_LENGTH)
 				{
-					errorMsg = "Question title should be atleast " + MIN_QUES_TITLE_LENGTH +" characters long!";
+					errorMsg = "Question title should be at least " + MIN_QUES_TITLE_LENGTH +" characters long!";
 				}
 				if(!errorMsg.isEmpty())
 				{
@@ -175,10 +175,15 @@ public class NewQuestion extends ActionBarActivity {
 		int id = item.getItemId();
 		if(id == R.id.action_logout)
 		{
-			Utilities.logOutCurUser();
-			Intent i = new Intent(NewQuestion.this,MainActivity.class);
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					Utilities.logOutCurUser();
+					Intent i = new Intent(NewQuestion.this,MainActivity.class);
+					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(i);
+				}
+			}).start();
 		}
 		return super.onOptionsItemSelected(item);
 	}

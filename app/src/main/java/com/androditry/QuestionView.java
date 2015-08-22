@@ -333,11 +333,15 @@ public class QuestionView extends ActionBarActivity {
 		int id = item.getItemId();
 		if(id == R.id.action_logout)
 		{
-			Utilities.logOutCurUser();
-			Intent i = new Intent(QuestionView.this,MainActivity.class);
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-			finish();
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					Utilities.logOutCurUser();
+					Intent i = new Intent(QuestionView.this,MainActivity.class);
+					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(i);
+				}
+			}).start();
 		}
 		else if(id == R.id.action_refresh)
 		{

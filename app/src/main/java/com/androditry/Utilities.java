@@ -8,10 +8,7 @@ import java.util.Map;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
-import com.parse.LogOutCallback;
-import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
@@ -28,12 +25,12 @@ public class Utilities {
 	public static final int CUSTOM_QUES_LIST_ITEM_ID_OFFSET = 2000;
 	private static ParseUser curUser=null;
 	
-	public static enum UserType
+	public enum UserType
 	{
 		USER_TYPE_IPM,
 		USER_TYPE_SCHOOL,
 		USER_TYPE_NONE
-	};
+	}
 	
 	public static class AllClassesNames
 	{
@@ -171,15 +168,8 @@ public class Utilities {
 	}
 
 	public static void logOutCurUser() {
-		ParseUser.logOutInBackground(new LogOutCallback() {
-			   public void done(ParseException e) {
-				     if (e == null) {
-				       curUser = null;
-				     } else {
-				       Log.d("Log_out",e.getMessage());
-				     }
-				   }
-				 });
+		ParseUser.logOut();
+		curUser = null;
 	}
 	
 	private static ArrayList<ParseObject> allTagsDetails;
@@ -193,7 +183,8 @@ public class Utilities {
 	}
 	public static ParseObject getObjectByTagName(String tagName)
 	{
-		ParseObject ret = null;
+        if(allTagsDetails == null)
+            return null;
 		for(ParseObject obj : allTagsDetails)
 		{
 			if(obj.getString(alias_TAGNAME).equals(tagName))
@@ -201,7 +192,7 @@ public class Utilities {
 				return obj;
 			}
 		}
-		return ret;
+		return null;
 	}
 	public static ParseObject getCurTagObject()
 	{

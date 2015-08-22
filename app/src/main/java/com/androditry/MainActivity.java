@@ -27,29 +27,46 @@ public class MainActivity extends ActionBarActivity {
 			}
         	
         });
-        if(Utilities.checkLoggedInUser())
-        {
-        	Intent i;
-        	Utilities.UserType utype = Utilities.getCurUserType();
-        	switch(utype)
-        	{
-        		case USER_TYPE_IPM:
-        			i = new Intent(MainActivity.this,HomeScreenIPM.class);
-        			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                	finish();
-        			break;
-        		case USER_TYPE_SCHOOL:
-        			i = new Intent(MainActivity.this,HomeScreenSchool.class);
-        			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                	finish();
-        			break;
-        		case USER_TYPE_NONE:
-        			Utilities.logOutCurUser();
-        			break;
-        	}
-        }
+		new Thread(new Runnable()
+		{
+			@Override
+			public void run() {
+				//do loading data or whatever hard here
+
+				if(Utilities.checkLoggedInUser())
+				{
+					Intent i;
+					Utilities.UserType utype = Utilities.getCurUserType();
+					switch(utype)
+					{
+						case USER_TYPE_IPM:
+							i = new Intent(MainActivity.this,HomeScreenIPM.class);
+							i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+							startActivity(i);
+
+							break;
+						case USER_TYPE_SCHOOL:
+							i = new Intent(MainActivity.this,HomeScreenSchool.class);
+							i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+							startActivity(i);
+
+							break;
+						case USER_TYPE_NONE:
+							Utilities.logOutCurUser();
+							return;
+					}
+				}
+				/*
+				runOnUiThread(new Runnable(){
+					@Override
+					public void run() {
+						//..update your UI here
+						finish();
+					}
+				});*/
+			}
+		}).start();
+
    
     }
 }

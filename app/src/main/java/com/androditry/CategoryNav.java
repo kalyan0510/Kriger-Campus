@@ -3,13 +3,15 @@ package com.androditry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import com.parse.FindCallback;
+import java.util.TimerTask;
+
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -31,192 +33,210 @@ public class CategoryNav extends ActionBarActivity {
 	ListView lvCatQues;
 	Button   btnNewQues;
 	
-	ArrayList<CustomQuesListItem> list = new ArrayList<CustomQuesListItem>();
+	ArrayList<CustomQuesListItem> list = new ArrayList<>();
     CustomQuesListAdapter adapter;
 
-    Timer myTimer;
-    private boolean haveAllQuestions = false;
-    private boolean timerCalledUpdate = false;
+    private Timer timer;
+    private static final long whenToStart = 30*1000L; // 30 seconds
+    private static final long howOften = 30*1000L; // 30 seconds
+
+    private boolean storedAllQuestions = false;
+    private boolean storedAllUsers = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_category_nav);
+        setContentView(R.layout.activity_category_nav);
 		setTitle(Utilities.getCategory().replace('_', ' '));
-		
+
 		tvAbout = (TextView) findViewById(R.id.tvAboutCat);
 		tvAbout.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
 		tvInfo = (TextView) findViewById(R.id.tvInfoCatNav);
 		tvInfo.setText("Loading Questions");
-		
+
 		lvCatQues = (ListView) findViewById(R.id.lvCategoryQuestions);
 		btnNewQues = (Button)  findViewById(R.id.btnAddQuestion);
-		
+
 		adapter = new CustomQuesListAdapter(this, list);
         lvCatQues.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        
-        lvCatQues.setOnItemClickListener(new OnItemClickListener(){
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				Utilities.setCurQuesObj(Utilities.getQuesObjectByQIndex(position));
-				Intent i = new Intent(CategoryNav.this,QuestionView.class);
-				startActivity(i);
-			}
-        	
+        lvCatQues.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Utilities.setCurQuesObj(Utilities.getQuesObjectByQIndex(position));
+                Intent i = new Intent(CategoryNav.this, QuestionView.class);
+                startActivity(i);
+            }
+
         });
-		
+
         btnNewQues.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(CategoryNav.this,NewQuestion.class);
-				startActivity(i);
-			}
-		});
-        
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CategoryNav.this, NewQuestion.class);
+                startActivity(i);
+            }
+        });
+
         if(Utilities.getCurUserType()==Utilities.UserType.USER_TYPE_IPM)
         {
         	btnNewQues.setEnabled(false);
         	btnNewQues.setVisibility(View.GONE);
         }
-		doPopulateAllQuestions(true);
-		/**
-        myTimer = new Timer();
-        myTimer.schedule(new TimerTask() {          
+		new UpdateQuestionsTask().execute(true);
+
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                TimerMethod();
+                CategoryNav.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new UpdateQuestionsTask().execute(true);
+                    }
+                });
             }
-
-        }, 30000, 30000);**/
+        };
+        timer.scheduleAtFixedRate(task, whenToStart, howOften);
 	}
-	
-/**
-    private void TimerMethod()
-    {
-        //This method is called directly by the timer
-        //and runs in the same thread as the timer.
 
-        //We call the method that will work with the UI
-        //through the runOnUiThread method.
-        this.runOnUiThread(Timer_Tick);
+
+    private enum UpdateTaskState
+    {
+        SUCCESS,
+        NO_INTERNET,
+        EXCEPTION_THROWN
     }
 
+    class UpdateQuestionsTask extends AsyncTask<Boolean,String, UpdateTaskState> {
+        @Override
+        protected UpdateTaskState doInBackground(Boolean... params) {
+            boolean forceUpdate = params[0];
 
-    private Runnable Timer_Tick = new Runnable() {
-        public void run() {
-        	//This method runs in the same thread as the UI.
-        	timerCalledUpdate = true;
-        	doPopulateAllQuestions(true);
+            if(!Utilities.isNetworkAvailable(CategoryNav.this)
+                    && (!storedAllQuestions || forceUpdate))
+            {
+                publishProgress("The list of questions could not be updated!\nCheck your network!");
+                return UpdateTaskState.NO_INTERNET;
+            }
+
+            if(forceUpdate)
+            {
+                try {
+                    ParseQuery<ParseObject> tquery = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
+                    tquery.fromLocalDatastore();
+                    List<ParseObject> objs = tquery.find();
+                    ParseObject.unpinAll(objs);
+                } catch (ParseException e1) {
+                    //Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
+                    e1.printStackTrace();
+                }
+            }
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
+            query.addAscendingOrder(Utilities.alias_QNUMANSWERS);
+            try {
+                List<ParseObject> postList = query.find();
+                Utilities.saveCurTagQuestions(postList);
+                list.clear();
+                for(ParseObject tag: postList)
+                {
+                    list.add(new CustomQuesListItem("...",tag.getString(Utilities.alias_QTITLE), tag.getInt(Utilities.alias_QNUMANSWERS)));
+                }
+
+                ParseObject.pinAllInBackground(postList, new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        storedAllQuestions = true;
+                        Utilities.haveAllTags = true;
+                    }
+                });
+                publishProgress("All questions loaded!");
+            } catch (ParseException e) {
+                publishProgress("An error occurred. Please try refresh. If interests still don't load then please logout and login again!");
+                //Toast.makeText(HomeScreenSchool.this, "No tags could be loaded due to error: \n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
+                e.printStackTrace();
+                return UpdateTaskState.EXCEPTION_THROWN;
+            }
+
+            return UpdateTaskState.SUCCESS;
         }
-    };
-**/
-	private void doPopulateAllQuestions(final boolean forceUpdate) {
-		if(!Utilities.isNetworkAvailable(CategoryNav.this)
-				&& (!haveAllQuestions || forceUpdate))
-		{
-			if(!timerCalledUpdate)
-			{
-				AlertDialog.Builder builder = new AlertDialog.Builder(CategoryNav.this);
-	            builder.setMessage(R.string.no_internet_msg)
-	                .setTitle(R.string.no_internet_title)
-	                .setPositiveButton(android.R.string.ok, null);
-	            AlertDialog dialog = builder.create();
-	            dialog.show();
-	            tvInfo.setText("The list of interests could not be updated!\nCheck your network!");
-			}
-    		return;
-		}
-		
-		
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
-		
-		if(Utilities.hasCurTagQuesLoaded())
-			haveAllQuestions = true;
-		if(haveAllQuestions)
-		{
-			if(!forceUpdate)
-				query.fromLocalDatastore();
-			else
-			{
-				try {
-					ParseObject.unpinAll();
-				} catch (ParseException e1) {
-					Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
-					e1.printStackTrace();
-				}
-			}
-		}
 
-		query.addAscendingOrder(Utilities.alias_QNUMANSWERS);
-	    query.findInBackground(new FindCallback<ParseObject>() {
-	 
-	        @Override
-	        public void done(List<ParseObject> postList, ParseException e) {
-	        	tvInfo.setText("All questions loaded!");
-	        	Utilities.saveCurTagQuestions(postList);
-	            if (e == null) {
-	            	list.clear();
-	            	int index = 0, totSize = postList.size() - 1;
-	            	String temp;
-	            	//boolean isAnon = Utilities.getObjectByTagName(Utilities.getCategory()).getBoolean(Utilities.alias_TAGISANON);
-	            	//Utilities.storeAllAnswers(postList);
-	            	for(ParseObject tag: postList)
-	            	{
-	            		temp = tag.getString(Utilities.alias_QBY);
-	            		list.add(new CustomQuesListItem("...",tag.getString(Utilities.alias_QTITLE), tag.getInt(Utilities.alias_QNUMANSWERS)));
-	            		if(index < totSize)
-	            			setListNameforusername(index, temp, false, forceUpdate);//, isAnon);
-	            		else
-	            			setListNameforusername(index, temp, true, forceUpdate);//, isAnon);
-	            		++index;
-	            	}
-	            	ParseObject.pinAllInBackground(postList, new SaveCallback(){
-						@Override
-						public void done(ParseException arg0) {
-							haveAllQuestions = true;
-							Utilities.setCurTagQuesLoaded();
-						}
-	            	});
-	                adapter.notifyDataSetChanged();
-	            } else {
-	                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
-	            }
-	        }
-	    });
-	    timerCalledUpdate = false;
-	}
-	
-	protected void setListNameforusername(final int index, String user, final boolean triggerUpdate, boolean isForcedUpdate)/*, final boolean isAnon)*/ {
-		ParseQuery<ParseUser> query = ParseUser.getQuery();
-		query.whereEqualTo("username", user);
-		if(haveAllQuestions && !isForcedUpdate)
-			query.fromLocalDatastore();
-		query.findInBackground(new FindCallback<ParseUser>() {
-		     public void done(List<ParseUser> objects, ParseException e) {
-		         if (e == null) {
-		        	 ParseUser usr = objects.get(0);
-		        	 /*boolean isTL = usr.getEmail().endsWith(Utilities.IPM_EMAIL_SUFFIX);
-		        	 if(isAnon && isTL)
-		        		 list.get(index).setName("...");
-		        	 else
-		        		 */
-		        	 usr.pinInBackground();
-		        	 list.get(index).setName(usr.getString(Utilities.alias_UFULLNAME));
-		             if(triggerUpdate)
-		             {
-		            	 adapter.notifyDataSetChanged();
-		             }
-		         } else {
-		             Log.d("Category Nav", e.getMessage());
-		         }
-		     }
-		 });
-	}
-	
+        @Override
+        protected void onProgressUpdate(String... text) {
+            tvInfo.setText(text[0]);
+            // Things to be done while execution of long running operation is in
+            // progress. For example updating ProgessDialog
+        }
+
+
+        @Override
+        protected void onPostExecute(UpdateTaskState state) {
+            // refresh UI
+            if(state == UpdateTaskState.SUCCESS)
+            {
+                adapter.notifyDataSetChanged();
+                new SetListNamesFromUserNames().execute();
+            }
+            else if(state == UpdateTaskState.NO_INTERNET)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CategoryNav.this);
+                builder.setMessage(R.string.no_internet_msg)
+                        .setTitle(R.string.no_internet_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
+    }
+
+    class SetListNamesFromUserNames extends AsyncTask<Boolean,Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Boolean... params) {
+            boolean isForcedUpdate = params[0];
+
+            Boolean ret = false;
+            int i=0;
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            for(CustomQuesListItem ques : list)
+            {
+                query.whereEqualTo("username", Utilities.getQuesObjectByQIndex(i++).getString(Utilities.alias_QBY));
+                if(storedAllUsers && !isForcedUpdate)
+                    query.fromLocalDatastore();
+
+                try
+                {
+                    List<ParseUser> postList = query.find();
+                    ParseUser usr = postList.get(0);
+                    usr.pinInBackground();
+                    ques.setName(usr.getString(Utilities.alias_UFULLNAME));
+                    ret = true;
+                }
+                catch (ParseException e)
+                {
+                    Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            return ret;
+        }
+
+        @Override
+        public void onPostExecute(Boolean isSuccess)
+        {
+            if(isSuccess)
+            {
+                storedAllUsers = true;
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -232,23 +252,48 @@ public class CategoryNav extends ActionBarActivity {
 		int id = item.getItemId();
 		if(id == R.id.action_logout)
 		{
-			Utilities.logOutCurUser();
-			Intent i = new Intent(CategoryNav.this,MainActivity.class);
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
-			finish();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Utilities.logOutCurUser();
+                    Intent i = new Intent(CategoryNav.this,MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                }
+            }).start();
 		}
 		else if(id == R.id.action_refresh)
 		{
 			Toast.makeText(CategoryNav.this, "Refreshing...", Toast.LENGTH_SHORT).show();
-			doPopulateAllQuestions(true);
+			new UpdateQuestionsTask().execute(true);
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        timer.cancel();
+    }
 	
 	@Override
-	protected void onPostResume() {
-		super.onPostResume();
-		doPopulateAllQuestions(false);
+	protected void onResume() {
+		super.onResume();
+		new UpdateQuestionsTask().execute(false);
+
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                CategoryNav.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new UpdateQuestionsTask().execute(true);
+                    }
+                });
+            }
+        };
+        timer.scheduleAtFixedRate(task, whenToStart, howOften);
 	}
 }
