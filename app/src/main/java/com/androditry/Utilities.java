@@ -264,6 +264,12 @@ public class Utilities {
 			curQuesAnswers.add(obj);
 		}
 	}
+	public static ParseObject getAnswerObjByIndex(int index)
+	{
+		if(curQuesAnswers == null)
+			return null;
+		return curQuesAnswers.get(index);
+	}
 	public static String getAnswerUsernameByText(String text)
 	{
 		for(ParseObject obj : curQuesAnswers)

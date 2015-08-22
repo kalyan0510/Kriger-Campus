@@ -2,14 +2,12 @@ package com.androditry;
 
 import java.util.List;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
-import com.parse.SaveCallback;
 
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -28,6 +26,8 @@ public class NewQuestion extends ActionBarActivity {
 	EditText etQTitle,etQDetails;
 	Button   btnPost;
 
+    String qtitle, qdetail;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,123 +42,149 @@ public class NewQuestion extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View v) {
-				btnPost.setEnabled(false);
-				if(!Utilities.isNetworkAvailable(NewQuestion.this))
-				{
-					AlertDialog.Builder builder = new AlertDialog.Builder(NewQuestion.this);
-                    builder.setMessage(R.string.no_internet_msg)
-                        .setTitle(R.string.no_internet_title)
-                        .setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    btnPost.setEnabled(true);
-            		return;
-				}
-				
-				String errorMsg = "";
-				String qtitle = etQTitle.getText().toString().trim();
-				String qdetail = etQDetails.getText().toString().trim();
-				
-				if(qtitle.isEmpty() || qtitle.length()<MIN_QUES_TITLE_LENGTH)
-				{
-					errorMsg = "Question title should be at least " + MIN_QUES_TITLE_LENGTH +" characters long!";
-				}
-				if(!errorMsg.isEmpty())
-				{
-					AlertDialog.Builder builder = new AlertDialog.Builder(NewQuestion.this);
-	                builder.setMessage(errorMsg)
-	                    .setTitle("Error")
-	                    .setPositiveButton(android.R.string.ok, null);
-	                AlertDialog dialog = builder.create();
-	                dialog.show();
-				}
-				else
-				{
-					ParseObject testObject = new ParseObject(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
-				    testObject.put(Utilities.alias_QTITLE, qtitle);
-				    testObject.put(Utilities.alias_QDETAILS, qdetail);
-				    testObject.put(Utilities.alias_QBY, Utilities.getCurUsername());
-				    testObject.put(Utilities.alias_QNUMANSWERS, 0);
-				    testObject.put(Utilities.alias_QNUMANSSEEN, 0);
-				    
-				    final ParseObject finalTestObject = testObject;
-				    
-				    ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
-				    if(Utilities.hasCurTagQuesLoaded())
-				    	query.fromLocalDatastore();
-					query.whereEqualTo(Utilities.alias_QTITLE, qtitle);
-				    query.findInBackground(new FindCallback<ParseObject>() {
-				        @Override
-				        public void done(List<ParseObject> postList, ParseException e) {
-				        	if(e == null)
-				        	{
-				        		if(!postList.isEmpty())
-				        		{
-				        			AlertDialog.Builder builder = new AlertDialog.Builder(NewQuestion.this);
-				    	            builder.setMessage("A Question exists with the exactly same title.\nPlease consider reading that question instead.")
-				    	                .setTitle("Duplicate Question!")
-				    	                .setPositiveButton(android.R.string.ok, null);
-				    	            AlertDialog dialog = builder.create();
-				    	            dialog.show();
-				        		}
-				        		else
-				        		{
-				        			finalTestObject.pinInBackground();
-				        			finalTestObject.saveInBackground(new SaveCallback() {
-					                    public void done(ParseException e) {
-					                    	if (e == null) {
-					                    		updateNumQuestionsInCategory();
-					                    		
-					                    		ParsePush push = new ParsePush();
-					                    		push.setChannel(Utilities.TL_CHANNEL_NAME);
-					                    		push.setMessage("A new Question was asked in " + Utilities.getCategory() + "!");
-					                    		push.sendInBackground();
-					                    		
-					                    		Toast.makeText(getApplicationContext(), "Question post succesful!", Toast.LENGTH_SHORT).show();
-					                    		NewQuestion.this.finish();
-					                    	} else {
-					                            // The save failed.
-					                            Toast.makeText(getApplicationContext(), "Failed to Save\nPlease Check network!", Toast.LENGTH_SHORT).show();
-					                            Log.d(getClass().getSimpleName(), "Answer Post error: " + e);
-					                        }
-					                    }
-					                });
-				        		}
-				        	}
-				        	else
-				        	{
-				        		Log.d("New question asked...","Caused exception\n" + e.getMessage());
-				        	}
-				        }
-				    });
-				}
-				btnPost.setEnabled(true);
+
+				qtitle = etQTitle.getText().toString().trim();
+				qdetail = etQDetails.getText().toString().trim();
+
+                new PostQuestionTask().execute();
 			}
 		});
 	}
-	
-	private void updateNumQuestionsInCategory() {
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.AllTagsList);
-		
-		ParseObject obj = Utilities.getObjectByTagName(Utilities.getCategory());
-		//Toast.makeText(getApplicationContext(), "Id to retrieve : " + obj.getObjectId(), Toast.LENGTH_SHORT).show();
-        // Retrieve the object by id
-		if(Utilities.haveAllTags)
-			query.fromLocalDatastore();
-        query.getInBackground(obj.getObjectId(), new GetCallback<ParseObject>() {
-          public void done(ParseObject post, ParseException e) {
-            if (e == null) {
-            		// Now let's update it with some new data.
-                	post.put(Utilities.alias_TAGQUES, post.getInt(Utilities.alias_TAGQUES) + 1);
-               		post.saveEventually();
+
+
+    private enum PostQuestionTaskState
+    {
+        SUCCESS,
+        NO_INTERNET,
+        TITLE_TOOSMALL,
+        QUES_DUPLICATE,
+        EXCEPTION_THROWN
+    }
+
+    String errMsg;
+    class PostQuestionTask extends AsyncTask<Void,Boolean, PostQuestionTaskState> {
+
+        @Override
+        protected PostQuestionTaskState doInBackground(Void... params) {
+            publishProgress(false);
+
+            if (!Utilities.isNetworkAvailable(NewQuestion.this)) {
+                return PostQuestionTaskState.NO_INTERNET;
             }
-            else
+
+            if(qtitle.isEmpty() || qtitle.length()<MIN_QUES_TITLE_LENGTH)
             {
-            	Log.d(getClass().getSimpleName(), "Could not find Object by id error: " + e);
+                return PostQuestionTaskState.TITLE_TOOSMALL;
             }
-          }
-        });
-	}
+            else {
+                try {
+                    ParseObject testObject = new ParseObject(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
+                    testObject.put(Utilities.alias_QTITLE, qtitle);
+                    testObject.put(Utilities.alias_QDETAILS, qdetail);
+                    testObject.put(Utilities.alias_QBY, Utilities.getCurUsername());
+                    testObject.put(Utilities.alias_QNUMANSWERS, 0);
+                    testObject.put(Utilities.alias_QNUMANSSEEN, 0);
+
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
+                    if(Utilities.hasCurTagQuesLoaded())
+                        query.fromLocalDatastore();
+                    query.whereEqualTo(Utilities.alias_QTITLE, qtitle);
+                    List<ParseObject> postList = query.find();
+                    if (!postList.isEmpty()) {
+                        return PostQuestionTaskState.QUES_DUPLICATE;
+                    }
+                    else
+                    {
+                        testObject.pin();
+                        testObject.save();
+                        updateNumQuestionsInCategory();
+                        Toast.makeText(getApplicationContext(), "Question post successful!", Toast.LENGTH_SHORT).show();
+
+                        ParsePush push = new ParsePush();
+                        push.setChannel(Utilities.TL_CHANNEL_NAME);
+                        push.setMessage("A new Question was asked in " + Utilities.getCategory() + "!");
+                        push.send();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    errMsg = e.getMessage();
+                    return PostQuestionTaskState.EXCEPTION_THROWN;
+                }
+            }
+            return PostQuestionTaskState.SUCCESS;
+        }
+
+        @Override
+        protected void onProgressUpdate(Boolean... isEnabled) {
+            btnPost.setEnabled(isEnabled[0]);
+            // Things to be done while execution of long running operation is in
+            // progress. For example updating ProgessDialog
+        }
+
+
+        @Override
+        protected void onPostExecute(PostQuestionTaskState state) {
+            // refresh UI
+            if (state == PostQuestionTaskState.SUCCESS) {
+                // Success!
+                finish();
+            }
+            else if (state == PostQuestionTaskState.NO_INTERNET) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewQuestion.this);
+                builder.setMessage(R.string.no_internet_msg)
+                        .setTitle(R.string.no_internet_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            } else if (state == PostQuestionTaskState.TITLE_TOOSMALL) {
+                String errorMsg = "Question title should be at least " + MIN_QUES_TITLE_LENGTH +" characters long!";
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewQuestion.this);
+                builder.setMessage(errorMsg)
+                        .setTitle("Error")
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else if(state == PostQuestionTaskState.QUES_DUPLICATE)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewQuestion.this);
+                builder.setMessage("A Question exists with the exactly same title.\nPlease consider reading that question instead.")
+                        .setTitle("Duplicate Question!")
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else if (state == PostQuestionTaskState.EXCEPTION_THROWN) {
+                // The save failed.
+                Toast.makeText(getApplicationContext(), "Failed to Save\nPlease Check network!", Toast.LENGTH_SHORT).show();
+                Log.d(getClass().getSimpleName(), "Answer Post error: " + errMsg);
+            }
+            btnPost.setEnabled(true);
+        }
+    }
+
+	private void updateNumQuestionsInCategory() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.AllTagsList);
+
+        //Toast.makeText(getApplicationContext(), "Id to retrieve : " + obj.getObjectId(), Toast.LENGTH_SHORT).show();
+        // Retrieve the object by id
+        if (Utilities.haveAllTags)
+            query.fromLocalDatastore();
+        try {
+            ParseObject obj = Utilities.getObjectByTagName(Utilities.getCategory());
+            ParseObject post = query.get(obj.getObjectId());
+            post.put(Utilities.alias_TAGQUES, post.getInt(Utilities.alias_TAGQUES) + 1);
+            post.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Log.d(getClass().getSimpleName(), "Could not find Object by id error: " + e);
+        }
+        catch (NullPointerException e)
+        {
+            e.printStackTrace();
+            Log.d(getClass().getSimpleName(), "The object for current tag was null!\n" + e.getMessage());
+        }
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

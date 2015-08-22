@@ -113,9 +113,11 @@ public class CategoryNav extends ActionBarActivity {
     }
 
     class UpdateQuestionsTask extends AsyncTask<Boolean,String, UpdateTaskState> {
+        boolean forceUpdate;
+
         @Override
         protected UpdateTaskState doInBackground(Boolean... params) {
-            boolean forceUpdate = params[0];
+            forceUpdate = params[0];
 
             if(!Utilities.isNetworkAvailable(CategoryNav.this)
                     && (!storedAllQuestions || forceUpdate))
@@ -138,6 +140,8 @@ public class CategoryNav extends ActionBarActivity {
             }
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
+            if(storedAllQuestions && !forceUpdate)
+                query.fromLocalDatastore();
             query.addAscendingOrder(Utilities.alias_QNUMANSWERS);
             try {
                 List<ParseObject> postList = query.find();
@@ -181,7 +185,7 @@ public class CategoryNav extends ActionBarActivity {
             if(state == UpdateTaskState.SUCCESS)
             {
                 adapter.notifyDataSetChanged();
-                new SetListNamesFromUserNames().execute();
+                new SetListNamesFromUserNames().execute(forceUpdate);
             }
             else if(state == UpdateTaskState.NO_INTERNET)
             {
@@ -252,13 +256,14 @@ public class CategoryNav extends ActionBarActivity {
 		int id = item.getItemId();
 		if(id == R.id.action_logout)
 		{
+            timer.cancel();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Utilities.logOutCurUser();
-                    Intent i = new Intent(CategoryNav.this,MainActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
+                Utilities.logOutCurUser();
+                Intent i = new Intent(CategoryNav.this,MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
                 }
             }).start();
 		}
