@@ -37,8 +37,8 @@ public class CategoryNav extends ActionBarActivity {
     CustomQuesListAdapter adapter;
 
     private Timer timer;
-    private static final long whenToStart = 30*1000L; // 30 seconds
-    private static final long howOften = 30*1000L; // 30 seconds
+    private static final long whenToStart = 60*1000L; // 60 seconds
+    private static final long howOften = 60*1000L; // 60 seconds
 
     private boolean storedAllQuestions = false;
     private boolean storedAllUsers = false;

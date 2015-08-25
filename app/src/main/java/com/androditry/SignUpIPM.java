@@ -57,7 +57,7 @@ public class SignUpIPM extends ActionBarActivity {
 		    	  {
 		    		  String tmp2 = tmp.substring(2);
 			    	  char t = Character.toUpperCase(tmp.charAt(tmp.length()-1));
-			    	  tmp2 = Character.toUpperCase(tmp2.charAt(0)) + tmp2.substring(1);
+			    	  tmp2 = Character.toUpperCase(tmp2.charAt(0)) + tmp2.substring(1, tmp2.length() - 1);
 			    	  tvFullNameStart.setText(tmp2 + " " + t);
 		    	  }
 		    	  else

@@ -7,6 +7,7 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -131,9 +132,13 @@ public class HomeScreenSchool extends ActionBarActivity {
                     CustomCatListItem item = new CustomCatListItem(tagName, 0, tag.getBoolean(Utilities.alias_TAGISANON));
                     list.add(item);
                 }
-                ParseObject.pinAll(postList);
-                storedAllInterests = true;
-                Utilities.haveAllTags = true;
+                ParseObject.pinAllInBackground(postList, new SaveCallback() {
+                    @Override
+                    public void done(ParseException arg0) {
+                        storedAllInterests = true;
+                        Utilities.haveAllTags = true;
+                    }
+                });
             } catch (ParseException e) {
                 publishProgress("An error occurred. Please try refresh. If interests still don't load then please logout and login again!");
                 //Toast.makeText(HomeScreenSchool.this, "No tags could be loaded due to error: \n" + e.getMessage(), Toast.LENGTH_SHORT).show();
