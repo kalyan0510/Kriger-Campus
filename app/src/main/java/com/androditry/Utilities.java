@@ -345,9 +345,9 @@ public class Utilities {
 	{
 		if(curUser == null)
 			return;
-		List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
-		if(subscribedChannels == null || subscribedChannels.size() == 0)
-		{
+		//List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
+		//if(subscribedChannels == null || subscribedChannels.size() == 0)
+		//{
 			if(getCurUserType() == UserType.USER_TYPE_IPM)
 			{
 				ParsePush.subscribeInBackground(TL_CHANNEL_NAME);
@@ -358,6 +358,6 @@ public class Utilities {
 				installation.put("username", getCurUsername());
 				installation.saveInBackground();
 			}
-		}
+		//}
 	}
 }

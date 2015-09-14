@@ -95,15 +95,15 @@ public class NewQuestion extends ActionBarActivity {
                     }
                     else
                     {
-                        testObject.pin();
-                        testObject.save();
+                        testObject.pinInBackground();
+                        testObject.saveInBackground();
                         updateNumQuestionsInCategory();
                         Toast.makeText(getApplicationContext(), "Question post successful!", Toast.LENGTH_SHORT).show();
 
                         ParsePush push = new ParsePush();
                         push.setChannel(Utilities.TL_CHANNEL_NAME);
                         push.setMessage("A new Question was asked in " + Utilities.getCategory() + "!");
-                        push.send();
+                        push.sendInBackground();
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();

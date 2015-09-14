@@ -160,7 +160,7 @@ public class CategoryNav extends ActionBarActivity {
                     @Override
                     public void done(ParseException e) {
                         storedAllQuestions = true;
-                        Utilities.haveAllTags = true;
+                        Utilities.setCurTagQuesLoaded();
                     }
                 });
                 publishProgress("All questions loaded!");

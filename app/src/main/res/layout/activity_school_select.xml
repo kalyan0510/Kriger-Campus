@@ -14,17 +14,35 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/ll11"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical" />
         
         <TextView
-        android:id="@+id/tvSchoolSelect"
-        android:text="@string/school_select"
-        android:layout_marginTop="4dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:typeface="serif" />
+            android:id="@+id/tvSchoolSelect"
+            android:text="@string/school_select"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+            <LinearLayout
+                android:id="@+id/ll13"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" />
         
     </LinearLayout>
 
@@ -38,10 +56,14 @@
         <Button
             android:layout_gravity="center_horizontal"
         	android:id="@+id/btnSchool"
-        	android:layout_width="150dp"
-        	android:layout_height="wrap_content"
-        	android:background="@drawable/blue_button"
-            style="@style/ButtonText"
+        	android:layout_width="match_parent"
+        	android:layout_height="50dp"
+            android:textSize="35sp"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:background="@drawable/btn_border"
         	android:text="@string/school" />
         
     </LinearLayout>
@@ -55,11 +77,15 @@
         
         <Button
         	android:id="@+id/btnIPM"
-        	android:layout_width="150dp"
-        	android:layout_height="wrap_content"
+        	android:layout_width="match_parent"
+        	android:layout_height="50dp"
+            android:textSize="35sp"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
         	android:layout_gravity="center_horizontal"
-        	android:background="@drawable/blue_button"
-            style="@style/ButtonText"
+        	android:background="@drawable/btn_border"
         	android:text="@string/IPM" />
         
     </LinearLayout>

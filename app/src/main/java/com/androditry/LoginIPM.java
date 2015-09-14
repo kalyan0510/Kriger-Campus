@@ -3,6 +3,7 @@ package com.androditry;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -16,6 +17,7 @@ public class LoginIPM extends ActionBarActivity {
 	
 	EditText etEmail,etPass;
 	Button btnLoginIPM,btnSignUpIPM;
+    ProgressDialog pd;
 
     String username, password;
 
@@ -64,8 +66,16 @@ public class LoginIPM extends ActionBarActivity {
     class LoginTask extends AsyncTask<Void,Boolean, LoginTaskState> {
 
         @Override
+        protected void onPreExecute() {
+            pd = new ProgressDialog(LoginIPM.this);
+            pd.setMessage("Please wait while logging in...");
+            pd.show();
+        }
+
+        @Override
         protected LoginTaskState doInBackground(Void... params) {
             publishProgress(false);
+            pd.setMessage("Logging in...");
 
             if (!Utilities.isNetworkAvailable(LoginIPM.this)) {
                 return LoginTaskState.NO_INTERNET;
@@ -105,6 +115,9 @@ public class LoginIPM extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(LoginTaskState state) {
+            pd.setMessage("");
+            pd.dismiss();
+
             // refresh UI
             if (state == LoginTaskState.SUCCESS) {
                 Intent intent = new Intent(LoginIPM.this, HomeScreenIPM.class);

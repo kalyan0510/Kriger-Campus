@@ -3,6 +3,7 @@ package com.androditry;
 import com.parse.ParseUser;
 import com.parse.ParseException;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
@@ -22,6 +23,7 @@ public class SignUpSchool extends ActionBarActivity {
 	EditText etEmail,etPass,etName,etUsername,etRePass;
 	Button btnSignUp;
 	CheckBox cbTerms;
+    ProgressDialog pd;
 
     String username, password, repass, email, name;
     boolean isCbChecked;
@@ -76,8 +78,16 @@ public class SignUpSchool extends ActionBarActivity {
     class SignUpTask extends AsyncTask<Void,Boolean, SignUpTaskState> {
 
         @Override
+        protected void onPreExecute() {
+            pd = new ProgressDialog(SignUpSchool.this);
+            pd.setMessage("Please wait while signing up...");
+            pd.show();
+        }
+
+        @Override
         protected SignUpTaskState doInBackground(Void... params) {
             publishProgress(false);
+            pd.setMessage("Signing up...");
 
             if (!Utilities.isNetworkAvailable(SignUpSchool.this)) {
                 return SignUpTaskState.NO_INTERNET;
@@ -136,6 +146,9 @@ public class SignUpSchool extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(SignUpTaskState state) {
+            pd.setMessage("");
+            pd.dismiss();
+
             // refresh UI
             if (state == SignUpTaskState.SUCCESS) {
                 // Success!

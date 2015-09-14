@@ -71,6 +71,7 @@ public class QuestionView extends ActionBarActivity {
         list.add(new CustomListItem("", "loading all answers..."));
         adapter.notifyDataSetChanged();
 
+        btnPost.setEnabled(false);
         btnPost.setOnClickListener(new View.OnClickListener() {
 
             @Override
