@@ -11,6 +11,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -29,7 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class CategoryNav extends ActionBarActivity {
 	
-	TextView tvInfo, tvAbout;
+	TextView tvCatName, tvCatInfo, tvInfo;
 	ListView lvCatQues;
 	Button   btnNewQues;
 	
@@ -49,13 +50,19 @@ public class CategoryNav extends ActionBarActivity {
         setContentView(R.layout.activity_category_nav);
 		setTitle(Utilities.getCategory().replace('_', ' '));
 
-		tvAbout = (TextView) findViewById(R.id.tvAboutCat);
-		tvAbout.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
-		tvInfo = (TextView) findViewById(R.id.tvInfoCatNav);
-		tvInfo.setText("Loading Questions");
+		tvCatName = (TextView) findViewById(R.id.tvCatName);
+        tvCatName.setText(Utilities.getCategory().replace('_', ' '));
+		tvCatInfo = (TextView) findViewById(R.id.tvCatInfo);
+        tvCatInfo.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
+        tvInfo    = (TextView) findViewById(R.id.tvInfoInCat);
 
 		lvCatQues = (ListView) findViewById(R.id.lvCategoryQuestions);
 		btnNewQues = (Button)  findViewById(R.id.btnAddQuestion);
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        tvCatInfo.setTypeface(face);
+        tvCatName.setTypeface(face);
+        btnNewQues.setTypeface(face);
 
 		adapter = new CustomQuesListAdapter(this, list);
         lvCatQues.setAdapter(adapter);
@@ -190,6 +197,7 @@ public class CategoryNav extends ActionBarActivity {
             {
                 adapter.notifyDataSetChanged();
                 new SetListNamesFromUserNames().execute(forceUpdate);
+                tvInfo.setVisibility(View.GONE);
             }
             else if(state == UpdateTaskState.NO_INTERNET)
             {

@@ -15,12 +15,17 @@
    		android:orientation="vertical" >
     
     <TextView
+        android:id="@+id/tvUNameSchool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_username" 
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
-        android:typeface="serif"/>
+        android:textColor="#111111"/>
 
         
     <EditText
@@ -34,13 +39,18 @@
       	    android:typeface="serif" />
     
     <TextView
+        android:id="@+id/tvPassSchool"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_pass"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
-        android:typeface="serif" />
+        android:textColor="#111111" />
     
     <EditText
         	android:id="@+id/etPassLoginSchool"
@@ -54,30 +64,46 @@
         
     <Button
         android:id="@+id/btnLoginSchool"
-        android:layout_marginTop="30dp"
-        android:layout_height="45dp"
-        android:layout_width="140dp"
-        android:background="@drawable/blue_button"
-        style="@style/ButtonText"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
+        android:background="@drawable/btn_border"
+        android:textAllCaps="false"
         android:text="@string/login" />
     
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textColor="#000000"
-        android:textSize="18sp"
+        android:id="@+id/tvNewUserSchool"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:text="@string/noaccount"/>
     
     <Button
         android:id="@+id/btnStartSignupSchool"
-        android:layout_height="45dp"
-        android:background="@drawable/blue_button"
-        style="@style/ButtonText"
         android:layout_gravity="center_horizontal"
-        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
+        android:background="@drawable/btn_border"
+        android:textAllCaps="false"
         android:text="@string/signup" />
         
     </LinearLayout>

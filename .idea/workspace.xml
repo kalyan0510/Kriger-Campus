@@ -20,14 +20,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0febc046-2f5a-4bf3-90f9-2ef7ea8ca07e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/assets/fonts/nevis.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/btn_border.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/academics.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/campus.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/faculty.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/funnparty.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/img_main_crown.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/interview.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/office.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ragging.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/sports.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/test.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/CustomGridView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchoolOld.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_old.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/grid_item_single.xml" />
+      <change type="DELETED" beforePath="E:\AndroidStudioProjects\Kriger Helps OLD\app\src\main\res\drawable-xxhdpi\img_main_crown.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/CategoryNav.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/CategoryNav.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenIPM.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenIPM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginIPM.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginIPM.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginSchool.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginSchool.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/NewQuestion.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/NewQuestion.java" />
@@ -36,8 +51,21 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpIPM.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpIPM.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpSchool.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpSchool.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_category_nav.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_category_nav.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_ipm.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_ipm.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_school.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_school.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_ipm.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_ipm.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_school.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_school.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_question.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_new_question.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_question_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_question_view.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_school_select.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_school_select.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_ipm.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_ipm.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_school.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_school.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_category.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_category.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item_ques.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item_ques.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Kriger Helps OLD.iws" />
@@ -59,14 +87,92 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="HomeScreenSchool.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="48" column="60" selection-start-line="48" selection-start-column="60" selection-end-line="48" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_home_screen_school.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_school.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomGridView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CustomGridView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grid_item_single.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/grid_item_single.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.2413793">
+              <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="LoginSchool.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/LoginSchool.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="88" column="20" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+              <caret line="141" column="77" selection-start-line="141" selection-start-column="77" selection-end-line="141" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="48" column="61" selection-start-line="48" selection-start-column="61" selection-end-line="48" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CategoryNav.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CategoryNav.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1491841">
+              <caret line="55" column="93" selection-start-line="55" selection-start-column="93" selection-end-line="55" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="67" column="27" selection-start-line="67" selection-start-column="27" selection-end-line="67" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -75,72 +181,19 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="343" column="60" selection-start-line="343" selection-start-column="60" selection-end-line="343" selection-end-column="60" />
+              <caret line="232" column="4" selection-start-line="232" selection-start-column="4" selection-end-line="232" selection-end-column="4" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#5584#5585#0" expanded="false" />
-                <element signature="e#5603#5604#0" expanded="false" />
-                <element signature="e#5650#5651#0" expanded="false" />
-                <element signature="e#5671#5672#0" expanded="false" />
-                <element signature="e#7370#7371#0" expanded="false" />
-                <element signature="e#7405#7406#0" expanded="false" />
-                <element signature="e#7457#7458#0" expanded="false" />
-                <element signature="e#7485#7486#0" expanded="false" />
-                <element signature="e#7822#7823#0" expanded="false" />
-                <element signature="e#7858#7859#0" expanded="false" />
-                <element signature="e#7897#7898#0" expanded="false" />
-                <element signature="e#7918#7919#0" expanded="false" />
-                <element signature="e#8259#8260#0" expanded="false" />
-                <element signature="e#8299#8300#0" expanded="false" />
-                <element signature="e#8404#8405#0" expanded="false" />
-                <element signature="e#8436#8437#0" expanded="false" />
-                <element signature="e#8482#8483#0" expanded="false" />
-                <element signature="e#8506#8507#0" expanded="false" />
-                <element signature="e#9716#9717#0" expanded="false" />
-                <element signature="e#9760#9761#0" expanded="false" />
-                <element signature="e#9805#9806#0" expanded="false" />
-                <element signature="e#9843#9844#0" expanded="false" />
-                <element signature="e#10059#10060#0" expanded="false" />
-                <element signature="e#10104#10105#0" expanded="false" />
-                <element signature="e#10342#10343#0" expanded="false" />
-                <element signature="e#10380#10381#0" expanded="false" />
+                <element signature="e#8051#8052#0" expanded="true" />
+                <element signature="e#8087#8088#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SchoolSelect.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/SchoolSelect.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_school_select.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_school_select.xml">
-          <provider editor-type-id="android-designer">
+      <file leaf-file-name="office.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/office.png">
+          <provider selected="true" editor-type-id="images">
             <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5072464">
-              <caret line="82" column="35" selection-start-line="82" selection-start-column="35" selection-end-line="82" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="btn_border.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_border.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="45" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
-              <folding />
-            </state>
           </provider>
         </entry>
       </file>
@@ -150,6 +203,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
+        <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -1276,19 +1331,36 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenIPM.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginSchool.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/QuestionView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/CategoryNav.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpSchool.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginIPM.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpIPM.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/NewQuestion.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_border.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginIPM.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/SchoolSelect.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpSchool.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpIPM.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_category.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_ques.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_school.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_ipm.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_school_select.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_school.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_ipm.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_question_view.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_new_question.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/NewQuestion.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/QuestionView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenIPM.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_ipm.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_category_nav.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/CategoryNav.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home_scree_old.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/LoginSchool.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchoolOld.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_school.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/grid_item_single.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/CustomGridView.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java" />
       </list>
     </option>
   </component>
@@ -1296,10 +1368,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1" />
-    <option name="y" value="1" />
-    <option name="width" value="1364" />
-    <option name="height" value="766" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1370" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -1324,8 +1396,10 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1343,16 +1417,50 @@
               <option name="myItemId" value="Kriger Helps OLD" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Kriger Helps OLD" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Kriger Helps OLD" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="androditry" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="recentsLimit" value="5" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="ECAZFG104964" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Copy_of_Galaxy_Nexus_API_21" />
     <property name="FullScreen" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="154" />
@@ -1373,9 +1481,11 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\AndroidStudioProjects\Kriger Helps OLD\app\src\main\res\drawable-xxhdpi" />
       <recent name="E:\AndroidStudioProjects\Kriger Helps OLD\app\src\main\assets\fonts" />
     </key>
   </component>
@@ -1590,29 +1700,35 @@
       <option name="project" value="LOCAL" />
       <updated>1440531348871</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Used progress dialog. Fixed a few things. Added font.">
+      <created>1442258585680</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1442258585680</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1364" height="766" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1370" height="772" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32840723" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32520324" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297546" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32900763" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32840723" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18619582" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18536586" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32840723" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29064038" sideWeight="0.4969743" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25691056" sideWeight="0.4969743" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25076687" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25038168" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -1623,7 +1739,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3284553" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1642,7 +1758,8 @@
     <MESSAGE value="Most optimisations Done. NewQues and QuesView left." />
     <MESSAGE value="Optimisations Complete Finally!!" />
     <MESSAGE value="Increased update interval. Fixed IPM Name prob." />
-    <option name="LAST_COMMIT_MESSAGE" value="Increased update interval. Fixed IPM Name prob." />
+    <MESSAGE value="Used progress dialog. Fixed a few things. Added font." />
+    <option name="LAST_COMMIT_MESSAGE" value="Used progress dialog. Fixed a few things. Added font." />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.64285713" />
   </component>
   <component name="XDebuggerManager">
@@ -1652,293 +1769,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="34" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="153" column="75" selection-start-line="153" selection-start-column="75" selection-end-line="153" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5584#5585#0" expanded="false" />
-            <element signature="e#5603#5604#0" expanded="false" />
-            <element signature="e#5650#5651#0" expanded="false" />
-            <element signature="e#5671#5672#0" expanded="false" />
-            <element signature="e#7370#7371#0" expanded="false" />
-            <element signature="e#7405#7406#0" expanded="false" />
-            <element signature="e#7457#7458#0" expanded="false" />
-            <element signature="e#7485#7486#0" expanded="false" />
-            <element signature="e#7822#7823#0" expanded="false" />
-            <element signature="e#7858#7859#0" expanded="false" />
-            <element signature="e#7897#7898#0" expanded="false" />
-            <element signature="e#7918#7919#0" expanded="false" />
-            <element signature="e#8259#8260#0" expanded="false" />
-            <element signature="e#8299#8300#0" expanded="false" />
-            <element signature="e#8404#8405#0" expanded="false" />
-            <element signature="e#8436#8437#0" expanded="false" />
-            <element signature="e#8482#8483#0" expanded="false" />
-            <element signature="e#8506#8507#0" expanded="false" />
-            <element signature="e#9716#9717#0" expanded="false" />
-            <element signature="e#9760#9761#0" expanded="false" />
-            <element signature="e#9805#9806#0" expanded="false" />
-            <element signature="e#9843#9844#0" expanded="false" />
-            <element signature="e#10059#10060#0" expanded="false" />
-            <element signature="e#10104#10105#0" expanded="false" />
-            <element signature="e#10342#10343#0" expanded="false" />
-            <element signature="e#10380#10381#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CustomQuesListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="153" column="75" selection-start-line="153" selection-start-column="75" selection-end-line="153" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5584#5585#0" expanded="false" />
-            <element signature="e#5603#5604#0" expanded="false" />
-            <element signature="e#5650#5651#0" expanded="false" />
-            <element signature="e#5671#5672#0" expanded="false" />
-            <element signature="e#7370#7371#0" expanded="false" />
-            <element signature="e#7405#7406#0" expanded="false" />
-            <element signature="e#7457#7458#0" expanded="false" />
-            <element signature="e#7485#7486#0" expanded="false" />
-            <element signature="e#7822#7823#0" expanded="false" />
-            <element signature="e#7858#7859#0" expanded="false" />
-            <element signature="e#7897#7898#0" expanded="false" />
-            <element signature="e#7918#7919#0" expanded="false" />
-            <element signature="e#8259#8260#0" expanded="false" />
-            <element signature="e#8299#8300#0" expanded="false" />
-            <element signature="e#8404#8405#0" expanded="false" />
-            <element signature="e#8436#8437#0" expanded="false" />
-            <element signature="e#8482#8483#0" expanded="false" />
-            <element signature="e#8506#8507#0" expanded="false" />
-            <element signature="e#9716#9717#0" expanded="false" />
-            <element signature="e#9760#9761#0" expanded="false" />
-            <element signature="e#9805#9806#0" expanded="false" />
-            <element signature="e#9843#9844#0" expanded="false" />
-            <element signature="e#10059#10060#0" expanded="false" />
-            <element signature="e#10104#10105#0" expanded="false" />
-            <element signature="e#10342#10343#0" expanded="false" />
-            <element signature="e#10380#10381#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CustomQuesListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="33" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="153" column="75" selection-start-line="153" selection-start-column="75" selection-end-line="153" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5584#5585#0" expanded="false" />
-            <element signature="e#5603#5604#0" expanded="false" />
-            <element signature="e#5650#5651#0" expanded="false" />
-            <element signature="e#5671#5672#0" expanded="false" />
-            <element signature="e#7370#7371#0" expanded="false" />
-            <element signature="e#7405#7406#0" expanded="false" />
-            <element signature="e#7457#7458#0" expanded="false" />
-            <element signature="e#7485#7486#0" expanded="false" />
-            <element signature="e#7822#7823#0" expanded="false" />
-            <element signature="e#7858#7859#0" expanded="false" />
-            <element signature="e#7897#7898#0" expanded="false" />
-            <element signature="e#7918#7919#0" expanded="false" />
-            <element signature="e#8259#8260#0" expanded="false" />
-            <element signature="e#8299#8300#0" expanded="false" />
-            <element signature="e#8404#8405#0" expanded="false" />
-            <element signature="e#8436#8437#0" expanded="false" />
-            <element signature="e#8482#8483#0" expanded="false" />
-            <element signature="e#8506#8507#0" expanded="false" />
-            <element signature="e#9716#9717#0" expanded="false" />
-            <element signature="e#9760#9761#0" expanded="false" />
-            <element signature="e#9805#9806#0" expanded="false" />
-            <element signature="e#9843#9844#0" expanded="false" />
-            <element signature="e#10059#10060#0" expanded="false" />
-            <element signature="e#10104#10105#0" expanded="false" />
-            <element signature="e#10342#10343#0" expanded="false" />
-            <element signature="e#10380#10381#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="52" selection-start-line="10" selection-start-column="52" selection-end-line="10" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CustomQuesListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://G:/adt-bundle-windows-x86_64-20140702/sdk/sources/android-22/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1967,108 +1797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenIPM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="159" column="40" selection-start-line="159" selection-start-column="40" selection-end-line="159" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/QuestionView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="300" column="41" selection-start-line="300" selection-start-column="41" selection-end-line="300" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="60" selection-start-line="74" selection-start-column="60" selection-end-line="74" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CategoryNav.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="161" column="50" selection-start-line="161" selection-start-column="50" selection-end-line="161" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpIPM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="183" column="61" selection-start-line="183" selection-start-column="61" selection-end-line="183" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpSchool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="149" column="25" selection-start-line="149" selection-start-column="25" selection-end-line="149" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/LoginIPM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="17" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/NewQuestion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="105" column="48" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/LoginSchool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="88" column="20" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="343" column="60" selection-start-line="343" selection-start-column="60" selection-end-line="343" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5584#5585#0" expanded="false" />
-            <element signature="e#5603#5604#0" expanded="false" />
-            <element signature="e#5650#5651#0" expanded="false" />
-            <element signature="e#5671#5672#0" expanded="false" />
-            <element signature="e#7370#7371#0" expanded="false" />
-            <element signature="e#7405#7406#0" expanded="false" />
-            <element signature="e#7457#7458#0" expanded="false" />
-            <element signature="e#7485#7486#0" expanded="false" />
-            <element signature="e#7822#7823#0" expanded="false" />
-            <element signature="e#7858#7859#0" expanded="false" />
-            <element signature="e#7897#7898#0" expanded="false" />
-            <element signature="e#7918#7919#0" expanded="false" />
-            <element signature="e#8259#8260#0" expanded="false" />
-            <element signature="e#8299#8300#0" expanded="false" />
-            <element signature="e#8404#8405#0" expanded="false" />
-            <element signature="e#8436#8437#0" expanded="false" />
-            <element signature="e#8482#8483#0" expanded="false" />
-            <element signature="e#8506#8507#0" expanded="false" />
-            <element signature="e#9716#9717#0" expanded="false" />
-            <element signature="e#9760#9761#0" expanded="false" />
-            <element signature="e#9805#9806#0" expanded="false" />
-            <element signature="e#9843#9844#0" expanded="false" />
-            <element signature="e#10059#10060#0" expanded="false" />
-            <element signature="e#10104#10105#0" expanded="false" />
-            <element signature="e#10342#10343#0" expanded="false" />
-            <element signature="e#10380#10381#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2081,14 +1809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6296296">
-          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -2111,17 +1831,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="45" selection-start-line="5" selection-start-column="45" selection-end-line="5" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/SchoolSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="56" selection-start-line="16" selection-start-column="56" selection-end-line="16" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2133,13 +1842,374 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/background1.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/SchoolSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="81" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/img_main_crown.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/LoginIPM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="39" selection-start-line="42" selection-start-column="8" selection-end-line="49" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpSchool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/SignUpIPM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="69" selection-start-line="52" selection-start-column="69" selection-end-line="52" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_ques.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.6896553">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_category.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.379311">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_layout.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.206897">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_school.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.413794">
+          <caret line="182" column="35" selection-start-line="182" selection-start-column="35" selection-end-line="182" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_ipm.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.379311">
+          <caret line="221" column="35" selection-start-line="221" selection-start-column="35" selection-end-line="221" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_school_select.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5072464">
-          <caret line="82" column="35" selection-start-line="82" selection-start-column="35" selection-end-line="82" selection-end-column="35" />
+        <state vertical-scroll-proportion="-12.793103">
+          <caret line="66" column="39" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_school.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.379311">
+          <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/NewQuestion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="35" selection-start-line="48" selection-start-column="8" selection-end-line="49" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/QuestionView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_view_one_category.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_view_all_categories.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_new_question.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.206897">
+          <caret line="92" column="35" selection-start-line="82" selection-start-column="8" selection-end-line="92" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_question_view.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="4" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenIPM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_ipm.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="146" column="35" selection-start-line="146" selection-start-column="35" selection-end-line="146" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_ipm.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.103449">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/vp_image.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.62069">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.851851">
+          <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_category_nav.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="16.51724">
+          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_old.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.0107527">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding>
+            <element signature="e#266#299#0" expanded="true" />
+            <element signature="e#324#359#0" expanded="true" />
+            <element signature="e#385#420#0" expanded="true" />
+            <element signature="e#444#477#0" expanded="true" />
+            <element signature="e#1288#1302#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ragging.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/test.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/funnparty.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/office.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchoolOld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.935393">
+          <caret line="69" column="39" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/Utilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="232" column="4" selection-start-line="232" selection-start-column="4" selection-end-line="232" selection-end-column="4" />
+          <folding>
+            <element signature="e#8051#8052#0" expanded="true" />
+            <element signature="e#8087#8088#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="27" selection-start-line="67" selection-start-column="27" selection-end-line="67" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="61" selection-start-line="48" selection-start-column="61" selection-end-line="48" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/LoginSchool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="141" column="77" selection-start-line="141" selection-start-column="77" selection-end-line="141" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/grid_item_single.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.2413793">
+          <caret line="21" column="38" selection-start-line="21" selection-start-column="38" selection-end-line="21" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CustomGridView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_school.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/HomeScreenSchool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="60" selection-start-line="48" selection-start-column="60" selection-end-line="48" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/androditry/CategoryNav.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1491841">
+          <caret line="55" column="93" selection-start-line="55" selection-start-column="93" selection-end-line="55" selection-end-column="93" />
           <folding />
         </state>
       </provider>

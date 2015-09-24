@@ -11,6 +11,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -48,11 +49,14 @@ public class HomeScreenIPM extends ActionBarActivity {
 		
 		tvInfo    = (TextView) findViewById(R.id.tvUserHomeInfoIPM);
 		lvUserCat = (ListView) findViewById(R.id.lvUserCategoriesIPM);
-		
+
 		adapter = new CustomCatListAdapter(this, list);
 	    lvUserCat.setAdapter(adapter);
 	    adapter.notifyDataSetChanged();
-	     
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        tvInfo.setTypeface(face);
+
         lvUserCat.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,

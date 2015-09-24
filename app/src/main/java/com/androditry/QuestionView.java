@@ -13,6 +13,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -82,6 +83,9 @@ public class QuestionView extends ActionBarActivity {
                 new PostAnswerTask().execute();
             }
         });
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        btnPost.setTypeface(face);
 
         if(Utilities.hasCurQuesAnsLoaded())
             new UpdateAnswersTask().execute(false);

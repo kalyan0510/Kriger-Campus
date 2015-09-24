@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="5dip" >
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    android:background="@drawable/btn_border" >
 
     <TextView
         android:id="@+id/tvNameLI"
@@ -24,4 +28,4 @@
         android:layout_marginTop="5dip"
         android:textColor="#343434"
         android:textSize="15sp" />
-</RelativeLayout>
+</LinearLayout>

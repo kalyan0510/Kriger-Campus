@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class SchoolSelect extends ActionBarActivity {
 	
 	Button btnSchool,btnIPM;
+	TextView tvText;
 	//TextView tvSchool, tvIPM;
 
 	@Override
@@ -21,10 +22,12 @@ public class SchoolSelect extends ActionBarActivity {
 		
 		btnSchool = (Button) findViewById(R.id.btnSchool);
 		btnIPM = (Button) findViewById(R.id.btnIPM);
+		tvText = (TextView) findViewById(R.id.tvSchoolSelect);
 
 		Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
 		btnSchool.setTypeface(face);
 		btnIPM.setTypeface(face);
+		tvText.setTypeface(face);
 
 		btnSchool.setOnClickListener(new View.OnClickListener() {
 			

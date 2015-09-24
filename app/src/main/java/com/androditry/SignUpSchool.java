@@ -4,6 +4,7 @@ import com.parse.ParseUser;
 import com.parse.ParseException;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
@@ -17,9 +18,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class SignUpSchool extends ActionBarActivity {
 	
-	TextView tvTerms;
+	TextView tvTerms, tvFullName, tvEmail, tvUsername, tvPass, tvConfPass;
 	EditText etEmail,etPass,etName,etUsername,etRePass;
 	Button btnSignUp;
 	CheckBox cbTerms;
@@ -42,6 +45,25 @@ public class SignUpSchool extends ActionBarActivity {
 		btnSignUp  = (Button)   findViewById(R.id.btnSignupSchool);
 		tvTerms    = (TextView) findViewById(R.id.tvTermsSchool);
 		cbTerms    = (CheckBox) findViewById(R.id.cbTermsSchool);
+        tvFullName = (TextView) findViewById(R.id.tvFullNameSignUpSchool);
+        tvEmail    = (TextView) findViewById(R.id.tvEmailSignUpSchool);
+        tvUsername = (TextView) findViewById(R.id.tvUsernameSignUpSchool);
+        tvPass     = (TextView) findViewById(R.id.tvPassSignUpSchool);
+        tvConfPass = (TextView) findViewById(R.id.tvConfPassSignUpSchool);
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        etEmail.setTypeface(face);
+        etPass.setTypeface(face);
+        tvEmail.setTypeface(face);
+        tvPass.setTypeface(face);
+        etName.setTypeface(face);
+        etUsername.setTypeface(face);
+        etRePass.setTypeface(face);
+        tvTerms.setTypeface(face);
+        tvFullName.setTypeface(face);
+        tvUsername.setTypeface(face);
+        tvConfPass.setTypeface(face);
+        btnSignUp.setTypeface(face);
 		
 		//Make the textView respond to user click on Link.
 		tvTerms.setMovementMethod(LinkMovementMethod.getInstance());

@@ -4,6 +4,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -12,11 +13,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 
 public class LoginSchool extends ActionBarActivity {
 	
-	EditText etUsername,etPass;
-	Button btnLoginSchool,btnSignUpSchool;
+	EditText etUsername, etPass;
+    TextView tvUName, tvPass, tvNewUsr;
+	Button btnLoginSchool, btnSignUpSchool;
     ProgressDialog pd;
 
     String username, password;
@@ -29,9 +33,22 @@ public class LoginSchool extends ActionBarActivity {
 		
 		etUsername = (EditText) findViewById(R.id.etUsernameLoginSchool);
 		etPass  = (EditText) findViewById(R.id.etPassLoginSchool);
+
+        tvUName = (TextView) findViewById(R.id.tvUNameSchool);
+        tvPass = (TextView) findViewById(R.id.tvPassSchool);
+        tvNewUsr = (TextView) findViewById(R.id.tvNewUserSchool);
 		
 		btnLoginSchool  = (Button) findViewById(R.id.btnLoginSchool);
 		btnSignUpSchool = (Button) findViewById(R.id.btnStartSignupSchool);
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        etUsername.setTypeface(face);
+        etPass.setTypeface(face);
+        tvUName.setTypeface(face);
+        tvPass.setTypeface(face);
+        tvNewUsr.setTypeface(face);
+        btnLoginSchool.setTypeface(face);
+        btnSignUpSchool.setTypeface(face);
 		
 		btnLoginSchool.setOnClickListener(new View.OnClickListener() {
 

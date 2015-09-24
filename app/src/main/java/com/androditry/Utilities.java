@@ -1,13 +1,20 @@
 package com.androditry;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+import android.util.DisplayMetrics;
 
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -360,4 +367,23 @@ public class Utilities {
 			}
 		//}
 	}
+
+	public static String[] AllCategoriesNamesString = {"Test", "Interview", "Campus", "Academics",
+					"Sports", "Ragging", "Office", "Faculty", "Fun N Party"};
+	public static int[] AllCategoriesImagesIds = {R.drawable.test, R.drawable.interview,
+					R.drawable.campus, R.drawable.academics, R.drawable.sports, R.drawable.ragging,
+					R.drawable.office, R.drawable.faculty, R.drawable.funnparty};
+
+	public static int ScreenWidth =0, ScreenHeight =0;
+	public static void CalcScreenWH(Activity ctx)
+	{
+		DisplayMetrics metrics = new DisplayMetrics();
+		ctx.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		ScreenWidth = metrics.widthPixels;
+		ScreenHeight = metrics.heightPixels;
+	}
+	public static int GridHeight =0;
+	public static Typeface FontTypeFace = null;
+	//public static List<String> AllCategoriesNames = new ArrayList<String>(AllCategoriesNamesString);
 }

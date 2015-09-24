@@ -17,11 +17,18 @@
         android:orientation="vertical" >
     
     <TextView
+        android:id="@+id/tvFullNameSignUpSchool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_fullname" 
+        android:text="@string/enter_fullname"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif"/>
         
     <EditText
@@ -35,11 +42,18 @@
       	    android:typeface="serif" />
     
     <TextView
+        android:id="@+id/tvUsernameSignUpSchool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_username" 
+        android:text="@string/enter_username"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif"/>
         
     <EditText
@@ -53,11 +67,18 @@
       	    android:typeface="serif" />
     
     <TextView
+        android:id="@+id/tvEmailSignUpSchool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_email" 
+        android:text="@string/enter_email"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif"/>
         
     <EditText
@@ -71,10 +92,17 @@
       	    android:typeface="serif" />
 
     <TextView
+        android:id="@+id/tvPassSignUpSchool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_pass"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
+        android:textColor="#111111"
         android:textStyle="bold"
         android:typeface="serif" />
     
@@ -89,11 +117,18 @@
             android:layout_height="wrap_content" />
     
     <TextView
+        android:id="@+id/tvConfPassSignUpSchool"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reenter_pass"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif" />
     
     <EditText
@@ -123,7 +158,12 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:text="@string/termsNConditions" />
  	
  	</LinearLayout>
@@ -131,11 +171,16 @@
     <Button
         android:id="@+id/btnSignupSchool"
         android:layout_marginTop="15dp"
-        android:layout_height="45dp"
-        android:layout_width="140dp"
-        android:background="@drawable/blue_button"
-        style="@style/ButtonText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="30sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_border"
+        android:textAllCaps="false"
         android:text="@string/signup" />
         
     </LinearLayout>

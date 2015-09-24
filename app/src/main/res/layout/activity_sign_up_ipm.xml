@@ -17,11 +17,17 @@
         android:orientation="vertical" >
     
     <TextView
+        android:id="@+id/tvEmailSignupIPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_email" 
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif"/>
 
     <LinearLayout
@@ -30,38 +36,46 @@
         android:orientation="horizontal">
         
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="25dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:text="@string/email_start" />
+            android:id="@+id/tvEmailStartIPMSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:textStyle="bold"
+            android:textColor="#111111"
+            android:typeface="serif"
+            android:text="@string/email_start" />
         
         <EditText
             android:id="@+id/etEmaleSignUpIPM"
             android:inputType="text"
             android:layout_marginTop="10dp"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="50dp"
             android:textSize="20sp"
             android:textStyle="bold"
       	    android:typeface="serif"
              />
-        
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="110dp"
+            android:id="@+id/tvEmailEndIPMSignUp"
+            android:layout_marginTop="10dp"
             android:text="@string/email_end"
             android:textSize="20sp"
-      		android:textStyle="bold"
+            android:textStyle="bold"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:textColor="#111111"
      	    android:typeface="serif" />
         
     </LinearLayout>
@@ -72,11 +86,18 @@
         android:orientation="vertical" >
     
     <TextView
+        android:id="@+id/tvFullNameSignUpIPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enter_fullname" 
+        android:layout_marginTop="10dp"
+        android:text="@string/enter_fullname"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif"/>
 
     <LinearLayout
@@ -110,11 +131,18 @@
     </LinearLayout>
     
     <TextView
+        android:id="@+id/tvPassSignUpIPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/enter_pass"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif" />
     
     <EditText
@@ -128,11 +156,18 @@
             android:layout_height="wrap_content" />
         
  	<TextView
+        android:id="@+id/tvConfPassSignUpIPM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="@string/reenter_pass"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:typeface="serif" />
     
     <EditText
@@ -162,7 +197,12 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:textStyle="bold"
+        android:textColor="#111111"
         android:text="@string/termsNConditions" />
     
      </LinearLayout>
@@ -170,11 +210,16 @@
     <Button
         android:id="@+id/btnSignupIPM"
         android:layout_marginTop="15dp"
-        android:layout_height="45dp"
-        android:layout_width="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="30sp"
+        android:shadowRadius="5"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="5"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/blue_button"
-        style="@style/ButtonText"
+        android:background="@drawable/btn_border"
+        android:textAllCaps="false"
         android:text="@string/signup" />
         
     </LinearLayout>

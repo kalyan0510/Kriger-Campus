@@ -7,6 +7,7 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -18,12 +19,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class NewQuestion extends ActionBarActivity {
 	
 	protected static final int MIN_QUES_TITLE_LENGTH = 10;
 	EditText etQTitle,etQDetails;
+    TextView tvAsk, tvTitle, tvDetails;
 	Button   btnPost;
 
     String qtitle, qdetail;
@@ -37,7 +42,18 @@ public class NewQuestion extends ActionBarActivity {
 		etQTitle   = (EditText) findViewById(R.id.etQuesTitle);
 		etQDetails = (EditText) findViewById(R.id.etQuesDetails);
 		btnPost    = (Button)   findViewById(R.id.btnPostQuestion);
-		
+        tvAsk      = (TextView) findViewById(R.id.tvAskQuestion);
+        tvTitle    = (TextView) findViewById(R.id.tvTitleQuestionAsk);
+        tvDetails  = (TextView) findViewById(R.id.tvDetailsQuestionAsk);
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        etQTitle.setTypeface(face);
+        etQDetails.setTypeface(face);
+        btnPost.setTypeface(face);
+        tvAsk.setTypeface(face);
+        tvTitle.setTypeface(face);
+        tvDetails.setTypeface(face);
+
 		btnPost.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

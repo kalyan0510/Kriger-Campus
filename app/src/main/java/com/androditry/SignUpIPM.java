@@ -4,6 +4,7 @@ import com.parse.ParseUser;
 import com.parse.ParseException;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
@@ -18,9 +19,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class SignUpIPM extends ActionBarActivity {
 	
-	TextView tvFullNameStart, tvTerms;
+	TextView tvFullNameStart, tvTerms, tvEmail, tvEmStart, tvEmEnd, tvPass, tvConfPass;
 	EditText etEmail, etPass, etRepass, etFullNameEnd;
 	Button btnSignUp;
 	CheckBox cbTerms;
@@ -35,13 +38,33 @@ public class SignUpIPM extends ActionBarActivity {
 		setContentView(R.layout.activity_sign_up_ipm);
 		setTitle("Sign Up | Kriger Campus");
 		
-		etEmail = (EditText) findViewById(R.id.etEmaleSignUpIPM);
-		etPass  = (EditText) findViewById(R.id.etPassSignUpIPM);
-		etRepass = (EditText) findViewById(R.id.etRePassSignUpIPM);
+		etEmail         = (EditText) findViewById(R.id.etEmaleSignUpIPM);
+		etPass          = (EditText) findViewById(R.id.etPassSignUpIPM);
+		etRepass        = (EditText) findViewById(R.id.etRePassSignUpIPM);
 		tvFullNameStart = (TextView) findViewById(R.id.tvFullNameStartIPM);
 		etFullNameEnd   = (EditText) findViewById(R.id.etFullNameEndSignUpIPM);
 		tvTerms         = (TextView) findViewById(R.id.tvTermsIPM);
 		cbTerms         = (CheckBox) findViewById(R.id.cbTermsIPM);
+        tvEmail         = (TextView) findViewById(R.id.tvEmailSignupIPM);
+        tvEmStart       = (TextView) findViewById(R.id.tvEmailStartIPMSignUp);
+        tvEmEnd         = (TextView) findViewById(R.id.tvEmailEndIPMSignUp);
+        tvPass          = (TextView) findViewById(R.id.tvPassSignUpIPM);
+        tvConfPass      = (TextView) findViewById(R.id.tvConfPassSignUpIPM);
+        btnSignUp       = (Button)   findViewById(R.id.btnSignupIPM);
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        etEmail.setTypeface(face);
+        etPass.setTypeface(face);
+        tvEmail.setTypeface(face);
+        tvPass.setTypeface(face);
+        etRepass.setTypeface(face);
+        tvFullNameStart.setTypeface(face);
+        etFullNameEnd.setTypeface(face);
+        tvTerms.setTypeface(face);
+        tvEmStart.setTypeface(face);
+        tvEmEnd.setTypeface(face);
+        tvConfPass.setTypeface(face);
+        btnSignUp.setTypeface(face);
 		
 		//Make the textView respond to user click on Link.
 		tvTerms.setMovementMethod(LinkMovementMethod.getInstance());
@@ -69,8 +92,7 @@ public class SignUpIPM extends ActionBarActivity {
 		      }
 		    }
 		 });
-		
-		btnSignUp = (Button) findViewById(R.id.btnSignupIPM);
+
 		btnSignUp.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

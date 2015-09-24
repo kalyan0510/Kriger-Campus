@@ -8,13 +8,14 @@
     <ScrollView
         android:id="@+id/svQuesView"
         android:layout_width="match_parent"
+        android:background="@drawable/btn_border"
         android:layout_height="60dp" >
 	
      <LinearLayout
-         	android:layout_margin="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:padding="10dp"
+         android:orientation="vertical" >
             
      <TextView
         android:id="@+id/tvQuestionTitleShow"
@@ -51,7 +52,7 @@
       android:id="@+id/rlSend"
       android:layout_alignParentBottom="true"
       android:layout_width="match_parent"
-      android:background="#9988aa"
+      android:background="#eeefec"
       android:paddingTop="5dp"
       android:paddingBottom="10dp"
       android:paddingLeft="0dp"
@@ -77,10 +78,14 @@
           android:paddingRight="10dp"
           android:layout_alignParentRight="true"
           android:layout_marginRight="1dp"
-          android:background="@drawable/blue_button"
-          style="@style/ButtonText"
+          android:shadowRadius="5"
+          android:shadowColor="#000000"
+          android:shadowDx="1"
+          android:shadowDy="5"
+          android:background="@drawable/btn_border"
+          android:textAllCaps="false"
           android:text="@string/PostAnswer"
-          android:textSize="18sp" />
+          android:textSize="22sp" />
     
     </RelativeLayout>
 

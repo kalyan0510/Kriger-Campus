@@ -6,19 +6,19 @@
     <string name="hello_world">Hello world!</string>
     <string name="school_select">You are a student of:</string>
     <string name="school">School</string>
-    <string name="IPM">IPM</string>
+    <string name="IPM">IPM\nIIM Indore</string>
     <string name="title_activity_login_ipm">LoginIPM</string>
     <string name="title_activity_login_school">LoginSchool</string>
-    <string name="enter_email">Enter Email:</string>
-    <string name="enter_fullname">Enter Full Name:</string>
-    <string name="enter_username">Enter Username:</string>
-    <string name="enter_pass">Enter Password:</string>
+    <string name="enter_email">Email:</string>
+    <string name="enter_fullname">Full Name:</string>
+    <string name="enter_username">Username:</string>
+    <string name="enter_pass">Password:</string>
     <string name="reenter_pass">Confirm Password:</string>
     <string name="email_start">i</string>
     <string name="email_end">\@iimidr.ac.in</string>
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
-    <string name="noaccount">Don\'t have an account? \nSignUp for a new account!</string>
+    <string name="noaccount">New User</string>
     <string name="title_activity_sign_up_ipm">SignUpIPM</string>
     <string name="title_activity_home_screen_ipm">HomeScreenIPM</string>
     <string name="pass_no_match_error_msg">The passwords do NOT match!</string>
@@ -39,12 +39,13 @@
     <string name="unfollowOneCategory">UNFOLLOW</string>
     <string name="title_activity_question_view">QuestionView</string>
     <string name="hint_write_answer">Write Your Answer Here. . .</string>
+    <string name="askQuestion">Ask a Question</string>
     <string name="PostAnswer">Post</string>
     <string name="newQuesSymbol">+</string>
     <string name="title_activity_new_question">NewQuestion</string>
-    <string name="quesTitle">Enter Title of questions :</string>
+    <string name="quesTitle">Title of the questions</string>
     <string name="quesTitleHint">Question Header. . .</string>
-    <string name="quesDetails">Details about the question :\n\t\t\t\t\t\t\t\t(optional)</string>
+    <string name="quesDetails">Details about the question\n(optional)</string>
     <string name="quesDetailsHint">Question Details. . .</string>
     <string name="postQuestion">Post</string>
     <string name="no_internet_msg">Internet connection could not be etablished. \nPlease verify that you are connected through an active connection.</string>
@@ -52,6 +53,8 @@
     <string name="title_bar_text">Title Bar</string>
     <string name="notif_text">!</string>
     <string name="termsNConditions">By signing up, you agree to our \n<u><a href="http://krigermotivation.com/kriger-campus-terms-and-conditions/">Terms and Conditions</a></u>.</string>
+    <string name="newQuesText">Ask a Question</string>
+    <string name="menu">MENU</string>
 
     <!-- **ACTIONS** -->
     <string name="menu_logout">LogOut</string>

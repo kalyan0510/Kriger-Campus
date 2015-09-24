@@ -4,6 +4,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 import android.app.ProgressDialog;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
@@ -12,10 +13,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginIPM extends ActionBarActivity {
 	
 	EditText etEmail,etPass;
+    TextView tvEmail, tvPass, tvNewUsr;
 	Button btnLoginIPM,btnSignUpIPM;
     ProgressDialog pd;
 
@@ -29,9 +32,22 @@ public class LoginIPM extends ActionBarActivity {
 		
 		etEmail = (EditText) findViewById(R.id.etEmaleLoginIPM);
 		etPass  = (EditText) findViewById(R.id.etPassLoginIPM);
+
+        tvEmail  = (TextView) findViewById(R.id.tvEnEmailIPM);
+        tvPass   = (TextView) findViewById(R.id.tvEnPassIPM);
+        tvNewUsr = (TextView) findViewById(R.id.tvNewUserIPM);
 		
 		btnLoginIPM  = (Button) findViewById(R.id.btnLoginIPM);
 		btnSignUpIPM = (Button) findViewById(R.id.btnStartSignupIPM);
+
+        Typeface face = Typeface.createFromAsset(getAssets(), "fonts/nevis.ttf");
+        etEmail.setTypeface(face);
+        etPass.setTypeface(face);
+        tvEmail.setTypeface(face);
+        tvPass.setTypeface(face);
+        tvNewUsr.setTypeface(face);
+        btnLoginIPM.setTypeface(face);
+        btnSignUpIPM.setTypeface(face);
 		
 		btnLoginIPM.setOnClickListener(new View.OnClickListener() {
 			
