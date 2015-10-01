@@ -1,11 +1,8 @@
 package com.androditry;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import android.app.Activity;
@@ -13,8 +10,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.widget.Toast;
 
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -61,7 +58,7 @@ public class Utilities {
 		private static final String TAG_CLASS_SUFFIX = "___";
 		public static String getClassNameForTag(String tagName)
 		{
-			tagName = tagName.replace(' ', '_').replace('(', '_').replace(')','_');
+			tagName = tagName.replace(' ', '_');
 			return (TAG_CLASS_PREFIX + tagName + TAG_CLASS_SUFFIX);
 		}
 		public static String getTagNameForClass(String className) {
@@ -178,117 +175,41 @@ public class Utilities {
 		ParseUser.logOut();
 		curUser = null;
 	}
-	
-	private static ArrayList<ParseObject> allTagsDetails;
 
-	public static void storeAllTags(List<ParseObject> postList) {
-		allTagsDetails = new ArrayList<>();
-		for(ParseObject obj : postList)
-		{
-			allTagsDetails.add(obj);
-		}
-	}
+	private static Map<String, ParseObject> allInterests = new HashMap<>();
 	public static ParseObject getObjectByTagName(String tagName)
 	{
-        if(allTagsDetails == null)
-            return null;
-		for(ParseObject obj : allTagsDetails)
-		{
-			if(obj.getString(alias_TAGNAME).equals(tagName))
-			{
-				return obj;
-			}
-		}
+        if(allInterests.containsKey(tagName))
+			return allInterests.get(tagName);
 		return null;
 	}
 	public static ParseObject getCurTagObject()
 	{
-		return getObjectByTagName(getCategory().replace(' ', '_'));
+		return getObjectByTagName(getCategory());
 	}
-	
-	private static ParseObject userDetailsObj;
-	public static void setUserDetailsObj(ParseObject parseObject) {
-		userDetailsObj = parseObject;
-	}
-	
-	public static ParseObject getUserDetailsObj()
+	public static void setCurTagObject(ParseObject obj)
 	{
-		return userDetailsObj;
-	}
-	
-	public static boolean doesFollow(String tagName)
-	{
-		String allLiked = userDetailsObj.getString(alias_TAGSFOLLOWED);
-		for(String likedTag : allLiked.split("-"))
-		{
-			if(likedTag.equals(tagName))
-			{
-				return true;
-			}
-		}
-		return false;
+		allInterests.put(getCategory(), obj);
 	}
 	
 	public static String tagName = "";
 	public static void setCategory(String cat)
 	{
-		tagName=cat.replace(' ', '_');
+		tagName = cat.replace(' ','_');
 	}
 	public static String getCategory()
 	{
 		return tagName;
 	}
-	
-	private static ArrayList<ParseObject> curTagQuestions;
-	public static void saveCurTagQuestions(List<ParseObject> postList) {
-		curTagQuestions = new ArrayList<>();
-		for(ParseObject obj : postList)
-		{
-			curTagQuestions.add(obj);
-		}
-		setTagQuesLoaded(getCategory());
-	}
-	
-	public static ParseObject getQuesObjectByQIndex(int index)
-	{
-		return curTagQuestions.get(index);
-	}
-	
+
 	private static ParseObject curQuesObj;
-	public static void setCurQuesObj(ParseObject quesObjByQID)
+	public static void setCurQuesObj(ParseObject quesObj)
 	{
-		curQuesObj = quesObjByQID;
+		curQuesObj = quesObj;
 	}
 	public static ParseObject getCurQuesObj()
 	{
 		return curQuesObj;
-	}
-	
-	private static ArrayList<ParseObject> curQuesAnswers;
-	public static void storeAllAnswers(List<ParseObject> postList) {
-		curQuesAnswers = new ArrayList<>();
-		for(ParseObject obj : postList)
-		{
-			curQuesAnswers.add(obj);
-		}
-        setCurQuesAnsLoaded();
-	}
-	public static ParseObject getAnswerObjByIndex(int index)
-	{
-		if(curQuesAnswers == null)
-			return null;
-		return curQuesAnswers.get(index);
-	}
-	public static String getAnswerUsernameByText(String text)
-	{
-		for(ParseObject obj : curQuesAnswers)
-		{
-			if(obj.getString(alias_ANSTEXT).equals(text))
-			{
-				return obj.getString(alias_ANSBY);
-			}
-		}
-		return "";
 	}
 	
 	public static boolean isNetworkAvailable(Context ctx)
@@ -300,52 +221,83 @@ public class Utilities {
 	
 	public static boolean haveAllTags = false;
 	
-	private static Map<String, Boolean> tagQuestionsLoaded = new HashMap<>();
-	public static void setTagQuesLoaded(String tagName, boolean newVal)
-	{
-		tagQuestionsLoaded.put(tagName, newVal);
-	}
-	public static void setTagQuesLoaded(String tagName)
-	{
-		tagQuestionsLoaded.put(tagName, true);
-	}
-	public static void setCurTagQuesLoaded()
-	{
-		setTagQuesLoaded(getCategory());
+	private static Map<String, List<ParseObject>> tagQuestions = new HashMap<>();
+	public static void saveCurTagQuestions(List<ParseObject> postList) {
+		List<ParseObject> curTagQuestions = new ArrayList<>();
+		for(ParseObject obj : postList)
+		{
+			curTagQuestions.add(obj);
+		}
+		tagQuestions.put(getCategory(), curTagQuestions);
 	}
 	public static boolean hasTagQuesLoaded(String tagName)
 	{
-		if(!tagQuestionsLoaded.containsKey(tagName))
-			return false;
-		return tagQuestionsLoaded.get(tagName);
+		return tagQuestions.containsKey(tagName);
 	}
 	public static boolean hasCurTagQuesLoaded()
 	{
-		return hasTagQuesLoaded(getCategory());
+		return tagQuestions.containsKey(getCategory());
 	}
-	
-	private static Map<String, Boolean> quesAnsLoaded = new HashMap<>();
-	public static void setQuesAnsLoaded(String quesId, boolean newVal)
+	public static List<ParseObject> getCurTagQuestions()
 	{
-		quesAnsLoaded.put(quesId, newVal);
+		if(tagQuestions.containsKey(getCategory()))
+			return tagQuestions.get(getCategory());
+		return null;
 	}
-	public static void setQuesAnsLoaded(String quesId)
+	public static ParseObject getQuesObjectByQIndex(int index)
 	{
-		quesAnsLoaded.put(quesId, true);
+		if(!tagQuestions.containsKey(getCategory()))
+			return null;
+		List<ParseObject> curTagQuestions = tagQuestions.get(getCategory());
+		return curTagQuestions.get(index);
 	}
-	public static void setCurQuesAnsLoaded()
-	{
-		setQuesAnsLoaded(getCurQuesObj().getString(alias_QID));
+
+	private static Map<String, List<ParseObject>> quesAnswers = new HashMap<>();
+	public static void saveCurQuesAnswers(List<ParseObject> postList) {
+		List<ParseObject> curQuesAns = new ArrayList<>();
+		for(ParseObject obj : postList)
+		{
+			curQuesAns.add(obj);
+		}
+		quesAnswers.put(getCurQuesObj().getObjectId(), curQuesAns);
 	}
-	public static boolean hasQuesAnsLoaded(String quesId)
+	public static boolean hasQuesAnsLoaded(String qID)
 	{
-		if(!quesAnsLoaded.containsKey(quesId))
-			return false;
-		return quesAnsLoaded.get(quesId);
+		return quesAnswers.containsKey(qID);
 	}
 	public static boolean hasCurQuesAnsLoaded()
 	{
-		return hasQuesAnsLoaded(getCurQuesObj().getString(alias_QID));
+		return quesAnswers.containsKey(getCurQuesObj().getObjectId());
+	}
+	public static List<ParseObject> getCurQuesAnswers()
+	{
+		if(quesAnswers.containsKey(getCurQuesObj().getObjectId()))
+			return quesAnswers.get(getCurQuesObj().getObjectId());
+		return null;
+	}
+	public static ParseObject getAnsObjectByAIndex(int index)
+	{
+		if(!quesAnswers.containsKey(getCurQuesObj().getObjectId()))
+			return null;
+		List<ParseObject> curQuesAns = quesAnswers.get(getCurQuesObj().getObjectId());
+		return curQuesAns.get(index);
+	}
+
+	private static Map<String, ParseUser> usersObjects = new HashMap<>();
+	public static void saveUserObject(ParseUser usr)
+	{
+		if(usr == null) return;
+		usersObjects.put(usr.getString(alias_UNAME), usr);
+	}
+	public static boolean hasUserObject(String usrname)
+	{
+		return usersObjects.containsKey(usrname);
+	}
+	public static ParseUser getUserObject(String usrname)
+	{
+		if(!usersObjects.containsKey(usrname))
+			return null;
+		return usersObjects.get(usrname);
 	}
 	
 	public static void CheckUpdateSubscriptionInBackground()
@@ -368,11 +320,13 @@ public class Utilities {
 		//}
 	}
 
-	public static String[] AllCategoriesNamesString = {"Test", "Interview", "Campus", "Academics",
+	public final static String[] AllCategoriesNamesString = {"Test", "Interview", "Campus", "Academics",
 					"Sports", "Ragging", "Office", "Faculty", "Fun N Party"};
-	public static int[] AllCategoriesImagesIds = {R.drawable.test, R.drawable.interview,
+	public final static int[] AllCategoriesImagesIds = {R.drawable.test, R.drawable.interview,
 					R.drawable.campus, R.drawable.academics, R.drawable.sports, R.drawable.ragging,
 					R.drawable.office, R.drawable.faculty, R.drawable.funnparty};
+	public static boolean[] AllCategoriesHaveNotif = {false, false, false, false, false, false,
+														false, false, false};
 
 	public static int ScreenWidth =0, ScreenHeight =0;
 	public static void CalcScreenWH(Activity ctx)
@@ -383,7 +337,6 @@ public class Utilities {
 		ScreenWidth = metrics.widthPixels;
 		ScreenHeight = metrics.heightPixels;
 	}
-	public static int GridHeight =0;
 	public static Typeface FontTypeFace = null;
 	//public static List<String> AllCategoriesNames = new ArrayList<String>(AllCategoriesNamesString);
 }

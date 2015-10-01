@@ -130,7 +130,7 @@ public class HomeScreenSchoolOld extends ActionBarActivity {
                 List<ParseObject> postList = query.find();
                 publishProgress("All interests loaded!");
                 list.clear();
-                Utilities.storeAllTags(postList);
+                //Utilities.storeAllTags(postList);
                 for (ParseObject tag : postList) {
                     String tagName = tag.getString(Utilities.alias_TAGNAME).replace('_', ' ');
                     CustomCatListItem item = new CustomCatListItem(tagName, 0, tag.getBoolean(Utilities.alias_TAGISANON));

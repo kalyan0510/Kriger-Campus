@@ -11,7 +11,6 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -43,8 +42,6 @@ public class QuestionView extends ActionBarActivity {
     private static final long whenToStart = 60*1000L; // 60 seconds
     private static final long howOften = 60*1000L; // 60 seconds
 
-	private boolean storedAllAnswers = false;
-    private boolean storedAllUsers = false;
     String strAns;
     //private boolean timerCalledUpdate = false;
 
@@ -133,9 +130,7 @@ public class QuestionView extends ActionBarActivity {
                     ParseObject testObject = new ParseObject(Utilities.AllClassesNames.getClassNameForQues(Utilities.getCurQuesObj().getObjectId()));
                     testObject.put(Utilities.alias_ANSBY, Utilities.getCurUsername());
                     testObject.put(Utilities.alias_ANSTEXT, strAns);
-                    testObject.pinInBackground();
                     publishProgress("");
-                    testObject.pin();
                     testObject.save();
                     String usrQBy = Utilities.getCurQuesObj().getString(Utilities.alias_QBY);
                     if (!usrQBy.equalsIgnoreCase(Utilities.getCurUsername())) {
@@ -150,8 +145,7 @@ public class QuestionView extends ActionBarActivity {
                         push.setMessage("Someone has posted an answered to your question on " + Utilities.getCategory() + "!");
                         push.send();
                     }
-
-                    Toast.makeText(QuestionView.this, "Answer posted Successfully!", Toast.LENGTH_SHORT).show();
+                    Utilities.getCurQuesAnswers().add(testObject);
                     updateCurQuestionNumAnswers();
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -174,6 +168,7 @@ public class QuestionView extends ActionBarActivity {
         protected void onPostExecute(PostAnswerTaskState state) {
             // refresh UI
             if (state == PostAnswerTaskState.SUCCESS) {
+                Toast.makeText(QuestionView.this, "Answer posted Successfully!", Toast.LENGTH_SHORT).show();
                 new UpdateAnswersTask().execute(false);
             }
             else if (state == PostAnswerTaskState.NO_INTERNET) {
@@ -227,34 +222,33 @@ public class QuestionView extends ActionBarActivity {
             forceUpdate = params[0];
 
             if(!Utilities.isNetworkAvailable(QuestionView.this)
-                    && (!storedAllAnswers || forceUpdate))
+                    && (!Utilities.hasCurQuesAnsLoaded() || forceUpdate))
             {
                 publishProgress("The list of questions could not be updated!\nCheck your network!");
                 return UpdateTaskState.NO_INTERNET;
             }
 
-            if(forceUpdate)
+            if(!forceUpdate)
             {
-                try {
-                    ParseQuery<ParseObject> tquery = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForQues(Utilities.getCurQuesObj().getObjectId()));
-                    tquery.fromLocalDatastore();
-                    List<ParseObject> objs = tquery.find();
-                    ParseObject.unpinAll(objs);
-                } catch (ParseException e1) {
-                    //Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
-                    e1.printStackTrace();
+                if(Utilities.hasCurQuesAnsLoaded())
+                {
+                    List<ParseObject> ans = Utilities.getCurQuesAnswers();
+                    list.clear();
+                    for(ParseObject obj : ans)
+                    {
+                        list.add(new CustomListItem("...",obj.getString(Utilities.alias_ANSTEXT)));
+                    }
+                    return UpdateTaskState.SUCCESS;
                 }
             }
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForQues(Utilities.getCurQuesObj().getObjectId()));
-            if(storedAllAnswers && !forceUpdate)
-                query.fromLocalDatastore();
             query.addAscendingOrder("createdAt");
             try {
                 List<ParseObject> postList = query.find();
                 list.clear();
 
-                Utilities.storeAllAnswers(postList);
+                Utilities.saveCurQuesAnswers(postList);
                 for(ParseObject tag: postList)
                 {
                     list.add(new CustomListItem("...",tag.getString(Utilities.alias_ANSTEXT)));
@@ -268,13 +262,6 @@ public class QuestionView extends ActionBarActivity {
                 {
                     setAllAnswersAsSeen();
                 }
-                ParseObject.pinAllInBackground(postList, new SaveCallback() {
-                    @Override
-                    public void done(ParseException arg0) {
-                        storedAllAnswers = true;
-                        Utilities.setCurQuesAnsLoaded();
-                    }
-                });
             } catch (ParseException e) {
                 //publishProgress("An error occurred. Please try refresh. If interests still don't load then please logout and login again!");
                 //Toast.makeText(HomeScreenSchool.this, "No tags could be loaded due to error: \n" + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -299,13 +286,19 @@ public class QuestionView extends ActionBarActivity {
             // refresh UI
             if(state == UpdateTaskState.SUCCESS)
             {
+                if(Utilities.getCurQuesObj() == null)
+                {
+                    Toast.makeText(QuestionView.this, "QUES OBJ is NULL!!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(QuestionView.this, "The put id: " + Utilities.getCurQuesObj().getObjectId(), Toast.LENGTH_SHORT).show();
                 lvAllAnswers.setEnabled(true);
                 etAnswer.setHint("Write your response here!");
                 etAnswer.setEnabled(true);
                 btnPost.setEnabled(true);
                 btnPost.setVisibility(View.VISIBLE);
                 adapter.notifyDataSetChanged();
-                new SetListNamesFromUserNames().execute(forceUpdate);
+                new SetListNamesFromUserNames().execute();
             }
             else if(state == UpdateTaskState.NO_INTERNET)
             {
@@ -333,25 +326,33 @@ public class QuestionView extends ActionBarActivity {
         }
     }
 
-
-    class SetListNamesFromUserNames extends AsyncTask<Boolean,Void, Boolean> {
+    class SetListNamesFromUserNames extends AsyncTask<Void,Void, Boolean> {
         @Override
-        protected Boolean doInBackground(Boolean... params) {
-            boolean isForcedUpdate = params[0];
+        protected Boolean doInBackground(Void... params) {
 
             Boolean ret = false;
             int i=0;
             ParseQuery<ParseUser> query = ParseUser.getQuery();
+            String usrname;
+            ParseUser user;
             for(CustomListItem ans : list)
             {
+                usrname = Utilities.getAnsObjectByAIndex(i++).getString(Utilities.alias_ANSBY);
+                if(Utilities.hasUserObject(usrname))
+                {
+                    user = Utilities.getUserObject(usrname);
+                    ans.setName(user.getString(Utilities.alias_UFULLNAME));
+                    ret = true;
+                    continue;
+                }
+
+                query.whereEqualTo("username", usrname);
                 try
                 {
-                    query.whereEqualTo("username", Utilities.getAnswerObjByIndex(i++).getString(Utilities.alias_ANSBY));
-                    if(storedAllUsers && !isForcedUpdate)
-                        query.fromLocalDatastore();
                     List<ParseUser> postList = query.find();
                     ParseUser usr = postList.get(0);
-                    usr.pinInBackground();
+                    Utilities.saveUserObject(usr);
+                    ans.setName(usr.getString(Utilities.alias_UFULLNAME));
                     boolean isAnon = Utilities.getObjectByTagName(Utilities.getCategory()).getBoolean(Utilities.alias_TAGISANON);
                     boolean isTL = usr.getEmail().endsWith(Utilities.IPM_EMAIL_SUFFIX)
                             && usr.getEmail().startsWith(Utilities.IPM_EMAIL_PREFIX);
@@ -366,11 +367,6 @@ public class QuestionView extends ActionBarActivity {
                     Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
                     e.printStackTrace();
                 }
-                catch (NullPointerException e)
-                {
-                    Log.d(getClass().getSimpleName(), "Object is null: " + e.getMessage());
-                    e.printStackTrace();
-                }
             }
             return ret;
         }
@@ -380,7 +376,6 @@ public class QuestionView extends ActionBarActivity {
         {
             if(isSuccess)
             {
-                storedAllUsers = true;
                 adapter.notifyDataSetChanged();
             }
         }

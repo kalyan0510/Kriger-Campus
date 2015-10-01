@@ -2,18 +2,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.androditry.HomeScreenIPM" >
-    
-    <item
-        android:id="@+id/action_logout"
-        android:orderInCategory="101"
-        android:title="@string/menu_logout"
-        app:showAsAction="never"/>
-    
+
     <item
         android:id="@+id/action_refresh"
         android:orderInCategory="102"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_refresh"
         android:title="@string/refresh"/>
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="101"
+        android:title="@string/menu_logout"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_logout" />
 
 </menu>

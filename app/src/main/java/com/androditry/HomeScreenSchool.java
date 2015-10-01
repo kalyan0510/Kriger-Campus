@@ -1,11 +1,6 @@
 package com.androditry;
 
-import java.util.List;
-
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -20,11 +15,23 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class HomeScreenSchool extends ActionBarActivity {
 	
 	TextView tvInfo;
     GridView grid;
     CustomGridView adapter;
+
+    Timer timer;
+    private static final long whenToStart = 0L; // 0 seconds
+    private static final long howOften = 80*1000L; // 80 seconds
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +47,13 @@ public class HomeScreenSchool extends ActionBarActivity {
         tvInfo.setTypeface(face);
 
         adapter = new CustomGridView(this, Utilities.AllCategoriesNamesString,
-                                                        Utilities.AllCategoriesImagesIds);
+                                        Utilities.AllCategoriesImagesIds, Utilities.AllCategoriesHaveNotif);
         grid.setAdapter(adapter);
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(HomeScreenSchool.this, "U clicked on " + position,
-                        Toast.LENGTH_SHORT).show();
-                Toast.makeText(HomeScreenSchool.this, "U choose" + adapter.getString(position),
-                        Toast.LENGTH_SHORT).show();
                 Utilities.setCategory(adapter.getString(position));
                 Intent i = new Intent(HomeScreenSchool.this, CategoryNav.class);
                 startActivity(i);
@@ -69,19 +72,27 @@ public class HomeScreenSchool extends ActionBarActivity {
             setTitle(title);
         }
 
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new CheckNotificationsTask().execute();
+            }
+        }, whenToStart, howOften);
+
     }
-/*
 
     class CheckNotificationsTask extends AsyncTask<Void,Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
             Boolean ret = false;
-            for(CustomCatListItem interest : list)
+            int l = Utilities.AllCategoriesNamesString.length;
+            for(int i=0; i<l; ++i)
             {
-                //Toast.makeText(this, "notifications checking...", Toast.LENGTH_SHORT).show();
-                interest.setNumNotifications(0);
-                String interestName = interest.getName();
-                ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(interestName));
+                Utilities.AllCategoriesHaveNotif[i] = false;
+                String interestName = Utilities.AllCategoriesNamesString[i];
+                ParseQuery<ParseObject> query = ParseQuery.getQuery(
+                                        Utilities.AllClassesNames.getClassNameForTag(interestName));
                 query.whereEqualTo(Utilities.alias_QBY, Utilities.getCurUsername());
 
                 try {
@@ -89,30 +100,21 @@ public class HomeScreenSchool extends ActionBarActivity {
                     int n = postList.size();
                     if(n > 0)
                     {
-                        String str = Utilities.AllClassesNames.getTagNameForClass(postList.get(0).getClassName());
-                        str = str.replace('_', ' ');
                         int numNotif = 0;
                         for(ParseObject pQues : postList)
                         {
                             if(pQues.getInt(Utilities.alias_QNUMANSWERS) > pQues.getInt(Utilities.alias_QNUMANSSEEN))
                                 ++numNotif;
                         }
-                        int t = 0;/*
-                        for(CustomCatListItem obj : list)
-                        {
-                            if(obj.getName().equals(str))
-                            {
-                                list.get(t).setNumNotifications(numNotif);
-                                break;
-                            }
-                            ++t;
-                        }*/
-    /*                }
+                        //Utilities.AllCategoriesNumNotif = numNotif;       /*NOT USED*/
+                        Utilities.AllCategoriesHaveNotif[i] = numNotif>0;
+                    }
                     ret = true;
                 } catch (ParseException e) {
                     Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
                     e.printStackTrace();
                 }
+                adapter.setHasNotif(Utilities.AllCategoriesHaveNotif);
             }
             return ret;
         }
@@ -123,7 +125,7 @@ public class HomeScreenSchool extends ActionBarActivity {
             if(isSuccess)
                 adapter.notifyDataSetChanged();
         }
-    }*/
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,25 +149,29 @@ public class HomeScreenSchool extends ActionBarActivity {
                     Intent i = new Intent(HomeScreenSchool.this,MainActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
-                    /*HomeScreenSchool.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            HomeScreenSchool.this.finish();
-                        }
-                    });*/
                 }
             }).start();
-		}
-		else if(id == R.id.action_refresh)
-		{
-			Toast.makeText(HomeScreenSchool.this, "Refreshing...", Toast.LENGTH_SHORT).show();
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        timer.cancel();
+    }
+
 	@Override
 	protected void onResume() {
 		super.onResume();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new CheckNotificationsTask().execute();
+            }
+        }, whenToStart, howOften);
 	}
 
 }

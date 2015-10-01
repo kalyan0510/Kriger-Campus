@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  android:orientation="vertical"
-  android:background="@drawable/background"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+<RelativeLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      android:orientation="vertical"
+      android:background="@drawable/background"
+      android:paddingTop="4dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
     
     <ScrollView
         android:id="@+id/svQuesView"
@@ -39,8 +41,10 @@
     </ScrollView>
     
     <ListView
+        android:layout_marginTop="10dp"
         android:id="@+id/lvAllAnswers"
         android:transcriptMode="alwaysScroll"
+        android:padding="5dp"
       android:layout_alignParentLeft="true"
       android:layout_alignParentRight="true"
       android:layout_below="@+id/svQuesView"

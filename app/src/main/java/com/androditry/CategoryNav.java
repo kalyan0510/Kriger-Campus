@@ -9,7 +9,6 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -41,8 +40,6 @@ public class CategoryNav extends ActionBarActivity {
     private static final long whenToStart = 60*1000L; // 60 seconds
     private static final long howOften = 60*1000L; // 60 seconds
 
-    private boolean storedAllQuestions = false;
-    private boolean storedAllUsers = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +50,9 @@ public class CategoryNav extends ActionBarActivity {
 		tvCatName = (TextView) findViewById(R.id.tvCatName);
         tvCatName.setText(Utilities.getCategory().replace('_', ' '));
 		tvCatInfo = (TextView) findViewById(R.id.tvCatInfo);
-        tvCatInfo.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
+        tvCatInfo.setText("Loading...");
+
+        //tvCatInfo.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
         tvInfo    = (TextView) findViewById(R.id.tvInfoInCat);
 
 		lvCatQues = (ListView) findViewById(R.id.lvCategoryQuestions);
@@ -74,6 +73,8 @@ public class CategoryNav extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Utilities.setCurQuesObj(Utilities.getQuesObjectByQIndex(position));
+                Toast.makeText(CategoryNav.this, "Curr QuesObj saved: " + Utilities.getCurQuesObj()
+                                .getString(Utilities.alias_QID), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(CategoryNav.this, QuestionView.class);
                 startActivity(i);
             }
@@ -94,27 +95,90 @@ public class CategoryNav extends ActionBarActivity {
         	btnNewQues.setEnabled(false);
         	btnNewQues.setVisibility(View.GONE);
         }
-
-        if(Utilities.hasCurTagQuesLoaded())
-		    new UpdateQuestionsTask().execute(false);
-        else
-            new UpdateQuestionsTask().execute(true);
-
-        timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                CategoryNav.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        new UpdateQuestionsTask().execute(true);
-                    }
-                });
-            }
-        };
-        timer.scheduleAtFixedRate(task, whenToStart, howOften);
+        new UpdateDetail().execute();
 	}
 
+    class UpdateDetail extends AsyncTask<Void, String, UpdateTaskState> {
+
+        @Override
+        protected UpdateTaskState doInBackground(Void... params) {
+
+            if(!Utilities.isNetworkAvailable(CategoryNav.this) && !Utilities.hasCurTagQuesLoaded())
+            {
+                publishProgress("The list of questions could not be updated!\nCheck your network!");
+                return UpdateTaskState.NO_INTERNET;
+            }
+
+            if(Utilities.getCurTagObject() != null)
+                return UpdateTaskState.SUCCESS;
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.AllTagsList);
+            query.whereEqualTo(Utilities.alias_TAGNAME, Utilities.getCategory());
+            try
+            {
+                List<ParseObject> postList = query.find();
+                Utilities.setCurTagObject(postList.get(0));
+            } catch (ParseException e) {
+                publishProgress("An error occurred. Please try refresh. If questions still don't load then please logout and login again!");
+                //Toast.makeText(HomeScreenSchool.this, "No tags could be loaded due to error: \n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(getClass().getSimpleName(), "Error: " + e.getMessage());
+                e.printStackTrace();
+                return UpdateTaskState.EXCEPTION_THROWN;
+            }
+
+            return UpdateTaskState.SUCCESS;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+            tvCatInfo.setText(text[0]);
+            //tvInfo.setText(text[0]);
+            // Things to be done while execution of long running operation is in
+            // progress. For example updating ProgessDialog
+        }
+
+
+        @Override
+        protected void onPostExecute(UpdateTaskState state) {
+            // refresh UI
+            if(state == UpdateTaskState.SUCCESS)
+            {
+                tvCatInfo.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
+                if(Utilities.hasCurTagQuesLoaded())
+                {
+                    Toast.makeText(CategoryNav.this, "Has cur tag LOADEd!", Toast.LENGTH_SHORT).show();
+                    new UpdateQuestionsTask().execute(false);
+                }
+                else
+                {
+                    Toast.makeText(CategoryNav.this, "Has cur tag NOT loaded!", Toast.LENGTH_SHORT).show();
+                    new UpdateQuestionsTask().execute(true);
+                }
+                timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        CategoryNav.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                new UpdateQuestionsTask().execute(true);
+                            }
+                        });
+                    }
+                };
+                timer.scheduleAtFixedRate(task, whenToStart, howOften);
+            }
+            else if(state == UpdateTaskState.NO_INTERNET)
+            {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CategoryNav.this);
+                builder.setMessage(R.string.no_internet_msg)
+                        .setTitle(R.string.no_internet_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        }
+    }
 
     private enum UpdateTaskState
     {
@@ -131,45 +195,41 @@ public class CategoryNav extends ActionBarActivity {
             forceUpdate = params[0];
 
             if(!Utilities.isNetworkAvailable(CategoryNav.this)
-                    && (!storedAllQuestions || forceUpdate))
+                    && (!Utilities.hasCurTagQuesLoaded() || forceUpdate))
             {
                 publishProgress("The list of questions could not be updated!\nCheck your network!");
                 return UpdateTaskState.NO_INTERNET;
             }
 
-            if(forceUpdate)
+            if(!forceUpdate)
             {
-                try {
-                    ParseQuery<ParseObject> tquery = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
-                    tquery.fromLocalDatastore();
-                    List<ParseObject> objs = tquery.find();
-                    ParseObject.unpinAll(objs);
-                } catch (ParseException e1) {
-                    //Toast.makeText(this, "Error while unpinning objects.", Toast.LENGTH_SHORT).show();
-                    e1.printStackTrace();
+                if(Utilities.hasCurTagQuesLoaded())
+                {
+                    List<ParseObject> allQues = Utilities.getCurTagQuestions();
+                    list.clear();
+                    if (allQues != null) {
+                        for(ParseObject tag: allQues)
+                        {
+                            list.add(new CustomQuesListItem("...",tag.getString(Utilities.alias_QTITLE), tag.getInt(Utilities.alias_QNUMANSWERS)));
+                        }
+                    }
+
+                    publishProgress("All questions loaded!");
+                    return UpdateTaskState.SUCCESS;
                 }
             }
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
-            if(storedAllQuestions && !forceUpdate)
-                query.fromLocalDatastore();
             query.addAscendingOrder(Utilities.alias_QNUMANSWERS);
             try {
                 List<ParseObject> postList = query.find();
                 Utilities.saveCurTagQuestions(postList);
+
                 list.clear();
                 for(ParseObject tag: postList)
                 {
                     list.add(new CustomQuesListItem("...",tag.getString(Utilities.alias_QTITLE), tag.getInt(Utilities.alias_QNUMANSWERS)));
                 }
-
-                ParseObject.pinAllInBackground(postList, new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        storedAllQuestions = true;
-                        Utilities.setCurTagQuesLoaded();
-                    }
-                });
                 publishProgress("All questions loaded!");
             } catch (ParseException e) {
                 publishProgress("An error occurred. Please try refresh. If interests still don't load then please logout and login again!");
@@ -196,7 +256,8 @@ public class CategoryNav extends ActionBarActivity {
             if(state == UpdateTaskState.SUCCESS)
             {
                 adapter.notifyDataSetChanged();
-                new SetListNamesFromUserNames().execute(forceUpdate);
+                Toast.makeText(CategoryNav.this, Utilities.getCategory() + ": Saved ques length :"+ Utilities.getCurTagQuestions().size(), Toast.LENGTH_SHORT).show();
+                new SetListNamesFromUserNames().execute();
                 tvInfo.setVisibility(View.GONE);
             }
             else if(state == UpdateTaskState.NO_INTERNET)
@@ -211,25 +272,32 @@ public class CategoryNav extends ActionBarActivity {
         }
     }
 
-    class SetListNamesFromUserNames extends AsyncTask<Boolean,Void, Boolean> {
+    class SetListNamesFromUserNames extends AsyncTask<Void,Void, Boolean> {
         @Override
-        protected Boolean doInBackground(Boolean... params) {
-            boolean isForcedUpdate = params[0];
+        protected Boolean doInBackground(Void... params) {
 
             Boolean ret = false;
             int i=0;
             ParseQuery<ParseUser> query = ParseUser.getQuery();
+            String usrname;
+            ParseUser user;
             for(CustomQuesListItem ques : list)
             {
-                query.whereEqualTo("username", Utilities.getQuesObjectByQIndex(i++).getString(Utilities.alias_QBY));
-                if(storedAllUsers && !isForcedUpdate)
-                    query.fromLocalDatastore();
+                usrname = Utilities.getQuesObjectByQIndex(i++).getString(Utilities.alias_QBY);
+                if(Utilities.hasUserObject(usrname))
+                {
+                    user = Utilities.getUserObject(usrname);
+                    ques.setName(user.getString(Utilities.alias_UFULLNAME));
+                    ret = true;
+                    continue;
+                }
 
+                query.whereEqualTo("username", usrname);
                 try
                 {
                     List<ParseUser> postList = query.find();
                     ParseUser usr = postList.get(0);
-                    usr.pinInBackground();
+                    Utilities.saveUserObject(usr);
                     ques.setName(usr.getString(Utilities.alias_UFULLNAME));
                     ret = true;
                 }
@@ -247,7 +315,6 @@ public class CategoryNav extends ActionBarActivity {
         {
             if(isSuccess)
             {
-                storedAllUsers = true;
                 adapter.notifyDataSetChanged();
             }
         }

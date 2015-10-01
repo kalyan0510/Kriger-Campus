@@ -9,49 +9,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/background"
     tools:context="com.androditry.HomeScreenIPM" >
-        
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_border"
         android:padding="10dp"
+        android:background="@drawable/btn_border"
         android:orientation="horizontal">
-    
-    <TextView
-        android:id="@+id/tvUserHomeInfoIPM"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-    
-    <!-- NO MORE NEEDED 19-07-2015
-    <Button
-        android:id="@+id/btnNotificationAllCatIPM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="50dp"
-        android:background="@drawable/blue_button"
-        style="@style/ButtonText"
-        android:text="@string/notif_text" /> -->
-    
-    <!-- NO MORE NEEDED 15-07-2015
-    <Button
-        android:id="@+id/btnViewAllCategoriesIPM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="50dp"
-        android:text="@string/view_all_categories_symbol" /> -->
-    
-    </LinearLayout>
-    
 
-    <ListView
+        <TextView
+            android:id="@+id/tvUserHomeInfoIPM"
+            android:textColor="#121212"
+            android:shadowRadius="5"
+            android:shadowDy="5"
+            android:shadowDx="1"
+            android:shadowColor="#000000"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="@string/menu" />
+
+    </LinearLayout>
+
+
+    <GridView
+        android:numColumns="3"
         android:layout_marginTop="10dp"
-        android:id="@+id/lvUserCategoriesIPM"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent" >
-    </ListView>
+        android:gravity="center"
+        android:stretchMode="columnWidth"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/gridIPM"
+        />
+
 
 </LinearLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.androditry"
-    android:versionCode="3"
-    android:versionName="1.2" >
+    android:versionCode="4"
+    android:versionName="1.3" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -69,16 +69,8 @@
             android:label="@string/title_activity_home_screen_school" >
         </activity>
         <activity
-            android:name=".ViewAllCategories"
-            android:label="@string/title_activity_view_all_categories" >
-        </activity>
-        <activity
             android:name=".CategoryNav"
             android:label="@string/title_activity_category_nav" >
-        </activity>
-        <activity
-            android:name=".ViewOneCategory"
-            android:label="@string/title_activity_view_one_category" >
         </activity>
         <activity
             android:name=".QuestionView"
@@ -87,10 +79,6 @@
         <activity
             android:name=".NewQuestion"
             android:label="@string/title_activity_new_question" >
-        </activity>
-        <activity
-            android:name=".TitleBar"
-            android:label="@string/title_activity_title_bar" >
         </activity>
 
         <service android:name="com.parse.PushService" />

@@ -48,7 +48,7 @@
     <string name="quesDetails">Details about the question\n(optional)</string>
     <string name="quesDetailsHint">Question Details. . .</string>
     <string name="postQuestion">Post</string>
-    <string name="no_internet_msg">Internet connection could not be etablished. \nPlease verify that you are connected through an active connection.</string>
+    <string name="no_internet_msg">Internet connection could not be established. \nPlease verify that you are connected through an active connection.</string>
     <string name="no_internet_title">Could NOT connect!</string>
     <string name="title_bar_text">Title Bar</string>
     <string name="notif_text">!</string>

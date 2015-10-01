@@ -10,17 +10,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
+ * A Custom Class to display objects in a grid
+ *
  * Created by Abhinav Tripathi on 23-Sep-15.
  */
 public class CustomGridView extends BaseAdapter{
     private Context mContext;
     private final String[] web;
     private final int[] Imageid;
+    private boolean[] hasNotif;
 
-    public CustomGridView(Context c,String[] web,int[] Imageid ) {
+    public CustomGridView(Context c,String[] web,int[] Imageid, boolean[] hasNotif ) {
         mContext = c;
         this.Imageid = Imageid;
         this.web = web;
+        this.hasNotif = hasNotif;
+    }
+
+    public void setHasNotif(boolean[] hasNotif)
+    {
+        this.hasNotif = hasNotif;
     }
 
     @Override
@@ -60,9 +69,11 @@ public class CustomGridView extends BaseAdapter{
             ImageView imageView = (ImageView)grid.findViewById(R.id.grid_image);
             textView.setText(web[position]);
             textView.setTypeface(Utilities.FontTypeFace);
+            if(hasNotif[position])
+                textView.setTextColor(0x1215ee);
             imageView.setImageResource(Imageid[position]);
         } else {
-            grid = (View) convertView;
+            grid = convertView;
         }
 
         return grid;
