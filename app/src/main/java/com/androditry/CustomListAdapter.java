@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,22 +41,33 @@ public class CustomListAdapter extends BaseAdapter {
 		if (convertView == null) {
 			convertView = layoutInflater.inflate(R.layout.list_item_layout, null);
 			holder = new ViewHolder();
-			holder.nameView = (TextView) convertView.findViewById(R.id.tvNameLI);
-			holder.textView = (TextView) convertView.findViewById(R.id.tvTextLI);
+			holder.nameView  = (TextView) convertView.findViewById(R.id.tvNameLI);
+			holder.textView  = (TextView) convertView.findViewById(R.id.tvTextLI);
+            holder.notifView = (TextView) convertView.findViewById(R.id.tvNotifLI);
 			
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
-		holder.nameView.setText(listData.get(position).getName());
-		holder.textView.setText(listData.get(position).getText());
-		
+		CustomListItem li = listData.get(position);
+		holder.nameView.setText(li.getName());
+		holder.textView.setText(li.getText());
+		if(li.getIsTL())
+        {
+            holder.nameView.setTextColor(Color.parseColor("#000000"));
+            holder.notifView.setVisibility(View.VISIBLE);
+        }
+		else
+        {
+            holder.nameView.setTextColor(Color.parseColor("#3178be"));
+            holder.notifView.setVisibility(View.GONE);
+        }
 		return convertView;
 	}
 
 	static class ViewHolder {
 		TextView nameView;
+        TextView notifView;
 		TextView textView;
 	}
 }

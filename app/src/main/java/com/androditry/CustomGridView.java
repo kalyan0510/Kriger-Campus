@@ -34,7 +34,6 @@ public class CustomGridView extends BaseAdapter{
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return web.length;
     }
 
@@ -50,13 +49,11 @@ public class CustomGridView extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return Utilities.CUSTOM_CAT_LIST_ITEM_ID_OFFSET + position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         View grid;
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

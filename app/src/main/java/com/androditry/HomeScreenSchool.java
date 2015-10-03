@@ -1,6 +1,5 @@
 package com.androditry;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -80,6 +78,7 @@ public class HomeScreenSchool extends ActionBarActivity {
             }
         }, whenToStart, howOften);
 
+        Utilities.CheckUpdateSubscriptionInBackground();
     }
 
     class CheckNotificationsTask extends AsyncTask<Void,Void, Boolean> {
@@ -142,15 +141,9 @@ public class HomeScreenSchool extends ActionBarActivity {
 		int id = item.getItemId();
 		if(id == R.id.action_logout)
 		{
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Utilities.logOutCurUser();
-                    Intent i = new Intent(HomeScreenSchool.this,MainActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                }
-            }).start();
+            timer.cancel();
+            Utilities.contextLogout = HomeScreenSchool.this;
+            new Utilities.LogoutTask().execute();
 		}
 		return super.onOptionsItemSelected(item);
 	}

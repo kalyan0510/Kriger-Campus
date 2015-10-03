@@ -6,16 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.DisplayMetrics;
-import android.widget.Toast;
+import android.util.Log;
+import android.view.View;
 
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class Utilities {
@@ -144,15 +151,25 @@ public class Utilities {
 		
 		return curUser.getEmail();
 	}
-	
+
+	public static UserType getUserType(ParseUser user)
+	{
+		if(user==null)
+			return UserType.USER_TYPE_NONE;
+
+		return ((user.getEmail().endsWith(IPM_EMAIL_SUFFIX)
+				&& user.getEmail().startsWith(IPM_EMAIL_PREFIX))) ?
+				UserType.USER_TYPE_IPM : UserType.USER_TYPE_SCHOOL;
+	}
+
 	public static UserType getCurUserType()
 	{
-		if(curUser==null)
-			return UserType.USER_TYPE_NONE;
-		
-		return ((curUser.getEmail().endsWith(IPM_EMAIL_SUFFIX) 
-				&& curUser.getEmail().startsWith(IPM_EMAIL_PREFIX))) ?
-						UserType.USER_TYPE_IPM : UserType.USER_TYPE_SCHOOL;
+		return getUserType(curUser);
+	}
+
+	public static boolean isIPMUser(ParseUser user)
+	{
+		return getUserType(user) == UserType.USER_TYPE_IPM;
 	}
 	
 	public static String getCurName()
@@ -339,4 +356,31 @@ public class Utilities {
 	}
 	public static Typeface FontTypeFace = null;
 	//public static List<String> AllCategoriesNames = new ArrayList<String>(AllCategoriesNamesString);
+
+	public static Context contextLogout;
+	public static class LogoutTask extends AsyncTask<Void,Void, Void> {
+		ProgressDialog pd;
+
+		@Override
+		protected void onPreExecute() {
+			pd = new ProgressDialog(contextLogout);
+			pd.setMessage("Logging out...\nPlease wait...");
+			pd.show();
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			Utilities.logOutCurUser();
+			Intent i = new Intent(contextLogout, MainActivity.class);
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+			contextLogout.startActivity(i);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void state) {
+			pd.setMessage("");
+			pd.dismiss();
+		}
+	}
 }

@@ -22,8 +22,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 public class NewQuestion extends ActionBarActivity {
 	
 	protected static final int MIN_QUES_TITLE_LENGTH = 10;
@@ -114,12 +112,11 @@ public class NewQuestion extends ActionBarActivity {
                         testObject.pinInBackground();
                         testObject.saveInBackground();
                         updateNumQuestionsInCategory();
-                        Toast.makeText(getApplicationContext(), "Question post successful!", Toast.LENGTH_SHORT).show();
 
-                        ParsePush push = new ParsePush();
+                        /*ParsePush push = new ParsePush();
                         push.setChannel(Utilities.TL_CHANNEL_NAME);
                         push.setMessage("A new Question was asked in " + Utilities.getCategory() + "!");
-                        push.sendInBackground();
+                        push.sendInBackground();*/
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -142,6 +139,7 @@ public class NewQuestion extends ActionBarActivity {
         protected void onPostExecute(PostQuestionTaskState state) {
             // refresh UI
             if (state == PostQuestionTaskState.SUCCESS) {
+                Toast.makeText(getApplicationContext(), "Question post successful!", Toast.LENGTH_SHORT).show();
                 // Success!
                 finish();
             }
@@ -217,15 +215,8 @@ public class NewQuestion extends ActionBarActivity {
 		int id = item.getItemId();
 		if(id == R.id.action_logout)
 		{
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					Utilities.logOutCurUser();
-					Intent i = new Intent(NewQuestion.this,MainActivity.class);
-					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(i);
-				}
-			}).start();
+            Utilities.contextLogout = NewQuestion.this;
+            new Utilities.LogoutTask().execute();
 		}
 		return super.onOptionsItemSelected(item);
 	}

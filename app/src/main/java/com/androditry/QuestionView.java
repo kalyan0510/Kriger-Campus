@@ -16,7 +16,6 @@ import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -63,10 +62,10 @@ public class QuestionView extends ActionBarActivity {
         qTitle.setText(obj.getString(Utilities.alias_QTITLE));
         qDetails.setText(obj.getString(Utilities.alias_QDETAILS));
 
+        list.add(new CustomListItem("", "loading all answers...", false));
         adapter = new CustomListAdapter(this, list);
         lvAllAnswers.setAdapter(adapter);
         lvAllAnswers.setEnabled(false);
-        list.add(new CustomListItem("", "loading all answers..."));
         adapter.notifyDataSetChanged();
 
         btnPost.setEnabled(false);
@@ -76,7 +75,6 @@ public class QuestionView extends ActionBarActivity {
             public void onClick(View v) {
                 btnPost.setEnabled(false);
                 strAns = etAnswer.getText().toString().trim();
-
                 new PostAnswerTask().execute();
             }
         });
@@ -234,9 +232,14 @@ public class QuestionView extends ActionBarActivity {
                 {
                     List<ParseObject> ans = Utilities.getCurQuesAnswers();
                     list.clear();
+                    if(ans.isEmpty())
+                    {
+                        list.add(new CustomListItem("","No answer yet for this question!", false));
+                        return UpdateTaskState.NO_COMMENTS;
+                    }
                     for(ParseObject obj : ans)
                     {
-                        list.add(new CustomListItem("...",obj.getString(Utilities.alias_ANSTEXT)));
+                        list.add(new CustomListItem("...",obj.getString(Utilities.alias_ANSTEXT), false));
                     }
                     return UpdateTaskState.SUCCESS;
                 }
@@ -247,16 +250,15 @@ public class QuestionView extends ActionBarActivity {
             try {
                 List<ParseObject> postList = query.find();
                 list.clear();
-
                 Utilities.saveCurQuesAnswers(postList);
+                if(postList.isEmpty())
+                {
+                    list.add(new CustomListItem("","No answer yet for this question!", false));
+                    return UpdateTaskState.NO_COMMENTS;
+                }
                 for(ParseObject tag: postList)
                 {
-                    list.add(new CustomListItem("...",tag.getString(Utilities.alias_ANSTEXT)));
-                }
-                if(list.isEmpty())
-                {
-                    list.add(new CustomListItem("","No answer yet for this question!"));
-                    return UpdateTaskState.NO_COMMENTS;
+                    list.add(new CustomListItem("...",tag.getString(Utilities.alias_ANSTEXT), false));
                 }
                 if(Utilities.getCurUsername().equalsIgnoreCase(Utilities.getCurQuesObj().getString(Utilities.alias_QBY)))
                 {
@@ -286,12 +288,6 @@ public class QuestionView extends ActionBarActivity {
             // refresh UI
             if(state == UpdateTaskState.SUCCESS)
             {
-                if(Utilities.getCurQuesObj() == null)
-                {
-                    Toast.makeText(QuestionView.this, "QUES OBJ is NULL!!", Toast.LENGTH_SHORT).show();
-                }
-                else
-                    Toast.makeText(QuestionView.this, "The put id: " + Utilities.getCurQuesObj().getObjectId(), Toast.LENGTH_SHORT).show();
                 lvAllAnswers.setEnabled(true);
                 etAnswer.setHint("Write your response here!");
                 etAnswer.setEnabled(true);
@@ -342,6 +338,7 @@ public class QuestionView extends ActionBarActivity {
                 {
                     user = Utilities.getUserObject(usrname);
                     ans.setName(user.getString(Utilities.alias_UFULLNAME));
+                    ans.setIsTL(Utilities.isIPMUser(user));
                     ret = true;
                     continue;
                 }
@@ -354,12 +351,12 @@ public class QuestionView extends ActionBarActivity {
                     Utilities.saveUserObject(usr);
                     ans.setName(usr.getString(Utilities.alias_UFULLNAME));
                     boolean isAnon = Utilities.getObjectByTagName(Utilities.getCategory()).getBoolean(Utilities.alias_TAGISANON);
-                    boolean isTL = usr.getEmail().endsWith(Utilities.IPM_EMAIL_SUFFIX)
-                            && usr.getEmail().startsWith(Utilities.IPM_EMAIL_PREFIX);
+                    boolean isTL = Utilities.isIPMUser(usr);
                     if(isAnon && isTL)
                         ans.setName("...");
                     else
                         ans.setName(usr.getString(Utilities.alias_UFULLNAME));
+                    ans.setIsTL(isTL);
                     ret = true;
                 }
                 catch (ParseException e)
@@ -397,15 +394,8 @@ public class QuestionView extends ActionBarActivity {
 		if(id == R.id.action_logout)
 		{
             timer.cancel();
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					Utilities.logOutCurUser();
-					Intent i = new Intent(QuestionView.this,MainActivity.class);
-					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(i);
-				}
-			}).start();
+            Utilities.contextLogout = QuestionView.this;
+            new Utilities.LogoutTask().execute();
 		}
 		else if(id == R.id.action_refresh)
 		{

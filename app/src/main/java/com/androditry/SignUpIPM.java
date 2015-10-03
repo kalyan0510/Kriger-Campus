@@ -19,8 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 public class SignUpIPM extends ActionBarActivity {
 	
 	TextView tvFullNameStart, tvTerms, tvEmail, tvEmStart, tvEmEnd, tvPass, tvConfPass;

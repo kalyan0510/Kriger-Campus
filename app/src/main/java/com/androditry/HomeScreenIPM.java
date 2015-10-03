@@ -92,6 +92,7 @@ public class HomeScreenIPM extends ActionBarActivity {
             }
         }, whenToStart, howOften);
 
+        Utilities.CheckUpdateSubscriptionInBackground();
     }
 
     class CheckNotificationsTask extends AsyncTask<Void,Void, Boolean> {

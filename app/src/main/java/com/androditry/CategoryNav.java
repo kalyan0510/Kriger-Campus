@@ -10,6 +10,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -32,6 +33,7 @@ public class CategoryNav extends ActionBarActivity {
 	TextView tvCatName, tvCatInfo, tvInfo;
 	ListView lvCatQues;
 	Button   btnNewQues;
+    ProgressDialog pd;
 	
 	ArrayList<CustomQuesListItem> list = new ArrayList<>();
     CustomQuesListAdapter adapter;
@@ -73,8 +75,8 @@ public class CategoryNav extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Utilities.setCurQuesObj(Utilities.getQuesObjectByQIndex(position));
-                Toast.makeText(CategoryNav.this, "Curr QuesObj saved: " + Utilities.getCurQuesObj()
-                                .getString(Utilities.alias_QID), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CategoryNav.this, "Curr QuesObj saved: " + Utilities.getCurQuesObj()
+                //                .getString(Utilities.alias_QID), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(CategoryNav.this, QuestionView.class);
                 startActivity(i);
             }
@@ -99,6 +101,13 @@ public class CategoryNav extends ActionBarActivity {
 	}
 
     class UpdateDetail extends AsyncTask<Void, String, UpdateTaskState> {
+
+        @Override
+        protected void onPreExecute() {
+            pd = new ProgressDialog(CategoryNav.this);
+            pd.setMessage("Loading category details...");
+            pd.show();
+        }
 
         @Override
         protected UpdateTaskState doInBackground(Void... params) {
@@ -140,18 +149,19 @@ public class CategoryNav extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(UpdateTaskState state) {
+            pd.setMessage("");
+            pd.dismiss();
+
             // refresh UI
             if(state == UpdateTaskState.SUCCESS)
             {
                 tvCatInfo.setText(Utilities.getCurTagObject().getString(Utilities.alias_TAGDETAILS));
                 if(Utilities.hasCurTagQuesLoaded())
                 {
-                    Toast.makeText(CategoryNav.this, "Has cur tag LOADEd!", Toast.LENGTH_SHORT).show();
                     new UpdateQuestionsTask().execute(false);
                 }
                 else
                 {
-                    Toast.makeText(CategoryNav.this, "Has cur tag NOT loaded!", Toast.LENGTH_SHORT).show();
                     new UpdateQuestionsTask().execute(true);
                 }
                 timer = new Timer();
@@ -189,6 +199,11 @@ public class CategoryNav extends ActionBarActivity {
 
     class UpdateQuestionsTask extends AsyncTask<Boolean,String, UpdateTaskState> {
         boolean forceUpdate;
+
+        @Override
+        protected void onPreExecute() {
+            pd.setMessage("Loading Questions...\nPlease wait...");
+        }
 
         @Override
         protected UpdateTaskState doInBackground(Boolean... params) {
@@ -252,11 +267,12 @@ public class CategoryNav extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(UpdateTaskState state) {
+
             // refresh UI
             if(state == UpdateTaskState.SUCCESS)
             {
                 adapter.notifyDataSetChanged();
-                Toast.makeText(CategoryNav.this, Utilities.getCategory() + ": Saved ques length :"+ Utilities.getCurTagQuestions().size(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CategoryNav.this, Utilities.getCategory() + ": Saved ques length :"+ Utilities.getCurTagQuestions().size(), Toast.LENGTH_SHORT).show();
                 new SetListNamesFromUserNames().execute();
                 tvInfo.setVisibility(View.GONE);
             }
@@ -336,15 +352,8 @@ public class CategoryNav extends ActionBarActivity {
 		if(id == R.id.action_logout)
 		{
             timer.cancel();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                Utilities.logOutCurUser();
-                Intent i = new Intent(CategoryNav.this,MainActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                }
-            }).start();
+            Utilities.contextLogout = CategoryNav.this;
+            new Utilities.LogoutTask().execute();
 		}
 		else if(id == R.id.action_refresh)
 		{
