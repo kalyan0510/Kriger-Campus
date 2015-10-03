@@ -4,17 +4,17 @@
     tools:context="com.androditry.QuestionView" >
 
     <item
-        android:id="@+id/action_logout"
-        android:orderInCategory="101"
-        android:icon="@drawable/ic_action_logout"
-        android:title="Logout"
-        app:showAsAction="ifRoom"/>
-    
-    <item
         android:id="@+id/action_refresh"
         android:orderInCategory="102"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_refresh"
         android:title="@string/refresh"/>
+
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_action_logout"
+        android:title="Logout"
+        app:showAsAction="ifRoom"/>
 
 </menu>

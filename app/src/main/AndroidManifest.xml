@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.androditry"
-    android:versionCode="4"
-    android:versionName="1.3" >
+    android:versionCode="5"
+    android:versionName="1.4" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -113,10 +113,6 @@
             android:name="com.parse.push.notification_icon"
             android:resource="@drawable/ic_launcher" />
 
-        <activity
-            android:name=".ProceedSchool"
-            android:label="@string/title_activity_proceed_school" >
-        </activity>
     </application>
 
 </manifest>

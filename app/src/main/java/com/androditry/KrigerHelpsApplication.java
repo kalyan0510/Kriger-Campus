@@ -6,8 +6,8 @@ import com.parse.ParseUser;
 import android.app.Application;
 
 public class KrigerHelpsApplication extends Application{
-	static final String APPLICATION_ID="pdRfBqyvBrT6GpaAFrwKRBxigKFDJ9RIxGx3hPFW";
-	static final String CLIENT_KEY="oeDvTojc5AZ89ztCpxihktkzpxsRM9ENxsFcXGIi";
+	static final String APPLICATION_ID="he0MHkv9kmsLr1p6CENzYOydf4GlhKslAPmgcVkv";
+	static final String CLIENT_KEY="W9PGIpdmCOqPgM5aA4BJfwQvQnYp64nC6OiNREao";
 	
 	@Override
 	public void onCreate() {
