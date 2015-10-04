@@ -145,7 +145,6 @@ public class SignUpSchool extends ActionBarActivity {
                     newUser.put("Name", name);
                     newUser.signUp();
 
-                    Toast.makeText(SignUpSchool.this, "Sign Up Successful!\nCheck your e-mail for verification link!", Toast.LENGTH_SHORT).show();
                     Utilities.InitialiseUserDetails(username);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -172,6 +171,7 @@ public class SignUpSchool extends ActionBarActivity {
             // refresh UI
             if (state == SignUpTaskState.SUCCESS) {
                 // Success!
+                Toast.makeText(SignUpSchool.this, "Sign Up Successful!\nCheck your e-mail for verification link!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUpSchool.this, LoginSchool.class);
                 startActivity(intent);
             }

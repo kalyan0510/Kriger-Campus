@@ -12,9 +12,8 @@ public class KrigerHelpsApplication extends Application{
 	@Override
 	public void onCreate() {
 	    super.onCreate();
-	    
-	    Parse.enableLocalDatastore(this);
+
 	    Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
-	    ParseUser.enableRevocableSessionInBackground();
+	    //ParseUser.enableRevocableSessionInBackground();
 	}
 }

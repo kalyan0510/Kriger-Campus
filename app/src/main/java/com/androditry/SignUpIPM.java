@@ -168,7 +168,6 @@ public class SignUpIPM extends ActionBarActivity {
                     newUser.put("Name", name);
                     newUser.signUp();
 
-                    Toast.makeText(SignUpIPM.this, "Sign Up Successful!\nCheck your e-mail for verification link!", Toast.LENGTH_SHORT).show();
                     Utilities.InitialiseUserDetails(username);
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -195,6 +194,7 @@ public class SignUpIPM extends ActionBarActivity {
             // refresh UI
             if (state == SignUpTaskState.SUCCESS) {
                 // Success!
+                Toast.makeText(SignUpIPM.this, "Sign Up Successful!\nCheck your e-mail for verification link!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUpIPM.this, LoginIPM.class);
                 startActivity(intent);
             }
