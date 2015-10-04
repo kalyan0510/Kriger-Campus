@@ -34,7 +34,7 @@ public class SignUpIPM extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_up_ipm);
-		setTitle("Sign Up | Kriger Campus");
+        setTitle("Kriger Campus");
 		
 		etEmail         = (EditText) findViewById(R.id.etEmaleSignUpIPM);
 		etPass          = (EditText) findViewById(R.id.etPassSignUpIPM);

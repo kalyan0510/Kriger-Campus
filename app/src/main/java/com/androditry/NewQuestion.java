@@ -35,7 +35,7 @@ public class NewQuestion extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_question);
-		setTitle("Ask a Question...");
+        setTitle("Kriger Campus");
 		
 		etQTitle   = (EditText) findViewById(R.id.etQuesTitle);
 		etQDetails = (EditText) findViewById(R.id.etQuesDetails);
@@ -101,23 +101,34 @@ public class NewQuestion extends ActionBarActivity {
 
                     ParseQuery<ParseObject> query = ParseQuery.getQuery(Utilities.AllClassesNames.getClassNameForTag(Utilities.getCategory()));
                     if(Utilities.hasCurTagQuesLoaded())
-                        query.fromLocalDatastore();
-                    query.whereEqualTo(Utilities.alias_QTITLE, qtitle);
-                    List<ParseObject> postList = query.find();
-                    if (!postList.isEmpty()) {
-                        return PostQuestionTaskState.QUES_DUPLICATE;
+                    {
+                        List<ParseObject> curQues = Utilities.getCurTagQuestions();
+                        for(ParseObject obj: curQues)
+                        {
+                            if(obj.getString(Utilities.alias_QTITLE).equalsIgnoreCase(qtitle))
+                            {
+                                return PostQuestionTaskState.QUES_DUPLICATE;
+                            }
+                        }
                     }
                     else
                     {
-                        testObject.pinInBackground();
-                        testObject.saveInBackground();
+                        query.whereEqualTo(Utilities.alias_QTITLE, qtitle);
+                        List<ParseObject> postList = query.find();
+                        if (!postList.isEmpty()) {
+                            return PostQuestionTaskState.QUES_DUPLICATE;
+                        }
+                    }
+
+                        testObject.save();
                         updateNumQuestionsInCategory();
+                        Utilities.getCurTagQuestions().add(testObject);
 
                         /*ParsePush push = new ParsePush();
                         push.setChannel(Utilities.TL_CHANNEL_NAME);
                         push.setMessage("A new Question was asked in " + Utilities.getCategory() + "!");
                         push.sendInBackground();*/
-                    }
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                     errMsg = e.getMessage();
@@ -182,8 +193,7 @@ public class NewQuestion extends ActionBarActivity {
 
         //Toast.makeText(getApplicationContext(), "Id to retrieve : " + obj.getObjectId(), Toast.LENGTH_SHORT).show();
         // Retrieve the object by id
-        if (Utilities.haveAllTags)
-            query.fromLocalDatastore();
+
         try {
             ParseObject obj = Utilities.getObjectByTagName(Utilities.getCategory());
             ParseObject post = query.get(obj.getObjectId());

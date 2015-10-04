@@ -49,7 +49,7 @@ public class QuestionView extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_view);
 
-        setTitle("Question in -- " + Utilities.getCategory());
+        setTitle("Kriger Campus");
 
         etAnswer = (EditText) findViewById(R.id.etAnswerUser);
         btnPost = (Button) findViewById(R.id.btnPostAnswer);

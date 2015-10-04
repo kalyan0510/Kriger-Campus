@@ -18,7 +18,7 @@ public class SchoolSelect extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_school_select);
-		setTitle("User Type | Kriger Campus");
+		setTitle("Kriger Campus");
 		
 		btnSchool = (Button) findViewById(R.id.btnSchool);
 		btnIPM = (Button) findViewById(R.id.btnIPM);

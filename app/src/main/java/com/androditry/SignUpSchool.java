@@ -33,7 +33,7 @@ public class SignUpSchool extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sign_up_school);
-		setTitle("Sign Up | Kriger Campus");
+        setTitle("Kriger Campus");
 		
 		etEmail    = (EditText) findViewById(R.id.etEmaleSignUpSchool);
 		etPass     = (EditText) findViewById(R.id.etPassSignUpSchool);

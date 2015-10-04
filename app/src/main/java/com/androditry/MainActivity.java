@@ -15,7 +15,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Welcome | Kriger Campus");
+		setTitle("Kriger Campus");
         
         tvAppMain = (TextView) findViewById(R.id.tvAppMain);
         tvAppMain.setOnClickListener(new View.OnClickListener(){

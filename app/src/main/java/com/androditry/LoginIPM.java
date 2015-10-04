@@ -28,7 +28,7 @@ public class LoginIPM extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_ipm);
-		setTitle("Login | Kriger Campus");
+        setTitle("Kriger Campus");
 		
 		etEmail = (EditText) findViewById(R.id.etEmaleLoginIPM);
 		etPass  = (EditText) findViewById(R.id.etPassLoginIPM);

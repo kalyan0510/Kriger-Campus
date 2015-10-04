@@ -80,8 +80,7 @@ public class HomeScreenIPM extends ActionBarActivity {
         }
         else
         {
-            String title = Utilities.getCurName();
-            setTitle(title);
+            setTitle("Kriger Campus");
         }
 
         timer = new Timer();

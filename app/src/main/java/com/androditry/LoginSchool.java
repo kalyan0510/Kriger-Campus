@@ -29,7 +29,7 @@ public class LoginSchool extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_school);
-		setTitle("Login | Kriger Campus");
+        setTitle("Kriger Campus");
 		
 		etUsername = (EditText) findViewById(R.id.etUsernameLoginSchool);
 		etPass  = (EditText) findViewById(R.id.etPassLoginSchool);
