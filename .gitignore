@@ -4,9 +4,12 @@ gen/
 *.txt
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
 /build
 /captures
-
+lint.xml
+.classpath
+.settings
+proguard-project.txt
+build.xml
+.idea/
