@@ -12,6 +12,7 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -212,8 +213,17 @@ public class QuestionView extends ActionBarActivity {
         EXCEPTION_THROWN
     }
 
+    ProgressDialog pd;
     class UpdateAnswersTask extends AsyncTask<Boolean,String, UpdateTaskState> {
         boolean forceUpdate;
+
+        @Override
+        protected void onPreExecute()
+        {
+            pd = new ProgressDialog(QuestionView.this);
+            pd.setMessage("Loading Answers...\nPlease wait.");
+            pd.show();
+        }
 
         @Override
         protected UpdateTaskState doInBackground(Boolean... params) {
@@ -285,6 +295,9 @@ public class QuestionView extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(UpdateTaskState state) {
+            pd.setMessage("");
+            pd.dismiss();
+
             // refresh UI
             if(state == UpdateTaskState.SUCCESS)
             {
@@ -316,6 +329,13 @@ public class QuestionView extends ActionBarActivity {
                     etAnswer.setText("");
                     etAnswer.setHint("You can't comment here yet!");
                     etAnswer.setEnabled(false);
+                }
+                else
+                {
+                    btnPost.setEnabled(true);
+                    btnPost.setVisibility(View.VISIBLE);
+                    etAnswer.setHint("Write your response here!");
+                    etAnswer.setEnabled(true);
                 }
             }
 
