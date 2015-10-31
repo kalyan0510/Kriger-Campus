@@ -1,7 +1,6 @@
 bin/
 app/build/
 gen/
-*.txt
 /build
 /captures
 lint.xml
