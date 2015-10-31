@@ -2,15 +2,10 @@ bin/
 app/build/
 gen/
 *.txt
-.gradle
-/local.properties
-.DS_Store
 /build
 /captures
 lint.xml
-.classpath
-.settings
-proguard-project.txt
 build.xml
-.idea/
 *.apk
+.gradle/
+.idea/
