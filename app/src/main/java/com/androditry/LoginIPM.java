@@ -2,6 +2,7 @@ package com.androditry;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginIPM extends ActionBarActivity {
 	
@@ -29,6 +31,18 @@ public class LoginIPM extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_ipm);
         setTitle("Kriger Campus");
+
+
+        /* final Button resetbtn=(Button)findViewById(R.id.reset_pwd);
+        resetbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                // Perform action on click
+                Intent i = new Intent(LoginIPM.this,reset.class);
+                startActivity(i);
+
+            }
+        }); */
 		
 		etEmail = (EditText) findViewById(R.id.etEmaleLoginIPM);
 		etPass  = (EditText) findViewById(R.id.etPassLoginIPM);

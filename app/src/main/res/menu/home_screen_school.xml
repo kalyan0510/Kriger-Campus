@@ -9,5 +9,12 @@
         android:icon="@drawable/ic_action_logout"
         android:title="Logout"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/user_profile"
+        android:orderInCategory="101"
+        android:icon="@drawable/usericon"
+        android:title="Logout"
+        app:showAsAction="ifRoom"/>
+
 
 </menu>

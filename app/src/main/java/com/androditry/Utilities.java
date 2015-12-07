@@ -214,6 +214,11 @@ public class Utilities {
 	{
 		tagName = cat.replace(' ','_');
 	}
+	public static String getItem()
+	{
+		return tagName;
+	}
+
 	public static String getCategory()
 	{
 		return tagName;

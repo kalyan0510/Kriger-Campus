@@ -213,6 +213,7 @@ public class CategoryNav extends ActionBarActivity {
                     && (!Utilities.hasCurTagQuesLoaded() || forceUpdate))
             {
                 publishProgress("The list of questions could not be updated!\nCheck your network!");
+
                 return UpdateTaskState.NO_INTERNET;
             }
 

@@ -22,6 +22,14 @@
 
     <uses-permission android:name="com.androditry.permission.C2D_MESSAGE" />
 
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:name=".KrigerHelpsApplication"
         android:allowBackup="true"
@@ -116,6 +124,38 @@
             android:name="com.parse.push.notification_icon"
             android:resource="@drawable/ic_launcher" />
 
+        <activity
+            android:name=".offline"
+            android:label="@string/title_activity_offline" >
+        </activity>
+        <activity
+            android:name=".faq"
+            android:label="@string/title_activity_faq" >
+        </activity>
+        <activity
+            android:name=".noti"
+            android:label="@string/title_activity_noti" >
+        </activity>
+        <activity
+            android:name=".noti1"
+            android:label="@string/title_activity_noti1" >
+        </activity>
+        <activity
+            android:name=".noti2"
+            android:label="@string/title_activity_noti2" >
+        </activity>
+        <activity
+            android:name=".profile"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name=".password_reset"
+            android:label="@string/title_activity_password_reset" >
+        </activity>
+        <activity
+            android:name=".reset"
+            android:label="@string/title_activity_reset" >
+        </activity>
     </application>
 
 </manifest>

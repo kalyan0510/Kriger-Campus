@@ -37,13 +37,8 @@
             android:textStyle="bold"
             android:typeface="serif" />
 
-            <LinearLayout
-                android:id="@+id/ll13"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical" />
-        
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +58,8 @@
             android:shadowColor="#000000"
             android:shadowDx="1"
             android:shadowDy="5"
-            android:background="@drawable/btn_border"
+            android:background="@drawable/but"
+            android:textColor="#ffffff"
             android:textAllCaps="false"
         	android:text="@string/school" />
         
@@ -86,7 +82,8 @@
             android:shadowDx="1"
             android:shadowDy="5"
         	android:layout_gravity="center_horizontal"
-        	android:background="@drawable/btn_border"
+            android:background="@drawable/but"
+            android:textColor="#ffffff"
             android:textAllCaps="false"
         	android:text="@string/IPM" />
         

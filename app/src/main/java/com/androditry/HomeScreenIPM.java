@@ -68,6 +68,8 @@ public class HomeScreenIPM extends ActionBarActivity {
                             .setPositiveButton(android.R.string.ok, null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                    Intent i = new Intent(HomeScreenIPM.this, offline.class);
+                    startActivity(i);
                 }
             }
         });
@@ -157,6 +159,12 @@ public class HomeScreenIPM extends ActionBarActivity {
                     startActivity(i);
                 }
             }).start();
+        }
+
+        if(id==R.id.user_profile)
+        {
+            Intent i = new Intent(HomeScreenIPM.this, profile.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

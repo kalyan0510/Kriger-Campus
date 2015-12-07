@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context="com.androditry.CategoryNav"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvCatName"
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:textColor="#121211"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:background="@drawable/btn_border"
+            android:text="RESET PASSWORD" />
+
+        <TextView
+            android:id="@+id/tvCatInfo"
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dp"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:textColor="#121211"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:background="@drawable/btn_border"
+            android:layout_height="wrap_content"
+            android:text="PROCEDURE" />
+
+        <TextView
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvInfoInCat"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/uname"
+        android:background="@drawable/btn_border"
+        android:hint="Username"
+        android:padding="10px"
+        android:layout_width="350dp"
+        android:layout_height="30dp" />
+
+    <EditText
+        android:id="@+id/verified"
+        android:background="@drawable/btn_border"
+        android:layout_marginTop="20dp"
+        android:hint="Verified Email ID"
+        android:padding="10px"
+        android:layout_width="350dp"
+        android:layout_height="30dp" />
+
+
+
+    <Button
+        android:text="Reset Password"
+        android:id="@+id/reset"
+        android:layout_gravity="center_horizontal"
+
+
+
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/but"
+        android:textColor="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+
+
+
+
+
+
+
+
+
+</LinearLayout>

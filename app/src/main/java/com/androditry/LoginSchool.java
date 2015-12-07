@@ -2,6 +2,7 @@ package com.androditry;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class LoginSchool extends ActionBarActivity {
@@ -30,6 +32,17 @@ public class LoginSchool extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login_school);
         setTitle("Kriger Campus");
+
+
+      /*  final Button resetbtn=(Button)findViewById(R.id.reset_pwd);
+        resetbtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent i = new Intent(LoginSchool.this,reset.class);
+                startActivity(i);
+
+            }
+        }); */
 		
 		etUsername = (EditText) findViewById(R.id.etUsernameLoginSchool);
 		etPass  = (EditText) findViewById(R.id.etPassLoginSchool);
@@ -115,7 +128,7 @@ public class LoginSchool extends ActionBarActivity {
                         Utilities.setCurrentUser(user);
                     }
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     errMsg = e.getMessage();
                     return LoginTaskState.EXCEPTION_THROWN;
                 }

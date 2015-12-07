@@ -81,5 +81,13 @@
     </style>
 
     <string name="title_activity_proceed_school">ProceedSchool</string>
+    <string name="title_activity_offline">offline</string>
+    <string name="title_activity_faq">faq</string>
+    <string name="title_activity_noti">noti</string>
+    <string name="title_activity_noti1">noti1</string>
+    <string name="title_activity_noti2">noti2</string>
+    <string name="title_activity_profile">profile</string>
+    <string name="title_activity_password_reset">password_reset</string>
+    <string name="title_activity_reset">reset</string>
 
 </resources>

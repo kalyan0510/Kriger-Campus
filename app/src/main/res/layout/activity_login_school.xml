@@ -73,7 +73,8 @@
         android:shadowColor="#000000"
         android:shadowDx="1"
         android:shadowDy="5"
-        android:background="@drawable/btn_border"
+        android:background="@drawable/but"
+        android:textColor="#ffffff"
         android:textAllCaps="false"
         android:text="@string/login" />
     
@@ -102,9 +103,26 @@
         android:shadowColor="#000000"
         android:shadowDx="1"
         android:shadowDy="5"
-        android:background="@drawable/btn_border"
+        android:background="@drawable/but"
+        android:textColor="#ffffff"
         android:textAllCaps="false"
         android:text="@string/signup" />
+
+        <!--<Button
+            android:id="@+id/reset_pwd"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="30sp"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:background="@drawable/but"
+            android:layout_marginTop="20dp"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:text="Reset Password" /> -->
         
     </LinearLayout>
 </ScrollView>
