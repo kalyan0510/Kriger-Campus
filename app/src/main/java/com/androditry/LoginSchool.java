@@ -34,7 +34,7 @@ public class LoginSchool extends ActionBarActivity {
         setTitle("Kriger Campus");
 
 
-      /*  final Button resetbtn=(Button)findViewById(R.id.reset_pwd);
+      final Button resetbtn=(Button)findViewById(R.id.reset_pwd);
         resetbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -42,7 +42,7 @@ public class LoginSchool extends ActionBarActivity {
                 startActivity(i);
 
             }
-        }); */
+        });
 		
 		etUsername = (EditText) findViewById(R.id.etUsernameLoginSchool);
 		etPass  = (EditText) findViewById(R.id.etPassLoginSchool);

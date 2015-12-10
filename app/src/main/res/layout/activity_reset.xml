@@ -55,6 +55,7 @@
     <EditText
         android:id="@+id/uname"
         android:background="@drawable/btn_border"
+        android:inputType="text"
         android:hint="Username"
         android:padding="10px"
         android:layout_width="350dp"
@@ -62,12 +63,15 @@
 
     <EditText
         android:id="@+id/verified"
+        android:inputType="text"
         android:background="@drawable/btn_border"
         android:layout_marginTop="20dp"
         android:hint="Verified Email ID"
         android:padding="10px"
         android:layout_width="350dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:enabled="true"
+        android:editable="true"/>
 
 
 

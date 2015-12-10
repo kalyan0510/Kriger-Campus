@@ -33,7 +33,7 @@ public class LoginIPM extends ActionBarActivity {
         setTitle("Kriger Campus");
 
 
-        /* final Button resetbtn=(Button)findViewById(R.id.reset_pwd);
+        final Button resetbtn=(Button)findViewById(R.id.reset_pwd);
         resetbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -42,7 +42,7 @@ public class LoginIPM extends ActionBarActivity {
                 startActivity(i);
 
             }
-        }); */
+        });
 		
 		etEmail = (EditText) findViewById(R.id.etEmaleLoginIPM);
 		etPass  = (EditText) findViewById(R.id.etPassLoginIPM);

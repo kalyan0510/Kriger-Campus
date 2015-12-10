@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -20,34 +21,39 @@ import java.util.List;
 
 public class reset extends ActionBarActivity {
 
+    EditText E,U;
+    String emailid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset);
 
-        EditText U=(EditText)findViewById(R.id.uname);
-        EditText E=(EditText)findViewById(R.id.verified);
-        final String u=U.getText().toString();
-        final String eml=E.getText().toString();
+        setTitle("Forgot Password");
 
-        Button reset=(Button)findViewById(R.id.reset);
-        reset.setOnClickListener(new View.OnClickListener() {
+        U=(EditText)findViewById(R.id.uname);
+        E=(EditText)findViewById(R.id.verified);
+
+        emailid=E.getText().toString();
+        //final String emlid=emailid;
+
+        Button resetbtn=(Button)findViewById(R.id.reset);
+        resetbtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                String u=U.getText().toString();
+                emailid=E.getText().toString();
                 // Perform action on click
-                ParseUser.requestPasswordResetInBackground(eml, new RequestPasswordResetCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            // An email was successfully sent with reset instructions.
-                            Toast.makeText(getApplicationContext(), "Reset Link Email Sent ",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Error!!",
-                                    Toast.LENGTH_SHORT).show();
-                            // Something went wrong. Look at the ParseException to see what's up.
-                        }
-                    }
-                });
+                //Toast.makeText(getApplicationContext(), emailid,
+                //        Toast.LENGTH_SHORT).show();
+
+                try {
+                    ParseUser.requestPasswordReset(emailid);
+                    //Toast.makeText(getApplicationContext(), "Pasword Reset Link Mail Sent",
+                    //        Toast.LENGTH_SHORT).show();
+                } catch (ParseException e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
