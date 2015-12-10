@@ -124,10 +124,10 @@ public class NewQuestion extends ActionBarActivity {
                         updateNumQuestionsInCategory();
                         Utilities.getCurTagQuestions().add(testObject);
 
-                        /*ParsePush push = new ParsePush();
+                        ParsePush push = new ParsePush();
                         //push.setChannel(Utilities.TL_CHANNEL_NAME);
                         push.setMessage("A new Question was asked in " + Utilities.getCategory() + "!");
-                        push.send(); */
+                        push.send();
 
                 } catch (ParseException e) {
                     e.printStackTrace();
