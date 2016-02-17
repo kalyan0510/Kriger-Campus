@@ -34,6 +34,7 @@ public class Utilities {
 	public static final int CUSTOM_ANS_LIST_ITEM_ID_OFFSET = 0;
 	public static final int CUSTOM_CAT_LIST_ITEM_ID_OFFSET = 1000;
 	public static final int CUSTOM_QUES_LIST_ITEM_ID_OFFSET = 2000;
+	public static ArrayList<String> liked = new ArrayList<String>();
 	private static ParseUser curUser=null;
 	
 	public enum UserType

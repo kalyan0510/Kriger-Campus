@@ -29,24 +29,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class QuestionView extends ActionBarActivity {
-	
-	TextView qTitle,qDetails;
-	EditText etAnswer;
-	Button btnPost;
-	ListView lvAllAnswers;
-	
-	ArrayList<CustomListItem> list = new ArrayList<>();
-	CustomListAdapter adapter;
 
-    private Timer timer;
-    private static final long whenToStart = 60*1000L; // 60 seconds
-    private static final long howOften = 60*1000L; // 60 seconds
+    TextView qTitle,qDetails;
+    EditText etAnswer;
+    Button btnPost;
+    ListView lvAllAnswers;
+
+    ArrayList<CustomListItem> list = new ArrayList<>();
+    CustomListAdapter adapter;
+
+    // private Timer timer;
+    //private static final long whenToStart = 60*1000L; // 60 seconds
+    //  private static final long howOften = 60*1000L; // 60 seconds
 
     String strAns;
     //private boolean timerCalledUpdate = false;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_view);
 
@@ -88,7 +88,7 @@ public class QuestionView extends ActionBarActivity {
         else
             new UpdateAnswersTask().execute(true);
 
-        timer = new Timer();
+        /*timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -100,7 +100,7 @@ public class QuestionView extends ActionBarActivity {
                 });
             }
         };
-        timer.scheduleAtFixedRate(task, whenToStart, howOften);
+        timer.scheduleAtFixedRate(task, whenToStart, howOften);*/
     }
 
     private enum PostAnswerTaskState
@@ -129,6 +129,8 @@ public class QuestionView extends ActionBarActivity {
                     ParseObject testObject = new ParseObject(Utilities.AllClassesNames.getClassNameForQues(Utilities.getCurQuesObj().getObjectId()));
                     testObject.put(Utilities.alias_ANSBY, Utilities.getCurUsername());
                     testObject.put(Utilities.alias_ANSTEXT, strAns);
+                    testObject.put("aUP_VOTE",0);
+                    testObject.put("aDW_VOTE",0);
                     publishProgress("");
                     testObject.save();
                     String usrQBy = Utilities.getCurQuesObj().getString(Utilities.alias_QBY);
@@ -199,11 +201,11 @@ public class QuestionView extends ActionBarActivity {
         obj.save();
     }
 
-	private void updateCurQuestionNumAnswers() throws ParseException {
+    private void updateCurQuestionNumAnswers() throws ParseException {
         ParseObject obj = Utilities.getCurQuesObj();
         obj.put(Utilities.alias_QNUMANSWERS, obj.getInt(Utilities.alias_QNUMANSWERS) + 1);
         obj.save();
-	}
+    }
 
     private enum UpdateTaskState
     {
@@ -249,7 +251,11 @@ public class QuestionView extends ActionBarActivity {
                     }
                     for(ParseObject obj : ans)
                     {
-                        list.add(new CustomListItem("...",obj.getString(Utilities.alias_ANSTEXT), false));
+
+                        list.add(new CustomListItem(obj.getObjectId(),"...",obj.getString(Utilities.alias_ANSTEXT), false,
+                                obj.getInt("aUP_VOTE"),obj.getInt("aDW_VOTE"),obj.getClassName()));
+
+
                     }
                     return UpdateTaskState.SUCCESS;
                 }
@@ -268,7 +274,8 @@ public class QuestionView extends ActionBarActivity {
                 }
                 for(ParseObject tag: postList)
                 {
-                    list.add(new CustomListItem("...",tag.getString(Utilities.alias_ANSTEXT), false));
+                    list.add(new CustomListItem(tag.getObjectId(),"...",tag.getString(Utilities.alias_ANSTEXT), false,
+                            tag.getInt("aUP_VOTE"),tag.getInt("aDW_VOTE"),tag.getClassName()));
                 }
                 if(Utilities.getCurUsername().equalsIgnoreCase(Utilities.getCurQuesObj().getString(Utilities.alias_QBY)))
                 {
@@ -398,46 +405,46 @@ public class QuestionView extends ActionBarActivity {
         }
     }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.question_view, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.question_view, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if(id == R.id.action_logout)
-		{
-            timer.cancel();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if(id == R.id.action_logout)
+        {
+            //  timer.cancel();
             Utilities.contextLogout = QuestionView.this;
             new Utilities.LogoutTask().execute();
-		}
-		else if(id == R.id.action_refresh)
-		{
-			Toast.makeText(QuestionView.this, "Refreshing...", Toast.LENGTH_SHORT).show();
-			new UpdateAnswersTask().execute(true);
-		}
-		return super.onOptionsItemSelected(item);
-	}
+        }
+        else if(id == R.id.action_refresh)
+        {
+            Toast.makeText(QuestionView.this, "Refreshing...", Toast.LENGTH_SHORT).show();
+            new UpdateAnswersTask().execute(true);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onPause()
     {
         super.onPause();
-        timer.cancel();
+        // timer.cancel();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        new UpdateAnswersTask().execute(false);
+        // new UpdateAnswersTask().execute(false);
 
-        timer = new Timer();
+       /* timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -449,6 +456,6 @@ public class QuestionView extends ActionBarActivity {
                 });
             }
         };
-        timer.scheduleAtFixedRate(task, whenToStart, howOften);
+        timer.scheduleAtFixedRate(task, whenToStart, howOften);*/
     }
 }

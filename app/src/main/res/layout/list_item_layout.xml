@@ -24,7 +24,8 @@
             android:textColor="#3178be"
             android:text="@string/hello_world"
             android:typeface="sans" />
-
+        <Button android:id="@+id/upvt" android:layout_width="30dp" android:layout_height="30dp" android:gravity="center" android:background="@drawable/upvt"/>
+        <Button android:id="@+id/dwvt" android:layout_width="30dp" android:text="0" android:layout_height="30dp" android:gravity="center" android:background="@drawable/dwvt"/>
         <TextView
             android:id="@+id/tvNotifLI"
             android:layout_width="30dp"

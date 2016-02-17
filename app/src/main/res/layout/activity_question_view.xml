@@ -1,96 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      android:orientation="vertical"
-      android:background="@drawable/background"
-      android:paddingTop="4dp"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:paddingTop="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/svQuesView"
         android:layout_width="match_parent"
         android:background="@drawable/btn_border"
         android:layout_height="80dp" >
-	
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:padding="10dp"
-         android:orientation="vertical" >
-            
-     <TextView
-        android:id="@+id/tvQuestionTitleShow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:textColor="#112145"
-        android:text="@string/hello_world" />
-        
-    <TextView
-        android:id="@+id/tvQuestionDetailsShow"
-        android:layout_width="match_parent"
-        android:textSize="18sp"
-        android:textColor="#111111"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-    
-    </LinearLayout>
-    
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvQuestionTitleShow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#112145"
+                android:text="@string/hello_world" />
+
+            <TextView
+                android:id="@+id/tvQuestionDetailsShow"
+                android:layout_width="match_parent"
+                android:textSize="18sp"
+                android:textColor="#111111"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_world" />
+
+        </LinearLayout>
+
     </ScrollView>
-    
+
     <ListView
         android:layout_marginTop="10dp"
         android:id="@+id/lvAllAnswers"
         android:transcriptMode="alwaysScroll"
         android:padding="5dp"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentRight="true"
-      android:layout_below="@+id/svQuesView"
-      android:layout_above="@+id/rlSend"
-      android:layout_width="wrap_content" 
-      android:layout_height="match_parent" />
-	
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/svQuesView"
+        android:layout_above="@+id/rlSend"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
     <RelativeLayout
-      android:id="@+id/rlSend"
-      android:layout_alignParentBottom="true"
-      android:layout_width="match_parent"
-      android:background="#eeefec"
-      android:paddingTop="5dp"
-      android:paddingBottom="10dp"
-      android:paddingLeft="0dp"
-      android:paddingRight="0dp"
-      android:layout_height="wrap_content" >
-    
-    <EditText
-          android:id="@+id/etAnswerUser"
-          android:layout_toLeftOf="@+id/btnPostAnswer"
-          android:layout_alignBottom="@+id/btnPostAnswer"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="top"
-          android:inputType="textMultiLine"
-          android:imeOptions="actionSend"
-          android:hint="@string/hint_write_answer" />
-    
-    <Button
-          android:id="@+id/btnPostAnswer"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:paddingRight="10dp"
-          android:layout_alignParentRight="true"
-          android:layout_marginRight="1dp"
-          android:shadowRadius="5"
-          android:shadowColor="#000000"
-          android:shadowDx="1"
-          android:shadowDy="5"
-          android:background="@drawable/btn_border"
-          android:textAllCaps="false"
-          android:text="@string/PostAnswer"
-          android:textSize="22sp" />
-    
+        android:id="@+id/rlSend"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="#eeefec"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/etAnswerUser"
+            android:layout_toLeftOf="@+id/btnPostAnswer"
+            android:layout_alignBottom="@+id/btnPostAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:imeOptions="actionSend"
+            android:hint="@string/hint_write_answer" />
+
+        <Button
+            android:id="@+id/btnPostAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="1dp"
+            android:shadowRadius="5"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="5"
+            android:background="@drawable/btn_border"
+            android:textAllCaps="false"
+            android:text="@string/PostAnswer"
+            android:textSize="22sp" />
+
     </RelativeLayout>
 
 </RelativeLayout>
